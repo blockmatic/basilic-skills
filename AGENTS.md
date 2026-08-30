@@ -34,7 +34,12 @@ Do not add `skills/workflow/SKILL.md`. A shallower `SKILL.md` shadows nested pla
 
 ## Install
 
+Use the [skills CLI](https://github.com/vercel-labs/skills). Interactive install picks skills and agents (Cursor included):
+
 ```bash
+npx skills@latest add blockmatic/basilic-skills
 npx skills@latest add blockmatic/basilic-skills --list
-npx skills@latest add blockmatic/basilic-skills --skill next-v16
+npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor
 ```
+
+Canonical copies land in `.agents/skills/`; agent flags (`-a cursor`, `-a claude-code`, …) write to each agent's skills directory. See README for full flag reference.

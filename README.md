@@ -2,65 +2,67 @@
 
 [![skills.sh](https://skills.sh/b/blockmatic/basilic-skills)](https://skills.sh/blockmatic/basilic-skills)
 
-Basilic-maintained [Agent Skills](https://agentskills.io) catalog. Copies here are the canonical versions for Basilic forks; they may differ from Expo, Vercel, or Anthropic upstream.
+Basilic-maintained [Agent Skills](https://agentskills.io) catalog. Install with the [skills CLI](https://github.com/vercel-labs/skills) — same flow as other skills.sh catalogs.
 
 ## Install
 
-Use the skills CLI via your package manager (same flags for all):
+Use your package manager (flags are identical):
 
 | npm | pnpm | bun |
 | --- | --- | --- |
 | `npx skills@latest` | `pnpm dlx skills@latest` | `bunx skills@latest` |
 
+**Interactive** — pick skills, then pick agents (Cursor, Claude Code, Codex, and others the CLI detects). Run in a normal terminal; inside Cursor the CLI may auto-target Cursor only.
+
 ```bash
 npx skills@latest add blockmatic/basilic-skills
-pnpm dlx skills@latest add blockmatic/basilic-skills
-bunx skills@latest add blockmatic/basilic-skills
 ```
 
-The CLI lists skills and lets you pick a subset.
-
-## List
+**List without installing:**
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --list
-pnpm dlx skills@latest add blockmatic/basilic-skills --list
-bunx skills@latest add blockmatic/basilic-skills --list
 ```
 
-From a clone:
+From a local clone: `npx skills@latest add . --list`
+
+## Flags
+
+| Intent | Example |
+| --- | --- |
+| One skill | `--skill next-v16` |
+| Several skills | `--skill next-v16 --skill fastify-v5` |
+| All skills | `--skill '*'` |
+| Cursor only | `-a cursor` |
+| Cursor + Claude Code | `-a cursor -a claude-code` |
+| All detected agents | `--agent '*'` |
+| User-wide (not project) | `-g` |
+| Copy files (no symlinks) | `--copy` |
+| Skip prompts | `-y` |
+
+Examples:
 
 ```bash
-npx skills@latest add . --list
-pnpm dlx skills@latest add . --list
-bunx skills@latest add . --list
+npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor
+npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor -a claude-code -y
 ```
 
-## One skill
+Do not use `--all` unless you want every skill on every agent.
 
-```bash
-npx skills@latest add blockmatic/basilic-skills --skill next-v16
-pnpm dlx skills@latest add blockmatic/basilic-skills --skill next-v16
-bunx skills@latest add blockmatic/basilic-skills --skill next-v16
-```
+## Agents and paths
 
-## Several skills
+The CLI has no free-form `--dir`. Scope and agent flags choose the destination:
 
-```bash
-npx skills@latest add blockmatic/basilic-skills --skill next-v16 --skill fastify-v5
-pnpm dlx skills@latest add blockmatic/basilic-skills --skill next-v16 --skill fastify-v5
-bunx skills@latest add blockmatic/basilic-skills --skill next-v16 --skill fastify-v5
-```
+| Target | Project path | Global (`-g`) |
+| --- | --- | --- |
+| Canonical (symlink hub) | `.agents/skills/<name>/` | `~/.agents/skills/<name>/` |
+| Cursor | `.cursor/skills/<name>/` | `~/.cursor/skills/<name>/` |
+| Claude Code | `.claude/skills/<name>/` | `~/.claude/skills/<name>/` |
+| Codex | `.codex/skills/<name>/` | `~/.codex/skills/<name>/` |
 
-## All skills
+Other agents (`opencode`, `windsurf`, …) get their own paths — see [supported agents](https://github.com/vercel-labs/skills#supported-agents). Some agents support env overrides (`CLAUDE_CONFIG_DIR`, `CODEX_HOME`).
 
-```bash
-npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor
-pnpm dlx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor
-bunx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor
-```
-
-`--skill '*'` installs every skill and still asks which agent. Do not use `--all` unless you want every skill on every agent.
+Default install method is **symlink** (canonical copy in `.agents/skills/`). Use `--copy` when symlinks are not supported.
 
 ## Repository structure
 
@@ -79,10 +81,15 @@ These trees are Basilic-maintained. Folder names use the stack major already in 
 
 This repository is MIT. Some skill trees keep upstream notices. `skills/frontend-design-v1/LICENSE.txt` is Apache License 2.0.
 
-Distribution is GitHub only (`npx skills add blockmatic/basilic-skills`). Do not publish this catalog to npm — `package.json` is intentionally `private`.
+Distribution is GitHub only. Do not publish this catalog to npm — `package.json` is intentionally `private`.
 
 ## Contribute
 
-Edit this repository. Consumers run `npx skills update` (or `pnpm dlx skills@latest update` / `bunx skills@latest update`). Do not rename a skill after install; lockfile keys follow skill names.
+Edit this repository. Consumers update with:
 
-Basilic commits vendored copies under `.cursor/skills/` so Cloud Agents get real files. Refresh with `npx skills@latest add blockmatic/basilic-skills --copy` (or pnpm/bun equivalents above) and copy trees into the nested layout (see Basilic `cursor-skills` doc).
+```bash
+npx skills@latest update
+pnpm dlx skills@latest update
+```
+
+Do not rename a skill after install; lockfile keys follow skill names. Commit `skills-lock.json` in consuming projects when you vendor skills.
