@@ -51,18 +51,28 @@ Do not use `--all` unless you want every skill on every agent.
 
 ## Agents and paths
 
-The CLI has no free-form `--dir`. Scope and agent flags choose the destination:
+The CLI has no free-form `--dir`. Scope and agent flags choose the destination. With `-a cursor`, the **project** install path is `.agents/skills/<name>/` (not `.cursor/skills/`). Cursor also reads `.cursor/skills/` if you place files there manually; this catalog relies on the CLI layout.
 
-| Target | Project path | Global (`-g`) |
+| Agent | Project path (`-a <agent>`) | Global (`-g`) |
 | --- | --- | --- |
-| Canonical (symlink hub) | `.agents/skills/<name>/` | `~/.agents/skills/<name>/` |
-| Cursor | `.cursor/skills/<name>/` | `~/.cursor/skills/<name>/` |
+| Cursor | `.agents/skills/<name>/` | `~/.cursor/skills/<name>/` |
 | Claude Code | `.claude/skills/<name>/` | `~/.claude/skills/<name>/` |
-| Codex | `.codex/skills/<name>/` | `~/.codex/skills/<name>/` |
+| Codex | `.agents/skills/<name>/` | `~/.codex/skills/<name>/` |
+| Canonical hub (symlink default) | `.agents/skills/<name>/` | `~/.agents/skills/<name>/` |
 
-Other agents (`opencode`, `windsurf`, …) get their own paths — see [supported agents](https://github.com/vercel-labs/skills#supported-agents). Some agents support env overrides (`CLAUDE_CONFIG_DIR`, `CODEX_HOME`).
+With **symlink** (default), the CLI stores files under `.agents/skills/` and links agent-specific dirs when applicable. With **`--copy`**, it writes independent copies into `.agents/skills/` (and into each `-a` agent dir when that agent uses a separate path).
 
-Default install method is **symlink** (canonical copy in `.agents/skills/`). Use `--copy` when symlinks are not supported.
+Examples:
+
+```bash
+# Cursor, one skill — lands in .agents/skills/next-v16/
+npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor -y
+
+# Cursor, all skills, copies (CI-friendly)
+npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor --copy -y
+```
+
+Other agents (`opencode`, `windsurf`, …): [supported agents](https://github.com/vercel-labs/skills#supported-agents). Env overrides: `CLAUDE_CONFIG_DIR`, `CODEX_HOME`.
 
 ## Repository structure
 
