@@ -6,8 +6,16 @@ Basilic-maintained [Agent Skills](https://agentskills.io) catalog. Copies here a
 
 ## Install
 
+Use the skills CLI via your package manager (same flags for all):
+
+| npm | pnpm | bun |
+| --- | --- | --- |
+| `npx skills@latest` | `pnpm dlx skills@latest` | `bunx skills@latest` |
+
 ```bash
 npx skills@latest add blockmatic/basilic-skills
+pnpm dlx skills@latest add blockmatic/basilic-skills
+bunx skills@latest add blockmatic/basilic-skills
 ```
 
 The CLI lists skills and lets you pick a subset.
@@ -16,30 +24,40 @@ The CLI lists skills and lets you pick a subset.
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --list
+pnpm dlx skills@latest add blockmatic/basilic-skills --list
+bunx skills@latest add blockmatic/basilic-skills --list
 ```
 
 From a clone:
 
 ```bash
 npx skills@latest add . --list
+pnpm dlx skills@latest add . --list
+bunx skills@latest add . --list
 ```
 
 ## One skill
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill next-v16
+pnpm dlx skills@latest add blockmatic/basilic-skills --skill next-v16
+bunx skills@latest add blockmatic/basilic-skills --skill next-v16
 ```
 
 ## Several skills
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 --skill fastify-v5
+pnpm dlx skills@latest add blockmatic/basilic-skills --skill next-v16 --skill fastify-v5
+bunx skills@latest add blockmatic/basilic-skills --skill next-v16 --skill fastify-v5
 ```
 
 ## All skills
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor
+pnpm dlx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor
+bunx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor
 ```
 
 `--skill '*'` installs every skill and still asks which agent. Do not use `--all` unless you want every skill on every agent.
@@ -65,6 +83,6 @@ Distribution is GitHub only (`npx skills add blockmatic/basilic-skills`). Do not
 
 ## Contribute
 
-Edit this repository. Consumers run `npx skills update`. Do not rename a skill after install; lockfile keys follow skill names.
+Edit this repository. Consumers run `npx skills update` (or `pnpm dlx skills@latest update` / `bunx skills@latest update`). Do not rename a skill after install; lockfile keys follow skill names.
 
-Basilic commits vendored copies under `.cursor/skills/` so Cloud Agents get real files. Refresh with `npx skills add blockmatic/basilic-skills --copy` and copy trees into the nested layout (see Basilic `cursor-skills` doc).
+Basilic commits vendored copies under `.cursor/skills/` so Cloud Agents get real files. Refresh with `npx skills@latest add blockmatic/basilic-skills --copy` (or pnpm/bun equivalents above) and copy trees into the nested layout (see Basilic `cursor-skills` doc).
