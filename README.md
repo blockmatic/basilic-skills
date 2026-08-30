@@ -65,4 +65,4 @@ This repository is MIT. Some skill trees keep upstream notices. `skills/frontend
 
 Edit this repository. Consumers run `npx skills update`. Do not rename a skill after install; lockfile keys follow skill names.
 
-Basilic authors with a sibling clone can `pnpm skills:link` in Basilic (local symlink; do not commit it). After publish, Basilic vendors with `npx skills add … --copy` so Cloud Agents get real files.
+Basilic commits vendored copies under `.cursor/skills/` so Cloud Agents get real files. Refresh with `npx skills add blockmatic/basilic-skills --copy` and copy trees into the nested layout (see Basilic `cursor-skills` doc).
