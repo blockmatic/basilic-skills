@@ -61,6 +61,8 @@ These trees are Basilic-maintained. Folder names use the stack major already in 
 
 This repository is MIT. Some skill trees keep upstream notices. `skills/frontend-design-v1/LICENSE.txt` is Apache License 2.0.
 
+Distribution is GitHub only (`npx skills add blockmatic/basilic-skills`). Do not publish this catalog to npm — `package.json` is intentionally `private`.
+
 ## Contribute
 
 Edit this repository. Consumers run `npx skills update`. Do not rename a skill after install; lockfile keys follow skill names.
