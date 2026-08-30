@@ -26,6 +26,12 @@ npx skills@latest add blockmatic/basilic-skills --list
 
 From a local clone: `npx skills@latest add . --list`
 
+Validate the catalog before pushing (frontmatter, cross-links, `skills.sh.json` sync):
+
+```bash
+pnpm validate
+```
+
 ## Flags
 
 | Intent | Example |
