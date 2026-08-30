@@ -1,0 +1,30 @@
+{
+  "name": "@blockmatic/basilic-skills",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Basilic-maintained Agent Skills catalog",
+  "scripts": {
+    "lint": "pnpm lint:biome && pnpm lint:eslint",
+    "lint:biome": "biome check .",
+    "lint:biome:fix": "biome check . --write",
+    "lint:eslint": "eslint . --max-warnings 0",
+    "lint:eslint:fix": "eslint . --fix --max-warnings 0",
+    "lint:fix": "pnpm run lint:eslint:fix && pnpm run lint:biome:fix",
+    "format": "biome format . --write"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.11",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.9.1",
+    "eslint-plugin-only-warn": "^1.2.1",
+    "eslint-plugin-turbo": "^2.10.12",
+    "globals": "^17.11.0",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "typescript-eslint": "^8.68.0"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "pnpm@11.24.0"
+}

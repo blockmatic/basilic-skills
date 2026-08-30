@@ -1,0 +1,113 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Core",
+      "description": "TypeScript patterns for the stack.",
+      "skills": ["typescript-v6"]
+    },
+    {
+      "title": "Workflow",
+      "description": "Slash playbooks for Basilic development workflows.",
+      "skills": [
+        "add-documentation",
+        "add-error-handling",
+        "audit-accessibility",
+        "clarify-task",
+        "code-review",
+        "coderabbit",
+        "council",
+        "debug-browser",
+        "debug-issue",
+        "deslop",
+        "diagrams",
+        "docker-logs",
+        "exec-push",
+        "fix-compile-errors",
+        "fix-git-issues",
+        "fix-github-actions",
+        "fix-push",
+        "fix-vercel-build",
+        "generate-api-docs",
+        "generate-pr-description",
+        "git-commit",
+        "git-create-pr",
+        "git-pr-comments",
+        "git-push",
+        "info-architecture",
+        "light-review-existing-diffs",
+        "lint-fix",
+        "lint-suite",
+        "nextjs-form",
+        "onboard-new-developer",
+        "optimize-performance",
+        "overview",
+        "plan-architecture",
+        "plan-feature",
+        "refactor-code",
+        "retro",
+        "review-plan",
+        "roadmap",
+        "run-all-tests-and-fix",
+        "security-audit",
+        "security-review",
+        "use-shadcn",
+        "use-tdd",
+        "use-v0",
+        "visualize",
+        "write-api-test",
+        "write-unit-tests",
+        "yolo"
+      ]
+    },
+    {
+      "title": "Web",
+      "description": "Next.js, React, and client data patterns.",
+      "skills": ["next-v16", "vercel-react-v1", "tanstack-query-v5", "ahooks-v3"]
+    },
+    {
+      "title": "UI",
+      "description": "Design, styling, and motion.",
+      "skills": [
+        "shadcn-v3",
+        "tailwind-design-system-v4",
+        "frontend-design-v1",
+        "motion-v13",
+        "emilkowal-animations-v1"
+      ]
+    },
+    {
+      "title": "API and Data",
+      "description": "Fastify, Drizzle, and OpenAPI clients.",
+      "skills": ["fastify-v5", "drizzle-orm-v0", "openapi-ts-v0"]
+    },
+    {
+      "title": "AI",
+      "description": "Vercel AI SDK core and UI.",
+      "skills": ["ai-sdk-core-v7", "ai-sdk-ui-v7"]
+    },
+    {
+      "title": "Expo",
+      "description": "Expo SDK and EAS skills (v55 upstream naming).",
+      "skills": [
+        "expo-dev-client-v55",
+        "expo-tailwind-setup-v55",
+        "expo-use-dom-v55",
+        "expo-upgrading-v55",
+        "expo-cicd-workflows-v55",
+        "expo-deployment-v55"
+      ]
+    },
+    {
+      "title": "Web3",
+      "description": "Wagmi and Solana UI patterns.",
+      "skills": ["wagmi-v3", "solana-v1"]
+    },
+    {
+      "title": "Testing",
+      "description": "Ad-hoc Playwright browser automation.",
+      "skills": ["playwright-v1"]
+    }
+  ]
+}
