@@ -27,8 +27,10 @@ Do not add `skills/workflow/SKILL.md`. A shallower `SKILL.md` shadows nested pla
 ## Authoring
 
 - Keep `SKILL.md` under 500 lines. Put depth in `references/`
-- Required frontmatter: `name`, `description` (max 1024)
+- Required frontmatter: `name`, `description` (max 1024, single line — no `description: |`)
 - Playbooks: `disable-model-invocation: true`; one-line `description`
+- Cross-link other skills with catalog-relative paths (`../fastify-v5/SKILL.md`), not `@cursor/skills/...`
+- Run `pnpm validate` before push — checks all SKILL.md files and `skills.sh.json` sync
 - No install-time dependencies between skills. Cross-links are optional hints
 - Do not reformat vendored skill bodies to match this repo's linter; `skills/` is ignored
 
