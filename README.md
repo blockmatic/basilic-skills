@@ -36,7 +36,7 @@ pnpm validate
 
 | Intent | Example |
 | --- | --- |
-| One skill | `--skill next-v16` |
+| One skill | `--skill next-v16` or `--skill workflow` |
 | Several skills | `--skill next-v16 --skill fastify-v5` |
 | All skills | `--skill '*'` |
 | Cursor only | `-a cursor` |
@@ -50,6 +50,7 @@ Examples:
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor
+npx skills@latest add blockmatic/basilic-skills --skill workflow -a cursor -y
 npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor -a claude-code -y
 ```
 
@@ -74,6 +75,9 @@ Examples:
 # Cursor, one skill — lands in .agents/skills/next-v16/
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor -y
 
+# Cursor, playbooks — lands in .agents/skills/workflow/
+npx skills@latest add blockmatic/basilic-skills --skill workflow -a cursor -y
+
 # Cursor, all skills, copies (CI-friendly)
 npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor --copy -y
 ```
@@ -83,15 +87,27 @@ Other agents (`opencode`, `windsurf`, …): [supported agents](https://github.co
 ## Repository structure
 
 ```text
-skills/<name>/SKILL.md           # tech skills (library major in the folder name)
-skills/workflow/<playbook>/      # independently installable slash playbooks
+skills/<name>/SKILL.md                 # tech skills (library major in the folder name)
+skills/workflow/SKILL.md               # required parent — installs as one skill named workflow
+skills/workflow/<playbook>/SKILL.md    # nested slash playbooks (not independently installable)
 ```
 
-There is no `SKILL.md` at `skills/workflow/` (that would hide nested playbooks).
+The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/workflow/`. Cursor still loads nested playbooks as `/<playbook>`. Claude Code: read `.agents/skills/workflow/<playbook>/SKILL.md`.
 
 ## Canonical copies
 
 These trees are Basilic-maintained. Folder names use the stack major already in Basilic (`typescript-v6`, `ai-sdk-core-v7`, `motion-v13`). Do not treat `npx skills add expo/skills` as a dependency of this catalog.
+
+Vendored from upstream (renamed and overlaid in this repo):
+
+- `nuqs-v2` ← `nuqs` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
+- `vitest-v4` ← `vitest` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
+- `viem-v2` ← `viem-integration` in [uniswap/uniswap-ai](https://github.com/uniswap/uniswap-ai)
+- `nodejs-keccak256-v1` ← `nodejs-keccak256` in [affaan-m/ecc](https://github.com/affaan-m/ecc)
+- `next-v16` ← `nextjs` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
+- `frontend-design-v1` ← [anthropics/skills](https://github.com/anthropics/skills) `frontend-design`
+- `emilkowal-animations-v1` ← pproenca/dot-skills `emilkowal-animations`
+- `vercel-react-v1` ← `react-best-practices` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
 
 ## License
 

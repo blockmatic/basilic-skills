@@ -9,62 +9,13 @@
     },
     {
       "title": "Workflow",
-      "description": "Slash playbooks for Basilic development workflows.",
-      "skills": [
-        "add-documentation",
-        "add-error-handling",
-        "audit-accessibility",
-        "clarify-task",
-        "code-review",
-        "coderabbit",
-        "council",
-        "debug-browser",
-        "debug-issue",
-        "deslop",
-        "diagrams",
-        "docker-logs",
-        "exec-push",
-        "fix-compile-errors",
-        "fix-git-issues",
-        "fix-github-actions",
-        "fix-push",
-        "fix-vercel-build",
-        "generate-api-docs",
-        "generate-pr-description",
-        "git-commit",
-        "git-create-pr",
-        "git-pr-comments",
-        "git-push",
-        "info-architecture",
-        "light-review-existing-diffs",
-        "lint-fix",
-        "lint-suite",
-        "nextjs-form",
-        "onboard-new-developer",
-        "optimize-performance",
-        "overview",
-        "plan-architecture",
-        "plan-feature",
-        "refactor-code",
-        "retro",
-        "review-plan",
-        "roadmap",
-        "run-all-tests-and-fix",
-        "security-audit",
-        "security-review",
-        "use-shadcn",
-        "use-tdd",
-        "use-v0",
-        "visualize",
-        "write-api-test",
-        "write-unit-tests",
-        "yolo"
-      ]
+      "description": "Slash playbooks for Basilic development workflows (installed as a nested tree).",
+      "skills": ["workflow"]
     },
     {
       "title": "Web",
       "description": "Next.js, React, and client data patterns.",
-      "skills": ["next-v16", "vercel-react-v1", "tanstack-query-v5", "ahooks-v3"]
+      "skills": ["next-v16", "vercel-react-v1", "tanstack-query-v5", "ahooks-v3", "nuqs-v2"]
     },
     {
       "title": "UI",
@@ -102,12 +53,12 @@
     {
       "title": "Web3",
       "description": "Wagmi and Solana UI patterns.",
-      "skills": ["wagmi-v3", "solana-v1"]
+      "skills": ["wagmi-v3", "solana-v1", "viem-v2", "nodejs-keccak256-v1"]
     },
     {
       "title": "Testing",
-      "description": "Ad-hoc Playwright browser automation.",
-      "skills": ["playwright-v1"]
+      "description": "Vitest unit tests and ad-hoc Playwright browser automation.",
+      "skills": ["vitest-v4", "playwright-v1"]
     }
   ]
 }
