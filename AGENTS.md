@@ -11,11 +11,12 @@ skills/
     scripts/             # optional
     references/          # optional; load on demand
   workflow/
-    {playbook}/          # independently installable slash playbooks
+    SKILL.md             # required parent — CLI copies this tree as one skill
+    {playbook}/
       SKILL.md
 ```
 
-Do not add `skills/workflow/SKILL.md`. A shallower `SKILL.md` shadows nested playbooks.
+`skills/workflow/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/workflow/<playbook>/`. Nested playbooks are not independently installable (`--skill git-push` will not match).
 
 ## Naming
 
