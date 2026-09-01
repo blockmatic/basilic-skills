@@ -254,4 +254,4 @@ describe('User Routes', () => {
 ## See Also
 
 - [Test Utils Template](../templates/test-utils.ts) - Test app builder example
-- [Backend Testing Rules](@.cursor/rules/backend/testing.mdc) - Testing standards for Fastify
+- Consuming-repo Fastify testing rule — app-specific test file conventions and database setup

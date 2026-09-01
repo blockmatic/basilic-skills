@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills')
-const expectedSkillCount = 72
+const expectedSkillCount = 76
 
 const namePattern = /^[a-z0-9-]+$/
 const errors = []
@@ -78,6 +78,10 @@ for (const file of skillFiles) {
 
   if (content.includes('@cursor/skills'))
     errors.push(`${rel}: contains @cursor/skills reference — use catalog-relative paths`)
+
+  const isWorkflow = rel.startsWith('skills/workflow/')
+  if (!isWorkflow && (content.includes('@repo/') || content.includes('apps/')))
+    errors.push(`${rel}: tech skills must not contain @repo/ or apps/ paths`)
 }
 
 const groupedSet = new Set(groupedNames)

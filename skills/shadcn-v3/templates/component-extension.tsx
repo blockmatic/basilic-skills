@@ -5,9 +5,9 @@
  * without modifying the originals, following best practices.
  */
 
-import { Button, type ButtonProps } from '@repo/ui/components/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@repo/ui/components/card'
-import { cn } from '@repo/ui/lib/utils'
+import { Button, type ButtonProps } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import type * as React from 'react'
 import { forwardRef } from 'react'

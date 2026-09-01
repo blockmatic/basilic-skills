@@ -64,7 +64,7 @@
     {
       "title": "Web",
       "description": "Next.js, React, and client data patterns.",
-      "skills": ["next-v16", "vercel-react-v1", "tanstack-query-v5", "ahooks-v3"]
+      "skills": ["next-v16", "vercel-react-v1", "tanstack-query-v5", "ahooks-v3", "nuqs-v2"]
     },
     {
       "title": "UI",
@@ -102,12 +102,12 @@
     {
       "title": "Web3",
       "description": "Wagmi and Solana UI patterns.",
-      "skills": ["wagmi-v3", "solana-v1"]
+      "skills": ["wagmi-v3", "solana-v1", "viem-v2", "nodejs-keccak256-v1"]
     },
     {
       "title": "Testing",
-      "description": "Ad-hoc Playwright browser automation.",
-      "skills": ["playwright-v1"]
+      "description": "Vitest unit tests and ad-hoc Playwright browser automation.",
+      "skills": ["vitest-v4", "playwright-v1"]
     }
   ]
 }

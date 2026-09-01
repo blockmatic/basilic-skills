@@ -93,6 +93,17 @@ There is no `SKILL.md` at `skills/workflow/` (that would hide nested playbooks).
 
 These trees are Basilic-maintained. Folder names use the stack major already in Basilic (`typescript-v6`, `ai-sdk-core-v7`, `motion-v13`). Do not treat `npx skills add expo/skills` as a dependency of this catalog.
 
+Vendored from upstream (renamed and overlaid in this repo):
+
+- `nuqs-v2` ← `nuqs` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
+- `vitest-v4` ← `vitest` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
+- `viem-v2` ← `viem-integration` in [uniswap/uniswap-ai](https://github.com/uniswap/uniswap-ai)
+- `nodejs-keccak256-v1` ← `nodejs-keccak256` in [affaan-m/ecc](https://github.com/affaan-m/ecc)
+- `next-v16` ← `nextjs` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
+- `frontend-design-v1` ← [anthropics/skills](https://github.com/anthropics/skills) `frontend-design`
+- `emilkowal-animations-v1` ← pproenca/dot-skills `emilkowal-animations`
+- `vercel-react-v1` ← `react-best-practices` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
+
 ## License
 
 This repository is MIT. Some skill trees keep upstream notices. `skills/frontend-design-v1/LICENSE.txt` is Apache License 2.0.
