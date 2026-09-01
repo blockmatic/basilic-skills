@@ -401,10 +401,9 @@ const testAccounts = [
   },
   // ... more accounts
 ];
-
-// ⚠️ Test mnemonic — NEVER use with real funds! Any funds sent to these addresses WILL be stolen.
-const testMnemonic = 'test test test test test test test test test test test junk';
 ```
+
+Anvil default mnemonic: set `TEST_MNEMONIC` in `.env.test` (never commit the phrase).
 
 ### Create Test Account Helper
 
@@ -414,8 +413,12 @@ function createTestAccount(index: number = 0) {
     throw new Error('Cannot use test accounts in production');
   }
 
-  return mnemonicToAccount('test test test test test test test test test test test junk', {
+  const mnemonic = process.env.TEST_MNEMONIC;
+  if (!mnemonic) throw new Error('Set TEST_MNEMONIC for local testing');
+
+  return mnemonicToAccount(mnemonic, {
     addressIndex: index,
   });
+}
 }
 ```
