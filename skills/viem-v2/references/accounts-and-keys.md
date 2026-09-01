@@ -420,5 +420,4 @@ function createTestAccount(index: number = 0) {
     addressIndex: index,
   });
 }
-}
 ```
