@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills')
-const expectedInstallableCount = 29
+const expectedInstallableCount = 30
 const expectedPlaybookCount = 48
 
 const namePattern = /^[a-z0-9-]+$/
