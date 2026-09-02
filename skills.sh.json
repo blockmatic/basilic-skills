@@ -5,7 +5,7 @@
     {
       "title": "Core",
       "description": "TypeScript patterns for the stack.",
-      "skills": ["typescript-v6"]
+      "skills": ["typescript-v6", "file-organization-v1"]
     },
     {
       "title": "Workflow",
