@@ -108,7 +108,7 @@ Vendored from upstream (renamed and overlaid in this repo):
 - `frontend-design-v1` ← [anthropics/skills](https://github.com/anthropics/skills) `frontend-design`
 - `emilkowal-animations-v1` ← pproenca/dot-skills `emilkowal-animations`
 - `vercel-react-v1` ← `react-best-practices` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
-- `web-design-guidelines-v1` ← `web-design-guidelines` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT; fetches [web-interface-guidelines `command.md`](https://github.com/vercel-labs/web-interface-guidelines) each review)
+- `web-design-guidelines-v1` ← `web-design-guidelines` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT; fetches a pinned [web-interface-guidelines `command.md`](https://github.com/vercel-labs/web-interface-guidelines/blob/e3d624baaf29dc1fc645aff3e38f03e564d2d6b1/command.md) revision)
 - `composition-patterns-v1` ← `composition-patterns` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT)
 
 Not vendored: Vercel `writing-guidelines`, `react-view-transitions`, and `react-native-guidelines`. Craft ideas from [Impeccable](https://github.com/pbakaus/impeccable) (Apache 2.0) are adapted in original wording in `b-use-frontend` and `frontend-design-v1/references/product-ui.md`; the Impeccable CLI, hooks, and PRODUCT/DESIGN generators are not in this catalog.
