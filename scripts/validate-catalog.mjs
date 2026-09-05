@@ -1,11 +1,11 @@
-import { readdir, readFile } from 'node:fs/promises'
+import { access, readdir, readFile, stat } from 'node:fs/promises'
 import { basename, dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills')
 const expectedInstallableCount = 30
-const expectedPlaybookCount = 48
+const expectedPlaybookCount = 50
 
 const namePattern = /^[a-z0-9-]+$/
 const errors = []
@@ -48,7 +48,7 @@ const loadGroupedSkillNames = async () => {
 const classify = rel => {
   const posix = toPosix(rel)
   if (/^skills\/[^/]+\/SKILL\.md$/.test(posix)) return 'installable'
-  if (/^skills\/workflow\/[^/]+\/SKILL\.md$/.test(posix)) return 'playbook'
+  if (/^skills\/b\/[^/]+\/SKILL\.md$/.test(posix)) return 'playbook'
   return 'other'
 }
 
@@ -66,9 +66,7 @@ for (const file of skillFiles) {
   const frontmatter = parseFrontmatter(content)
 
   if (kind === 'other') {
-    errors.push(
-      `${rel}: SKILL.md must be skills/<name>/SKILL.md or skills/workflow/<name>/SKILL.md`,
-    )
+    errors.push(`${rel}: SKILL.md must be skills/<name>/SKILL.md or skills/b/<name>/SKILL.md`)
     continue
   }
 
@@ -79,32 +77,63 @@ for (const file of skillFiles) {
 
   const { name, descriptionLine, descriptionBlock, disableModelInvocation } = frontmatter
 
-  if (!name) errors.push(`${rel}: missing name in frontmatter`)
-  else if (name !== folderName)
+  if (!name) {
+    errors.push(`${rel}: missing name in frontmatter`)
+  } else if (name !== folderName) {
     errors.push(`${rel}: name "${name}" does not match folder "${folderName}"`)
-  else if (!namePattern.test(name)) errors.push(`${rel}: name "${name}" has invalid characters`)
-  else if (kind === 'playbook' && name === 'workflow')
-    errors.push(`${rel}: playbook must not be named "workflow"`)
-  else if (seenNames.has(name)) errors.push(`${rel}: duplicate skill name "${name}"`)
-  else {
+  } else if (!namePattern.test(name)) {
+    errors.push(`${rel}: name "${name}" has invalid characters`)
+  } else if (kind === 'playbook' && !name.startsWith('b-')) {
+    errors.push(`${rel}: playbook name must start with "b-"`)
+  } else if (seenNames.has(name)) {
+    errors.push(`${rel}: duplicate skill name "${name}"`)
+  } else {
     seenNames.add(name)
     if (kind === 'installable') installableNames.add(name)
     else playbookNames.add(name)
   }
 
-  if (!descriptionLine && !descriptionBlock.trim())
+  if (!descriptionLine && !descriptionBlock.trim()) {
     errors.push(`${rel}: missing description in frontmatter`)
-  else if (descriptionLine === '|' || descriptionLine === '>')
+  } else if (descriptionLine === '|' || descriptionLine === '>') {
     errors.push(`${rel}: description must be a single line, not a YAML block`)
-  else if (descriptionBlock.includes('\n')) errors.push(`${rel}: description must be a single line`)
-  else {
+  } else if (descriptionBlock.includes('\n')) {
+    errors.push(`${rel}: description must be a single line`)
+  } else {
     const description = (descriptionLine || descriptionBlock).trim()
     if (description.length > 1024)
       errors.push(`${rel}: description exceeds 1024 characters (${description.length})`)
   }
 
-  if (kind === 'playbook' && disableModelInvocation !== 'true')
+  if ((kind === 'playbook' || name === 'b') && disableModelInvocation !== 'true')
     errors.push(`${rel}: playbooks must set disable-model-invocation: true`)
+
+  if (kind === 'playbook') {
+    const headings = [...content.matchAll(/^## (.+)$/gm)].map(match => match[1].trim())
+    const hasSteps = headings.some(heading => heading === 'Steps' || heading.startsWith('Steps '))
+    const hasPurpose = headings.some(
+      heading => heading === 'Purpose' || heading === 'Purpose and inputs',
+    )
+    const hasExit = headings.some(heading =>
+      /Verification|Handoff|Completion|Review checklist/.test(heading),
+    )
+    if (!hasPurpose) errors.push(`${rel}: playbook must have ## Purpose or ## Purpose and inputs`)
+    if (!hasSteps) errors.push(`${rel}: playbook must have ## Steps`)
+    if (!hasExit)
+      errors.push(
+        `${rel}: playbook must have ## Verification, ## Handoff, ## Completion, or ## Review checklist`,
+      )
+  }
+
+  if (name === 'b' || kind === 'playbook')
+    for (const [, target] of content.matchAll(/\]\(([^)]+)\)/g)) {
+      if (/^(?:[a-z]+:|#|\/)/i.test(target)) continue
+      try {
+        await access(join(dirname(file), target.split('#')[0]))
+      } catch {
+        errors.push(`${rel}: missing packaged reference "${target}"`)
+      }
+    }
 
   if (content.includes('@cursor/skills'))
     errors.push(`${rel}: contains @cursor/skills reference — use catalog-relative paths`)
@@ -122,24 +151,64 @@ if (playbookNames.size !== expectedPlaybookCount)
   errors.push(`expected ${expectedPlaybookCount} playbooks, found ${playbookNames.size}`)
 
 const groupedSet = new Set(groupedNames)
-for (const name of installableNames) {
+for (const name of installableNames)
   if (!groupedSet.has(name)) errors.push(`skills.sh.json: skill "${name}" is not in any grouping`)
-}
 
-for (const name of playbookNames) {
+for (const name of playbookNames)
   if (groupedSet.has(name))
     errors.push(`skills.sh.json: playbook "${name}" must not be listed as an installable skill`)
-}
 
-for (const name of groupedNames) {
+for (const name of groupedNames)
   if (!installableNames.has(name))
     errors.push(`skills.sh.json: grouped skill "${name}" has no installable SKILL.md`)
-}
 
 if (groupedNames.length !== installableNames.size)
   errors.push(
     `skills.sh.json lists ${groupedNames.length} skills but catalog has ${installableNames.size} installable`,
   )
+
+try {
+  const leftoverWorkflow = await stat(join(skillsRoot, 'workflow'))
+  if (leftoverWorkflow.isDirectory())
+    errors.push('skills/workflow: leftover second workflow tree; keep only skills/b')
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error
+}
+
+if (!installableNames.has('b')) errors.push('skills/b/SKILL.md: dispatcher is required')
+
+const dispatcherContent = await readFile(join(skillsRoot, 'b', 'SKILL.md'), 'utf8')
+const indexedPlaybooks = new Set(
+  [...dispatcherContent.matchAll(/\]\((b-[a-z0-9-]+)\/SKILL\.md\)/g)].map(match => match[1]),
+)
+for (const name of playbookNames)
+  if (!indexedPlaybooks.has(name)) errors.push(`skills/b/SKILL.md: missing index entry for ${name}`)
+for (const name of indexedPlaybooks)
+  if (!playbookNames.has(name)) errors.push(`skills/b/SKILL.md: indexes unknown playbook ${name}`)
+
+const refsDir = join(skillsRoot, 'b', 'references')
+const refEntries = await readdir(refsDir)
+for (const file of refEntries) {
+  if (!file.endsWith('.md')) continue
+  const path = join(refsDir, file)
+  const content = await readFile(path, 'utf8')
+  const rel = toPosix(relative(root, path))
+  for (const [, target] of content.matchAll(/\]\(([^)]+)\)/g)) {
+    if (/^(?:[a-z]+:|#|\/)/i.test(target)) continue
+    try {
+      await access(join(dirname(path), target.split('#')[0]))
+    } catch {
+      errors.push(`${rel}: missing packaged reference "${target}"`)
+    }
+  }
+}
+
+try {
+  await access(join(skillsRoot, 'b', 'references', 'authoring.md'))
+  await access(join(skillsRoot, 'b', 'references', 'completion.md'))
+} catch {
+  errors.push('skills/b/references: packaged authoring.md and completion.md are required')
+}
 
 if (errors.length) {
   console.error('Catalog validation failed:\n')

@@ -68,7 +68,7 @@ Next.js 16 App Router (GA October 2025). Prefer the version-matched docs in `nod
 
 - React 19 concurrent UI: [vercel-react-v1](../vercel-react-v1/SKILL.md)
 - Client data after hydration: [tanstack-query-v5](../tanstack-query-v5/SKILL.md)
-- Forms that stay on the Next server: [workflow/nextjs-form](../workflow/nextjs-form/SKILL.md)
+- Forms that stay on the Next server: [b/b-nextjs-form](../b/b-nextjs-form/SKILL.md)
 
 ## Two cache models (do not mix)
 
@@ -117,7 +117,7 @@ When the user asks to review, refactor, modernize, or audit Next code, follow [`
 8. [Client islands](references/_sections.md#8-client-components) — LOW-MEDIUM — `'use client'` leaf, children slot, hydration, `next/script`
 9. [Hygiene](references/_sections.md#9-codebase-hygiene) — CROSS-CUTTING — dedup fetchers, consolidate routes, dead code, boundary audit, name drift
 
-Full rule list: [`AGENTS.md`](AGENTS.md). Rule files: [`references/`](references/).
+Full rule list: [`references/compiled.md`](references/compiled.md). Rule files: [`references/`](references/).
 
 ## References
 

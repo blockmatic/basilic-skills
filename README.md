@@ -36,7 +36,7 @@ pnpm validate
 
 | Intent | Example |
 | --- | --- |
-| One skill | `--skill next-v16` or `--skill workflow` |
+| One skill | `--skill next-v16` (GitHub) or `--skill b` (local clone until published) |
 | Several skills | `--skill next-v16 --skill fastify-v5` |
 | All skills | `--skill '*'` |
 | Cursor only | `-a cursor` |
@@ -46,11 +46,11 @@ pnpm validate
 | Copy files (no symlinks) | `--copy` |
 | Skip prompts | `-y` |
 
-Examples:
+Examples (tech skills from GitHub; **`b` is unpublished** — GitHub `main` still ships `workflow`):
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor
-npx skills@latest add blockmatic/basilic-skills --skill workflow -a cursor -y
+npx skills@latest add /path/to/basilic-skills --skill b -a cursor -y
 npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor -a claude-code -y
 ```
 
@@ -75,8 +75,8 @@ Examples:
 # Cursor, one skill — lands in .agents/skills/next-v16/
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor -y
 
-# Cursor, playbooks — lands in .agents/skills/workflow/
-npx skills@latest add blockmatic/basilic-skills --skill workflow -a cursor -y
+# Cursor, playbooks — local preview until `b` is on GitHub main
+npx skills@latest add /path/to/basilic-skills --skill b -a cursor -y
 
 # Cursor, all skills, copies (CI-friendly)
 npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor --copy -y
@@ -88,11 +88,11 @@ Other agents (`opencode`, `windsurf`, …): [supported agents](https://github.co
 
 ```text
 skills/<name>/SKILL.md                 # tech skills (library major in the folder name)
-skills/workflow/SKILL.md               # required parent — installs as one skill named workflow
-skills/workflow/<playbook>/SKILL.md    # nested slash playbooks (not independently installable)
+skills/b/SKILL.md               # required parent — installs as one skill named b
+skills/b/b-<playbook>/SKILL.md    # nested slash playbooks (not independently installable)
 ```
 
-The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/workflow/`. Cursor still loads nested playbooks as `/<playbook>`. Claude Code: read `.agents/skills/workflow/<playbook>/SKILL.md`.
+The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/b/`. Cursor still loads nested playbooks as `/b-<playbook>`. Claude Code: read `.claude/skills/b/b-<playbook>/SKILL.md`.
 
 ## Canonical copies
 
@@ -125,3 +125,7 @@ pnpm dlx skills@latest update
 ```
 
 Do not rename a skill after install; lockfile keys follow skill names. Commit `skills-lock.json` in consuming projects when you vendor skills.
+
+## Basilic workflows
+
+Use `/b` for the catalog, `/b plan`, `/b build`, `/b review`, or a full `/b-<playbook>` name. FIRST `/f-*` remains separate. See [adoption and migration](docs/workflow-adoption.md) for structure, checklists, and the move from `workflow` to `b`.
