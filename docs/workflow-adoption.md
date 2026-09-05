@@ -56,7 +56,7 @@ Migration is explicit: `/workflow` becomes `/b`; `/plan-feature` becomes `/b-pla
 
 ## Validation and limits
 
-`pnpm validate` checks names, invocation metadata, catalog grouping, expected counts, and relative references from the workflow entry points. A packaged install should contain 50 child playbooks plus the dispatcher and references, with no second workflow tree.
+`pnpm validate` checks names, invocation metadata, catalog grouping, expected counts, dispatcher index coverage of every `b-*` folder, and relative references from playbook SKILL.md files and `skills/b/references/*.md`. A packaged install should contain 50 child playbooks plus the dispatcher and references, with no second workflow tree.
 
 Evaluate these scenarios in an isolated workspace: `/b` lists without executing; an unknown token does not publish; review-only leaves files unchanged; build-only does not commit; a commit with unrelated staged files preserves them; failed verification does not become a success claim. These are behavior acceptance criteria, not evidence of a completed agent evaluation.
 

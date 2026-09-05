@@ -108,6 +108,23 @@ for (const file of skillFiles) {
   if ((kind === 'playbook' || name === 'b') && disableModelInvocation !== 'true')
     errors.push(`${rel}: playbooks must set disable-model-invocation: true`)
 
+  if (kind === 'playbook') {
+    const headings = [...content.matchAll(/^## (.+)$/gm)].map(match => match[1].trim())
+    const hasSteps = headings.some(heading => heading === 'Steps' || heading.startsWith('Steps '))
+    const hasPurpose = headings.some(
+      heading => heading === 'Purpose' || heading === 'Purpose and inputs',
+    )
+    const hasExit = headings.some(heading =>
+      /Verification|Handoff|Completion|Review checklist/.test(heading),
+    )
+    if (!hasPurpose) errors.push(`${rel}: playbook must have ## Purpose or ## Purpose and inputs`)
+    if (!hasSteps) errors.push(`${rel}: playbook must have ## Steps`)
+    if (!hasExit)
+      errors.push(
+        `${rel}: playbook must have ## Verification, ## Handoff, ## Completion, or ## Review checklist`,
+      )
+  }
+
   if (name === 'b' || kind === 'playbook')
     for (const [, target] of content.matchAll(/\]\(([^)]+)\)/g)) {
       if (/^(?:[a-z]+:|#|\/)/i.test(target)) continue
@@ -159,6 +176,32 @@ try {
 }
 
 if (!installableNames.has('b')) errors.push('skills/b/SKILL.md: dispatcher is required')
+
+const dispatcherContent = await readFile(join(skillsRoot, 'b', 'SKILL.md'), 'utf8')
+const indexedPlaybooks = new Set(
+  [...dispatcherContent.matchAll(/\]\((b-[a-z0-9-]+)\/SKILL\.md\)/g)].map(match => match[1]),
+)
+for (const name of playbookNames)
+  if (!indexedPlaybooks.has(name)) errors.push(`skills/b/SKILL.md: missing index entry for ${name}`)
+for (const name of indexedPlaybooks)
+  if (!playbookNames.has(name)) errors.push(`skills/b/SKILL.md: indexes unknown playbook ${name}`)
+
+const refsDir = join(skillsRoot, 'b', 'references')
+const refEntries = await readdir(refsDir)
+for (const file of refEntries) {
+  if (!file.endsWith('.md')) continue
+  const path = join(refsDir, file)
+  const content = await readFile(path, 'utf8')
+  const rel = toPosix(relative(root, path))
+  for (const [, target] of content.matchAll(/\]\(([^)]+)\)/g)) {
+    if (/^(?:[a-z]+:|#|\/)/i.test(target)) continue
+    try {
+      await access(join(dirname(path), target.split('#')[0]))
+    } catch {
+      errors.push(`${rel}: missing packaged reference "${target}"`)
+    }
+  }
+}
 
 try {
   await access(join(skillsRoot, 'b', 'references', 'authoring.md'))

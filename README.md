@@ -36,7 +36,7 @@ pnpm validate
 
 | Intent | Example |
 | --- | --- |
-| One skill | `--skill next-v16` or `--skill b` |
+| One skill | `--skill next-v16` (GitHub) or `--skill b` (local clone until published) |
 | Several skills | `--skill next-v16 --skill fastify-v5` |
 | All skills | `--skill '*'` |
 | Cursor only | `-a cursor` |
@@ -46,11 +46,11 @@ pnpm validate
 | Copy files (no symlinks) | `--copy` |
 | Skip prompts | `-y` |
 
-Examples:
+Examples (tech skills from GitHub; **`b` is unpublished** — GitHub `main` still ships `workflow`):
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor
-npx skills@latest add blockmatic/basilic-skills --skill b -a cursor -y
+npx skills@latest add /path/to/basilic-skills --skill b -a cursor -y
 npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor -a claude-code -y
 ```
 
@@ -75,8 +75,8 @@ Examples:
 # Cursor, one skill — lands in .agents/skills/next-v16/
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor -y
 
-# Cursor, playbooks — lands in .agents/skills/b/
-npx skills@latest add blockmatic/basilic-skills --skill b -a cursor -y
+# Cursor, playbooks — local preview until `b` is on GitHub main
+npx skills@latest add /path/to/basilic-skills --skill b -a cursor -y
 
 # Cursor, all skills, copies (CI-friendly)
 npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor --copy -y

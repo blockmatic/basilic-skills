@@ -45,6 +45,8 @@ npx skills@latest add blockmatic/basilic-skills --list
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor
 ```
 
+Until `b` is published, install playbooks from a local clone (`--skill b`). GitHub `main` still exposes `workflow`.
+
 Canonical copies land in `.agents/skills/`; agent flags (`-a cursor`, `-a claude-code`, …) write to each agent's skills directory. See README for full flag reference.
 
 For workflow changes, read `skills/b/references/authoring.md`. The dispatcher and references ship as one installable `b` skill. Do not retain a second workflow tree after migration.
