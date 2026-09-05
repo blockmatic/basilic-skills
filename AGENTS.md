@@ -10,18 +10,18 @@ skills/
     SKILL.md
     scripts/             # optional
     references/          # optional; load on demand
-  b/
+  workflow/
     SKILL.md             # required parent — CLI copies this tree as one skill
-    b-{playbook}/
+    {playbook}/
       SKILL.md
 ```
 
-`skills/b/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/b/b-<playbook>/`. Nested playbooks are not independently installable (`--skill b-git-push` will not match).
+`skills/workflow/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/workflow/<playbook>/`. Nested playbooks are not independently installable (`--skill git-push` will not match).
 
 ## Naming
 
 - Tech skills: `<topic>-v<major>` (library/SDK major, e.g. `next-v16`, `motion-v13`)
-- Playbooks: unversioned folder names (`b-plan-feature`, `b-exec-push`)
+- Playbooks: unversioned folder names (`plan-feature`, `exec-push`)
 - Do not invent majors. Do not keep `foo/` next to `foo-vN/`
 - `name` is lowercase letters, digits, hyphens; max 64; equals the folder that contains `SKILL.md`
 
@@ -45,8 +45,8 @@ npx skills@latest add blockmatic/basilic-skills --list
 npx skills@latest add blockmatic/basilic-skills --skill next-v16 -a cursor
 ```
 
-Until `b` is published, install playbooks from a local clone (`--skill b`). GitHub `main` still exposes `workflow`.
+Install playbooks with `--skill workflow`.
 
 Canonical copies land in `.agents/skills/`; agent flags (`-a cursor`, `-a claude-code`, …) write to each agent's skills directory. See README for full flag reference.
 
-For workflow changes, read `skills/b/references/authoring.md`. The dispatcher and references ship as one installable `b` skill. Do not retain a second workflow tree after migration.
+For workflow changes, read `skills/workflow/references/authoring.md`. The dispatcher and references ship as one installable `workflow` skill. Do not retain a second playbook tree.
