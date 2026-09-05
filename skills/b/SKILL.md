@@ -25,6 +25,7 @@ Direct `/b-<name>` loads the same child. Names in an old conversation such as `/
 | `/b push` | [b-git-push](b-git-push/SKILL.md) |
 | `/b pr` | [b-git-create-pr](b-git-create-pr/SKILL.md) |
 | `/b retro` | [b-retro](b-retro/SKILL.md) |
+| `/b ui` | [b-use-frontend](b-use-frontend/SKILL.md) |
 
 `build` ends at verified local changes. `commit`, `push`, `pr`, and `exec-push` request their named Git actions; none requests merging or deploying. Use `/b-git-push` to publish an already-committed branch; `/b-fix-push` after fixing a failed push; `/b-exec-push` only when the user asked for implement through a described PR.
 
@@ -73,6 +74,7 @@ Direct `/b-<name>` loads the same child. Names in an old conversation such as `/
 - [/b-run-all-tests-and-fix](b-run-all-tests-and-fix/SKILL.md)
 - [/b-security-audit](b-security-audit/SKILL.md)
 - [/b-security-review](b-security-review/SKILL.md)
+- [/b-use-frontend](b-use-frontend/SKILL.md)
 - [/b-use-shadcn](b-use-shadcn/SKILL.md)
 - [/b-use-tdd](b-use-tdd/SKILL.md)
 - [/b-use-v0](b-use-v0/SKILL.md)
