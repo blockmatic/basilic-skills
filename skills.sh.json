@@ -24,6 +24,8 @@
         "shadcn-v3",
         "tailwind-design-system-v4",
         "frontend-design-v1",
+        "web-design-guidelines-v1",
+        "composition-patterns-v1",
         "motion-v13",
         "emilkowal-animations-v1"
       ]
