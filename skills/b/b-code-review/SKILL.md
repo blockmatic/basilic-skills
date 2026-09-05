@@ -13,7 +13,7 @@ Use the specified diff, branch, or PR and its intended behavior. Establish the r
 1. Understand the trigger and expected result before judging the implementation. Read tests to learn which claims are actually exercised.
 2. Check the dimensions below, concentrating on changed behavior, affected callers, and failure paths. Read domain rules when a boundary changes.
 3. Validate suspected defects with a concrete execution path, failing case, or source evidence. Do not invent timings or vulnerabilities from appearances.
-4. Challenge verification claims: a listed check that was not run, or a typecheck offered as proof of a browser path, is a finding. Order findings by impact with file/line, trigger, consequence, and smallest useful remedy.
+4. Challenge verification claims. An unrun check is a finding only when the repository requires it or concrete evidence shows failure. A typecheck that cannot prove a browser path is not a defect when that path is out of scope. Order findings by impact with file/line, trigger, consequence, and smallest useful remedy.
 
 ## Review checklist
 

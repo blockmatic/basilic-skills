@@ -23,4 +23,4 @@ Run the documented full gate (`pnpm qa` in Basilic, or the repo's equivalent) an
 
 ## Handoff
 
-Summarize failures, fixes, and remaining blockers. Publish only if the user then asks `/b-git-commit`.
+Summarize failures, fixes, and remaining blockers. If they want a local commit, use `/b-git-commit`. Use `/b-git-push` only after they explicitly request publication of an already-committed branch.

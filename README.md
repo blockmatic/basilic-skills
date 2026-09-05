@@ -92,7 +92,7 @@ skills/b/SKILL.md               # required parent — installs as one skill name
 skills/b/b-<playbook>/SKILL.md    # nested slash playbooks (not independently installable)
 ```
 
-The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/b/`. Cursor still loads nested playbooks as `/b-<playbook>`. Claude Code: read `.agents/skills/b/b-<playbook>/SKILL.md`.
+The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/b/`. Cursor still loads nested playbooks as `/b-<playbook>`. Claude Code: read `.claude/skills/b/b-<playbook>/SKILL.md`.
 
 ## Canonical copies
 
