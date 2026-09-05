@@ -28,7 +28,7 @@ Basilic already carries stack-specific patterns, generated-client ownership, rep
 
 Addy's [incremental implementation](https://github.com/addyosmani/agent-skills/blob/84ee50673804b95c287d1e4eb4f1c1dad7c5188a/skills/incremental-implementation/SKILL.md) treats commits as part of each increment. Basilic distinguishes implementation from a user-requested commit/push. Its existing `use-tdd` playbook is explicit; importing universal TDD would change that contract and add unnecessary work to low-impact documentation edits.
 
-The planning source defaults to `tasks/plan.md` and a task list, with support for external trackers. Basilic already has work state and FIRST artifacts. Keeping those destinations avoids another partially maintained plan tree. Similarly, a second constraints or definition-of-done policy would compete with repository rules and the Quality/Pipelines stations. We borrow evidence questions, not new policy ownership.
+The planning source defaults to `tasks/plan.md` and a task list, with support for external trackers. Basilic already has work state and FIRST artifacts. Keeping those destinations avoids another partially maintained plan tree. Similarly, a second constraints or definition-of-done policy would compete with repository rules and the Quality/Workflow stations. We borrow evidence questions, not new policy ownership.
 
 ## Where the checklists help most
 
