@@ -2,7 +2,7 @@
 
 ## Decision
 
-Keep the Basilic catalog and adopt selected structure from Addy Osmani's agent-skills. Use one installable `b` tree, a `/b` dispatcher, and nested `/b-*` playbooks. FIRST remains the durable decision framework; this catalog implements development tasks. This is a local catalog change until published, not a claim that the GitHub catalog already exposes `b`.
+Keep the Basilic catalog and adopt selected structure from Addy Osmani's agent-skills. Use one installable `workflow` tree, a `/workflow` dispatcher, and nested unprefixed playbooks (`/plan-feature`). FIRST remains the durable decision framework; this catalog implements development tasks.
 
 ## Evidence and comparison
 
@@ -10,13 +10,13 @@ Research inspected [the site](https://skills.addy.ie/) and [source revision 84ee
 
 | Concern | Addy's approach | Basilic decision |
 |---|---|---|
-| Discovery | Lifecycle commands and a meta-skill route work | `/b` routes explicit requests; `/f-*` continues to route durable decisions |
+| Discovery | Lifecycle commands and a meta-skill route work | `/workflow` routes explicit requests; `/f-*` continues to route durable decisions |
 | Authoring | Purpose, use conditions, procedure, warning signs, and verification | Concise inputs, steps, observable checklist, and handoff; add detail where it changes behavior |
 | Planning | Dependencies, acceptance conditions, and verification per task | Adopt these in the existing plan location; no automatic branch creation |
-| Implementation | Small increments with tests and commits | Add `/b-build`; verification is proportional to change, publishing remains separately requested |
+| Implementation | Small increments with tests and commits | Add `/build`; verification is proportional to change, publishing remains separately requested |
 | Review | Multiple dimensions, severity, and verification scrutiny | Review correctness, clarity, architecture, security, and performance with concrete findings |
 | Debugging | Reproduction and progressively narrowed diagnosis | Evidence before fixes, one hypothesis at a time, original-scenario verification, explicit unresolved state |
-| Checklists | Shared completion and domain references | Keep a compact evidence reference inside the installed `b` package; existing repository policies own thresholds |
+| Checklists | Shared completion and domain references | Keep a compact evidence reference inside the installed `workflow` package; existing repository policies own thresholds |
 | Distribution | Skills plus several native integrations and repository-level references | Preserve the existing skills CLI and Cursor-first layout; no additional plugin or harness configuration |
 | Evaluation | Structural, lexical routing, and agent behavior checks | Strengthen structural/package checks now; use realistic manual scenarios before claiming behavioral improvement |
 
@@ -42,30 +42,30 @@ Specialty playbooks retain their existing mechanics under consistent headings an
 
 ## Packaging and migration
 
-The skills CLI installs the parent containing `SKILL.md`; the entire `b` directory carries its children and references. This avoids the per-skill shared-reference portability limitation acknowledged in Addy's [README](https://github.com/addyosmani/agent-skills/blob/84ee50673804b95c287d1e4eb4f1c1dad7c5188a/README.md). Nested children are not independent CLI install targets.
+The skills CLI installs the parent containing `SKILL.md`; the entire `workflow` directory carries its children and references. This avoids the per-skill shared-reference portability limitation acknowledged in Addy's [README](https://github.com/addyosmani/agent-skills/blob/84ee50673804b95c287d1e4eb4f1c1dad7c5188a/README.md). Nested children are not independent CLI install targets.
 
 For local preview, from the consuming repository:
 
 ```bash
-pnpm dlx skills@latest add /path/to/basilic-skills --skill b -a cursor --copy -y
+pnpm dlx skills@latest add /path/to/basilic-skills --skill workflow -a cursor --copy -y
 ```
 
-After the catalog change is published, use the same command with `blockmatic/basilic-skills` as source. Verify `b` and all references installed before removing the previous installed `workflow` package with the skills CLI. Inspect local modifications before removal. Review the generated lockfile; do not fabricate a GitHub hash for an unpublished local preview.
+After the catalog change is published, use the same command with `blockmatic/basilic-skills` as source. Verify `workflow` and all references installed before removing a leftover installed `b` package with the skills CLI. Inspect local modifications before removal. Review the generated lockfile; do not fabricate a GitHub hash for an unpublished local preview.
 
-Migration is explicit: `/workflow` becomes `/b`; `/plan-feature` becomes `/b-plan-feature`, and similarly for every old child. `/b plan` is a dispatcher shortcut to `/b-plan-feature`. Old standalone names are not registered aliases. Update pinned prompts, documentation, and exact file references. Reload skill discovery in the agent if needed.
+Migration is explicit: `/b` becomes `/workflow`; `/b-plan-feature` becomes `/plan-feature`, and similarly for every child. `/workflow plan` is a dispatcher shortcut to `/plan-feature`. Prefixed `b-` names are not registered aliases. Update pinned prompts, documentation, and exact file references. Reload skill discovery in the agent if needed.
 
 ## Validation and limits
 
-`pnpm validate` checks names, invocation metadata, catalog grouping, expected counts, dispatcher index coverage of every `b-*` folder, and relative references from playbook SKILL.md files and `skills/b/references/*.md`. A packaged install should contain 51 child playbooks plus the dispatcher and references, with no second workflow tree.
+`pnpm validate` checks names, invocation metadata, catalog grouping, expected counts, dispatcher index coverage of every playbook folder, and relative references from playbook SKILL.md files and `skills/workflow/references/*.md`. A packaged install should contain 51 child playbooks plus the dispatcher and references, with no leftover `b` tree.
 
-Evaluate these scenarios in an isolated workspace: `/b` lists without executing; an unknown token does not publish; review-only leaves files unchanged; build-only does not commit; a commit with unrelated staged files preserves them; failed verification does not become a success claim. These are behavior acceptance criteria, not evidence of a completed agent evaluation.
+Evaluate these scenarios in an isolated workspace: `/workflow` lists without executing; an unknown token does not publish; review-only leaves files unchanged; build-only does not commit; a commit with unrelated staged files preserves them; failed verification does not become a success claim. These are behavior acceptance criteria, not evidence of a completed agent evaluation.
 
 Addy's [eval design](https://github.com/addyosmani/agent-skills/blob/84ee50673804b95c287d1e4eb4f1c1dad7c5188a/evals/README.md) usefully separates structural checks from real execution. Its lexical routing score approximates discovery; it does not prove correct reasoning. A full multi-harness evaluation system would be a separate maintenance commitment. No measured productivity or reliability improvement is claimed here.
 
 ## References
 
 - Catalog `AGENTS.md`, `README.md`, and `scripts/validate-catalog.mjs`
-- `skills/b/references/authoring.md` and `skills/b/references/completion.md`
+- `skills/workflow/references/authoring.md` and `skills/workflow/references/completion.md`
 - Basilic repository rules: `base/general`, `base/git`, `cursor/skills`, `base/docs`, `base/readme`
 - Basilic technical docs: `development/ai-workflow.mdx`, `development/cursor-skills.mdx`
 - FIRST: `_first/AGENTS.md`, `_first/ABOUT.md`, `_first/FIRST.md`, `f-workflow`, and the Workflow instance

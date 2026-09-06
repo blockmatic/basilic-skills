@@ -48,7 +48,7 @@ const loadGroupedSkillNames = async () => {
 const classify = rel => {
   const posix = toPosix(rel)
   if (/^skills\/[^/]+\/SKILL\.md$/.test(posix)) return 'installable'
-  if (/^skills\/b\/[^/]+\/SKILL\.md$/.test(posix)) return 'playbook'
+  if (/^skills\/workflow\/[^/]+\/SKILL\.md$/.test(posix)) return 'playbook'
   return 'other'
 }
 
@@ -66,7 +66,7 @@ for (const file of skillFiles) {
   const frontmatter = parseFrontmatter(content)
 
   if (kind === 'other') {
-    errors.push(`${rel}: SKILL.md must be skills/<name>/SKILL.md or skills/b/<name>/SKILL.md`)
+    errors.push(`${rel}: SKILL.md must be skills/<name>/SKILL.md or skills/workflow/<name>/SKILL.md`)
     continue
   }
 
@@ -83,8 +83,8 @@ for (const file of skillFiles) {
     errors.push(`${rel}: name "${name}" does not match folder "${folderName}"`)
   } else if (!namePattern.test(name)) {
     errors.push(`${rel}: name "${name}" has invalid characters`)
-  } else if (kind === 'playbook' && !name.startsWith('b-')) {
-    errors.push(`${rel}: playbook name must start with "b-"`)
+  } else if (kind === 'playbook' && name.startsWith('b-')) {
+    errors.push(`${rel}: playbook name must not start with "b-"`)
   } else if (seenNames.has(name)) {
     errors.push(`${rel}: duplicate skill name "${name}"`)
   } else {
@@ -105,7 +105,7 @@ for (const file of skillFiles) {
       errors.push(`${rel}: description exceeds 1024 characters (${description.length})`)
   }
 
-  if ((kind === 'playbook' || name === 'b') && disableModelInvocation !== 'true')
+  if ((kind === 'playbook' || name === 'workflow') && disableModelInvocation !== 'true')
     errors.push(`${rel}: playbooks must set disable-model-invocation: true`)
 
   if (kind === 'playbook') {
@@ -125,7 +125,7 @@ for (const file of skillFiles) {
       )
   }
 
-  if (name === 'b' || kind === 'playbook')
+  if (name === 'workflow' || kind === 'playbook')
     for (const [, target] of content.matchAll(/\]\(([^)]+)\)/g)) {
       if (/^(?:[a-z]+:|#|\/)/i.test(target)) continue
       try {
@@ -168,25 +168,28 @@ if (groupedNames.length !== installableNames.size)
   )
 
 try {
-  const leftoverWorkflow = await stat(join(skillsRoot, 'workflow'))
-  if (leftoverWorkflow.isDirectory())
-    errors.push('skills/workflow: leftover second workflow tree; keep only skills/b')
+  const leftoverB = await stat(join(skillsRoot, 'b'))
+  if (leftoverB.isDirectory())
+    errors.push('skills/b: leftover second playbook tree; keep only skills/workflow')
 } catch (error) {
   if (error.code !== 'ENOENT') throw error
 }
 
-if (!installableNames.has('b')) errors.push('skills/b/SKILL.md: dispatcher is required')
+if (!installableNames.has('workflow'))
+  errors.push('skills/workflow/SKILL.md: dispatcher is required')
 
-const dispatcherContent = await readFile(join(skillsRoot, 'b', 'SKILL.md'), 'utf8')
+const dispatcherContent = await readFile(join(skillsRoot, 'workflow', 'SKILL.md'), 'utf8')
 const indexedPlaybooks = new Set(
-  [...dispatcherContent.matchAll(/\]\((b-[a-z0-9-]+)\/SKILL\.md\)/g)].map(match => match[1]),
+  [...dispatcherContent.matchAll(/\]\(([a-z0-9-]+)\/SKILL\.md\)/g)].map(match => match[1]),
 )
 for (const name of playbookNames)
-  if (!indexedPlaybooks.has(name)) errors.push(`skills/b/SKILL.md: missing index entry for ${name}`)
+  if (!indexedPlaybooks.has(name))
+    errors.push(`skills/workflow/SKILL.md: missing index entry for ${name}`)
 for (const name of indexedPlaybooks)
-  if (!playbookNames.has(name)) errors.push(`skills/b/SKILL.md: indexes unknown playbook ${name}`)
+  if (!playbookNames.has(name))
+    errors.push(`skills/workflow/SKILL.md: indexes unknown playbook ${name}`)
 
-const refsDir = join(skillsRoot, 'b', 'references')
+const refsDir = join(skillsRoot, 'workflow', 'references')
 const refEntries = await readdir(refsDir)
 for (const file of refEntries) {
   if (!file.endsWith('.md')) continue
@@ -204,10 +207,10 @@ for (const file of refEntries) {
 }
 
 try {
-  await access(join(skillsRoot, 'b', 'references', 'authoring.md'))
-  await access(join(skillsRoot, 'b', 'references', 'completion.md'))
+  await access(join(skillsRoot, 'workflow', 'references', 'authoring.md'))
+  await access(join(skillsRoot, 'workflow', 'references', 'completion.md'))
 } catch {
-  errors.push('skills/b/references: packaged authoring.md and completion.md are required')
+  errors.push('skills/workflow/references: packaged authoring.md and completion.md are required')
 }
 
 if (errors.length) {
