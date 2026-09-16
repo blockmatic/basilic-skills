@@ -87,7 +87,7 @@ Other agents (`opencode`, `windsurf`, …): [supported agents](https://github.co
 ## Repository structure
 
 ```text
-skills/<name>/SKILL.md                       # tech skills (library major in the folder name)
+skills/<name>/SKILL.md                       # library skills use -v<major>; craft/pattern skills do not
 skills/workflow/SKILL.md                     # required parent — installs as one skill named workflow
 skills/workflow/<playbook>/SKILL.md          # nested slash playbooks (not independently installable)
 ```
@@ -96,7 +96,7 @@ The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/s
 
 ## Canonical copies
 
-These trees are Basilic-maintained. Folder names use the stack major already in Basilic (`typescript-v6`, `ai-sdk-core-v7`, `motion-v13`). Do not treat `npx skills add expo/skills` as a dependency of this catalog.
+These trees are Basilic-maintained. Library/SDK folders use the stack major already in Basilic (`typescript-v6`, `ai-sdk-core-v7`, `motion-v13`). Pattern, guideline, and craft skills stay unversioned. Do not treat `npx skills add expo/skills` as a dependency of this catalog.
 
 Vendored from upstream (renamed and overlaid in this repo):
 
@@ -105,17 +105,22 @@ Vendored from upstream (renamed and overlaid in this repo):
 - `viem-v2` ← `viem-integration` in [uniswap/uniswap-ai](https://github.com/uniswap/uniswap-ai)
 - `nodejs-keccak256-v1` ← `nodejs-keccak256` in [affaan-m/ecc](https://github.com/affaan-m/ecc)
 - `next-v16` ← `nextjs` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
-- `frontend-design-v1` ← [anthropics/skills](https://github.com/anthropics/skills) `frontend-design`
-- `emilkowal-animations-v1` ← pproenca/dot-skills `emilkowal-animations`
-- `vercel-react-v1` ← `react-best-practices` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
-- `web-design-guidelines-v1` ← `web-design-guidelines` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT; fetches a pinned [web-interface-guidelines `command.md`](https://github.com/vercel-labs/web-interface-guidelines/blob/e3d624baaf29dc1fc645aff3e38f03e564d2d6b1/command.md) revision)
-- `composition-patterns-v1` ← `composition-patterns` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT)
+- `frontend-design` ← [anthropics/skills](https://github.com/anthropics/skills) `frontend-design`
+- `emilkowal-animations` ← pproenca/dot-skills `emilkowal-animations`
+- `vercel-react` ← `react-best-practices` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
+- `web-design-guidelines` ← `web-design-guidelines` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT; fetches a pinned [web-interface-guidelines `command.md`](https://github.com/vercel-labs/web-interface-guidelines/blob/e3d624baaf29dc1fc645aff3e38f03e564d2d6b1/command.md) revision)
+- `composition-patterns` ← `composition-patterns` in [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT)
 
-Not vendored: Vercel `writing-guidelines`, `react-view-transitions`, and `react-native-guidelines`. Craft ideas from [Impeccable](https://github.com/pbakaus/impeccable) (Apache 2.0) are adapted in original wording in `use-frontend` and `frontend-design-v1/references/product-ui.md`; the Impeccable CLI, hooks, and PRODUCT/DESIGN generators are not in this catalog.
+Vendored from upstream (folder names unchanged):
+
+- [emilkowalski/skills](https://github.com/emilkowalski/skills) at [`85e8e2363b713506e1d5b6e07a0eb2da66be1bc3`](https://github.com/emilkowalski/skills/commit/85e8e2363b713506e1d5b6e07a0eb2da66be1bc3) (MIT): `emil-design-eng`, `review-animations`, `animation-vocabulary`, `apple-design`, `improve-animations`, `find-animation-opportunities`, `pick-ui-library`, `prototype`, `animate`, `ask-sonner`, `animate-expo`, `write-swift`, `mobile-native`
+- `better-ui` ← [jakubkrehel/skills](https://github.com/jakubkrehel/skills) at [`267330e1adfc66a718fb65fa6918c1f06d0a689e`](https://github.com/jakubkrehel/skills/commit/267330e1adfc66a718fb65fa6918c1f06d0a689e) (MIT). Sibling `better-*` skills are not in this catalog.
+
+Not vendored: Vercel `writing-guidelines`, `react-view-transitions`, and `react-native-guidelines`. Craft ideas from [Impeccable](https://github.com/pbakaus/impeccable) (Apache 2.0) are adapted in original wording in `use-frontend` and `frontend-design/references/product-ui.md`; the Impeccable CLI, hooks, and PRODUCT/DESIGN generators are not in this catalog.
 
 ## License
 
-This repository is MIT. Some skill trees keep upstream notices. `skills/frontend-design-v1/LICENSE.txt` is Apache License 2.0.
+This repository is MIT. Some skill trees keep upstream notices. `skills/frontend-design/LICENSE.txt` is Apache License 2.0.
 
 Distribution is GitHub only. Do not publish this catalog to npm — `package.json` is intentionally `private`.
 
@@ -128,7 +133,7 @@ npx skills@latest update
 pnpm dlx skills@latest update
 ```
 
-Do not rename a skill after install; lockfile keys follow skill names. Commit `skills-lock.json` in consuming projects when you vendor skills.
+Do not rename a skill after install; lockfile keys follow skill names. A catalog rename is a breaking consumer key change — re-add the skill under the new name and commit `skills-lock.json`. Commit `skills-lock.json` in consuming projects when you vendor skills.
 
 ## Basilic workflows
 
