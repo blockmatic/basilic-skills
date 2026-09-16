@@ -132,4 +132,6 @@ Do not rename a skill after install; lockfile keys follow skill names. Commit `s
 
 ## Basilic workflows
 
-Use `/workflow` for the catalog, `/workflow plan`, `/workflow build`, `/workflow review`, `/workflow ui`, or a full `/<playbook>` name. FIRST `/f-*` remains separate. See [adoption and migration](docs/workflow-adoption.md) for structure and checklists.
+This repository is the source of truth for `/plan`, `/build`, and the rest of the `workflow` tree. Consumers install with `--skill workflow`; do not treat a vendored `.agents/skills/workflow/` copy as canonical.
+
+Use `/workflow` for the catalog, `/plan`, `/build`, `/workflow review`, `/workflow ui`, or a full `/<playbook>` name. `/use-tdd` is opt-in. See [adoption and migration](docs/workflow-adoption.md) for structure and checklists.

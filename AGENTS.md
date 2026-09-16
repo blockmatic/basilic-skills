@@ -16,12 +16,12 @@ skills/
       SKILL.md
 ```
 
-`skills/workflow/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/workflow/{playbook}/`. Nested playbooks are not independently installable (`--skill plan-feature` will not match).
+`skills/workflow/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/workflow/{playbook}/`. Nested playbooks are not independently installable (`--skill plan` will not match).
 
 ## Naming
 
 - Tech skills: `<topic>-v<major>` (library/SDK major, e.g. `next-v16`, `motion-v13`)
-- Playbooks: unversioned folder names (`plan-feature`, `exec-push`)
+- Playbooks: unversioned folder names (`plan`, `exec-push`)
 - Do not invent majors. Do not keep `foo/` next to `foo-vN/`
 - `name` is lowercase letters, digits, hyphens; max 64; equals the folder that contains `SKILL.md`
 
@@ -49,4 +49,4 @@ Install playbooks with `--skill workflow`. Nested children are not independent C
 
 Canonical copies land in `.agents/skills/`; agent flags (`-a cursor`, `-a claude-code`, …) write to each agent's skills directory. See README for full flag reference.
 
-For workflow changes, read `skills/workflow/references/authoring.md`. The dispatcher and references ship as one installable `workflow` skill. Do not retain a leftover `b` tree after migration.
+For workflow changes, edit this catalog (`skills/workflow/`), then refresh consumers with the skills CLI. Installed copies under a product repo's `.agents/skills/workflow/` are not the source of truth. The dispatcher and references ship as one installable `workflow` skill. Do not retain a leftover `b` tree after migration.
