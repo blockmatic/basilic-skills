@@ -17,7 +17,19 @@ import {
 } from 'ai'
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json()
+  const body: unknown = await req.json()
+  if (
+    body === null ||
+    typeof body !== 'object' ||
+    !('messages' in body) ||
+    !Array.isArray((body as { messages: unknown }).messages)
+  )
+    return new Response(JSON.stringify({ error: 'Invalid request body' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+  const { messages } = body as { messages: UIMessage[] }
 
   const result = streamText({
     model: openai('gpt-4.1'),
