@@ -11,8 +11,8 @@ Compare implementation to the repository's `PRODUCT.md`. Durable goals, prioriti
 ## Steps
 
 1. Read `PRODUCT.md`. If it is missing, stop and say so.
-2. Diff code against named horizons and the feature map. List shipped, in-progress, and overlay items with no matching code.
-3. Do not invent features, effort buckets, or a second backlog. Optional diagrams may illustrate the overlay, not a new roadmap.
+2. Diff code against named horizons and the feature map. List shipped, in-progress, and PRODUCT.md items with no matching code.
+3. Do not invent features, effort buckets, or a second backlog. Optional diagrams may illustrate PRODUCT.md, not a new roadmap.
 4. Ask whether the user wants a durable `PRODUCT.md` change or `/plan` (implementation slices for an already-authorized item).
 
 ## Verification
@@ -23,4 +23,4 @@ Compare implementation to the repository's `PRODUCT.md`. Durable goals, prioriti
 
 ## Handoff
 
-Return overlay gaps and the owning document. Do not offer a feature plan unless the user asked.
+Return PRODUCT.md gaps and the owning document. Do not offer a feature plan unless the user asked.

@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: Audit the change or tree against the repository Security overlay and existing checks. Use when the user types /security-audit.
+description: Audit the change or tree against repository security docs and existing checks. Use when the user types /security-audit.
 disable-model-invocation: true
 ---
 
@@ -17,7 +17,7 @@ Find security defects relative to repository security docs and existing scanners
 
 ## Verification
 
-- [ ] Each finding cites overlay, check, or source evidence.
+- [ ] Each finding cites docs, check, or source evidence.
 - [ ] No new password, encryption, or header policy was introduced.
 - [ ] No commit unless the user asked.
 

@@ -11,7 +11,7 @@ Produce an implementation-structure plan for the user's question. Durable system
 ## Steps
 
 1. Read the matching architecture MDX and ADRs. If the change is a durable boundary, stop and document it in the existing ADR/docs system.
-2. State implementation goals vs nice-to-haves. Stay inside the existing architecture unless the user already authorized a station decision.
+2. State implementation goals vs nice-to-haves. Stay inside the existing architecture unless the user already authorized a durable architecture decision.
 3. List constraints, trade-offs, and alternatives that affect this change. Flag high-risk items for a human.
 4. Add Mermaid only when structure or flow is otherwise unclear.
 5. Save only if the user gave a path; otherwise return in chat. Include assumptions and References. Do not create a branch.

@@ -1,6 +1,6 @@
 ---
 name: security-review
-description: Review current code against the repository Security overlay; report evidence and remedies. Use when the user types /security-review.
+description: Review current code against repository security docs; report evidence and remedies. Use when the user types /security-review.
 disable-model-invocation: true
 ---
 
@@ -18,7 +18,7 @@ Review the specified diff or tree for security defects against repository securi
 ## Verification
 
 - [ ] Findings have file/line and an execution path.
-- [ ] Overlay thresholds were not expanded.
+- [ ] Documented thresholds were not expanded.
 - [ ] No unsolicited commit.
 
 ## Handoff

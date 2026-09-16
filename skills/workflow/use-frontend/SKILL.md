@@ -32,4 +32,4 @@ Load `frontend-design-v1` for visual direction, `composition-patterns-v1` for re
 
 ## Handoff
 
-Return what changed, which viewports and states were inspected, remaining unverified behavior, and whether Quality a11y or the interface checklist still need a pass. Read [completion evidence](../references/completion.md).
+Return what changed, which viewports and states were inspected, remaining unverified behavior, and whether a11y or the interface checklist still need a pass. Read [completion evidence](../references/completion.md).
