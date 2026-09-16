@@ -16,12 +16,12 @@ skills/
       SKILL.md
 ```
 
-`skills/workflow/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/workflow/{playbook}/`. Nested playbooks are not independently installable (`--skill plan-feature` will not match).
+`skills/workflow/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/workflow/{playbook}/`. Nested playbooks are not independently installable (`--skill plan` will not match).
 
 ## Naming
 
 - Tech skills: `<topic>-v<major>` (library/SDK major, e.g. `next-v16`, `motion-v13`)
-- Playbooks: unversioned folder names (`plan-feature`, `exec-push`)
+- Playbooks: unversioned folder names (`plan`, `exec-push`)
 - Do not invent majors. Do not keep `foo/` next to `foo-vN/`
 - `name` is lowercase letters, digits, hyphens; max 64; equals the folder that contains `SKILL.md`
 
