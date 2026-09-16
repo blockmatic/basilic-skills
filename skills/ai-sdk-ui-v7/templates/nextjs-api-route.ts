@@ -13,23 +13,38 @@ import {
   isStepCount,
   streamText,
   toUIMessageStream,
-  type UIMessage,
+  validateUIMessages,
 } from 'ai'
 
+function invalidBodyResponse() {
+  return new Response(JSON.stringify({ error: 'Invalid request body' }), {
+    status: 400,
+    headers: { 'Content-Type': 'application/json' },
+  })
+}
+
 export async function POST(req: Request) {
-  const body: unknown = await req.json()
+  let body: unknown
+  try {
+    body = await req.json()
+  } catch {
+    return invalidBodyResponse()
+  }
+
   if (
     body === null ||
     typeof body !== 'object' ||
     !('messages' in body) ||
-    !Array.isArray((body as { messages: unknown }).messages)
+    !Array.isArray(body.messages)
   )
-    return new Response(JSON.stringify({ error: 'Invalid request body' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return invalidBodyResponse()
 
-  const { messages } = body as { messages: UIMessage[] }
+  let messages
+  try {
+    messages = await validateUIMessages({ messages: body.messages })
+  } catch {
+    return invalidBodyResponse()
+  }
 
   const result = streamText({
     model: openai('gpt-4.1'),
