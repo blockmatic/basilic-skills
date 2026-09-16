@@ -20,8 +20,9 @@ skills/
 
 ## Naming
 
-- Tech skills: `<topic>-v<major>` (library/SDK major, e.g. `next-v16`, `motion-v13`)
-- Playbooks: unversioned folder names (`plan`, `exec-push`)
+- Library/SDK skills: `<topic>-v<major>` (the package or framework major, e.g. `next-v16`, `motion-v13`, Expo `*-v55`)
+- Pattern, guideline, and craft skills: unversioned kebab-case (`composition-patterns`, `better-ui`, `emil-design-eng`)
+- Playbooks: unversioned folder names under `workflow/` (`plan`, `exec-push`)
 - Do not invent majors. Do not keep `foo/` next to `foo-vN/`
 - `name` is lowercase letters, digits, hyphens; max 64; equals the folder that contains `SKILL.md`
 
