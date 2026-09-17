@@ -69,11 +69,14 @@ describe('NotificationService', () => {
 
 **Configuration option:**
 
+Vitest 5 defaults `clearMocks` to `true` (call history is cleared before each test). Keep an explicit `clearMocks: true` only if you want the intent documented. Set `clearMocks: false` when a suite must share mock call history.
+
 ```typescript
 // vitest.config.ts
 export default defineConfig({
   test: {
-    clearMocks: true, // Automatically clear mock state between tests
+    // default in Vitest 5; set false only when a suite must keep call history
+    clearMocks: true,
   },
 })
 ```

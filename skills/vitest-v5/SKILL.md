@@ -1,11 +1,18 @@
 ---
-name: vitest-v4
-description: Vitest testing framework patterns for test setup, async testing, mocking with vi.*, snapshots, and test performance (formerly test-vitest). This skill should be used when writing or debugging Vitest tests. This skill does NOT cover TDD methodology (use test-tdd skill), API mocking with MSW (use test-msw skill), or Jest-specific APIs.
+name: vitest-v5
+description: Vitest 5 testing framework patterns for test setup, async testing, mocking with vi.*, snapshots, and test performance (formerly test-vitest / vitest-v4). This skill should be used when writing or debugging Vitest tests. This skill does NOT cover TDD methodology (use test-tdd skill), API mocking with MSW (use test-msw skill), or Jest-specific APIs.
 ---
 
 # Vitest Best Practices
 
-Comprehensive performance optimization and best practices guide for Vitest testing framework. Contains 44 rules across 8 categories, prioritized by impact to guide test writing, refactoring, and code review.
+Comprehensive performance optimization and best practices guide for Vitest 5. Contains 44 rules across 8 categories, prioritized by impact to guide test writing, refactoring, and code review.
+
+## Assumptions
+
+- Vitest 5+ (`vitest` ^5). Node.js >= 22.12. Vite >= 6.4. Migration: https://vitest.dev/guide/migration/
+- `vi.mock`, `vi.unmock`, and `vi.hoisted` must be top-level. Nested calls throw in v5
+- `clearMocks` defaults to `true` (call history cleared before each test)
+- `test.sequential` / `describe.sequential` / `sequential` are removed. Use `concurrent: false` or `sequence: { concurrent: false }`
 
 ## When to Apply
 

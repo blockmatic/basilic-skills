@@ -11,3 +11,4 @@ dist
 .pnp.js
 *.log
 __dev
+*.tsbuildinfo

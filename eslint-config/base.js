@@ -14,7 +14,7 @@ import tseslint from 'typescript-eslint'
  * All formatting rules are disabled here (Biome owns formatting).
  * This config focuses on correctness and architectural enforcement only.
  *
- * @type {import("eslint").Linter.Config}
+ * @type {any}
  * */
 export const config = [
   js.configs.recommended,
@@ -140,16 +140,12 @@ export const config = [
             'Avoid enums. Use const objects or union types instead. See .cursor/rules/base/typescript.mdc',
         },
       ],
-      // Enforce subpath imports for @repo packages
+      // Enforce subpath imports for @repo packages (`@repo/error` root is message utils — allowed)
+
       '@typescript-eslint/no-restricted-imports': [
         'error',
         {
           paths: [
-            {
-              name: '@repo/error',
-              message:
-                'Use subpath imports: @repo/error/nextjs, @repo/error/node, @repo/error/react, etc.',
-            },
             {
               name: '@repo/utils',
               message:
@@ -159,14 +155,19 @@ export const config = [
             {
               name: '@repo/ui',
               message:
-                'Use subpath imports: @repo/ui/components/*, @repo/ui/lib/utils, @repo/ui/radix, etc.',
+                'Use subpath imports: @repo/ui/components/*, @repo/ui/lib/utils, @repo/ui/base, etc.',
             },
           ],
           patterns: [
             {
               group: ['@radix-ui/react-*'],
               message:
-                'Import from @repo/ui/radix instead. See packages/ui/src/radix/index.tsx for available exports.',
+                'Import from @repo/ui/base instead. See packages/ui/src/base/index.tsx for available exports.',
+            },
+            {
+              group: ['@base-ui/react', '@base-ui/react/*'],
+              message:
+                'Import from @repo/ui/base instead. See packages/ui/src/base/index.tsx for available exports.',
             },
           ],
         },

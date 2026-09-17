@@ -10,13 +10,14 @@ const expectedPlaybookCount = 42
 const namePattern = /^[a-z0-9-]+$/
 const errors = []
 
+/** @param {string} path */
 const toPosix = path => path.split('\\').join('/')
 
+/** @param {string} content */
 const parseFrontmatter = content => {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
-  if (!match) return null
-
-  const block = match[1]
+  const block = match?.[1]
+  if (!block) return null
   const name = block.match(/^name:\s*(.+)$/m)?.[1]?.trim()
   const descriptionBlock = block.match(/^description:\s*([\s\S]*?)(?=^[a-zA-Z-]+:|\s*$)/m)
   const descriptionLine = block.match(/^description:\s*(.*)$/m)?.[1]?.trim()
@@ -30,6 +31,10 @@ const parseFrontmatter = content => {
   }
 }
 
+/**
+ * @param {string} dir
+ * @param {string[]} [files]
+ */
 const walkSkillFiles = async (dir, files = []) => {
   const entries = await readdir(dir, { withFileTypes: true })
   for (const entry of entries) {
@@ -41,10 +46,12 @@ const walkSkillFiles = async (dir, files = []) => {
 }
 
 const loadGroupedSkillNames = async () => {
+  /** @type {{ groupings: { skills: string[] }[] }} */
   const config = JSON.parse(await readFile(join(root, 'skills.sh.json'), 'utf8'))
   return config.groupings.flatMap(group => group.skills)
 }
 
+/** @param {string} rel */
 const classify = rel => {
   const posix = toPosix(rel)
   if (/^skills\/[^/]+\/SKILL\.md$/.test(posix)) return 'installable'
@@ -113,10 +120,13 @@ for (const file of skillFiles) {
     errors.push(`${rel}: playbooks must set disable-model-invocation: true`)
 
   if (name === 'workflow' || kind === 'playbook')
-    for (const [, target] of content.matchAll(/\]\(([^)]+)\)/g)) {
-      if (/^(?:[a-z]+:|#|\/)/i.test(target)) continue
+    for (const match of content.matchAll(/\]\(([^)]+)\)/g)) {
+      const target = match[1]
+      if (!target || /^(?:[a-z]+:|#|\/)/i.test(target)) continue
+      const href = target.split('#')[0]
+      if (!href) continue
       try {
-        await access(join(dirname(file), target.split('#')[0]))
+        await access(join(dirname(file), href))
       } catch {
         errors.push(`${rel}: missing packaged reference "${target}"`)
       }
@@ -159,7 +169,7 @@ try {
   if (leftoverB.isDirectory())
     errors.push('skills/b: leftover second playbook tree; keep only skills/workflow')
 } catch (error) {
-  if (error.code !== 'ENOENT') throw error
+  if (/** @type {NodeJS.ErrnoException} */ (error).code !== 'ENOENT') throw error
 }
 
 if (!installableNames.has('workflow'))
@@ -167,10 +177,13 @@ if (!installableNames.has('workflow'))
 
 const dispatcherContent = await readFile(join(skillsRoot, 'workflow', 'SKILL.md'), 'utf8')
 const indexedPlaybooks = new Set(
-  [...dispatcherContent.matchAll(/\]\(([a-z0-9-]+(?:\/[a-z0-9-]+)?)\/SKILL\.md\)/g)].map(match => {
-    const rel = match[1]
-    return rel.includes('/') ? rel.slice(rel.lastIndexOf('/') + 1) : rel
-  }),
+  [...dispatcherContent.matchAll(/\]\(([a-z0-9-]+(?:\/[a-z0-9-]+)?)\/SKILL\.md\)/g)].flatMap(
+    match => {
+      const rel = match[1]
+      if (!rel) return []
+      return [rel.includes('/') ? rel.slice(rel.lastIndexOf('/') + 1) : rel]
+    },
+  ),
 )
 for (const name of playbookNames)
   if (!indexedPlaybooks.has(name))
@@ -186,10 +199,13 @@ for (const file of refEntries) {
   const path = join(refsDir, file)
   const content = await readFile(path, 'utf8')
   const rel = toPosix(relative(root, path))
-  for (const [, target] of content.matchAll(/\]\(([^)]+)\)/g)) {
-    if (/^(?:[a-z]+:|#|\/)/i.test(target)) continue
+  for (const match of content.matchAll(/\]\(([^)]+)\)/g)) {
+    const target = match[1]
+    if (!target || /^(?:[a-z]+:|#|\/)/i.test(target)) continue
+    const href = target.split('#')[0]
+    if (!href) continue
     try {
-      await access(join(dirname(path), target.split('#')[0]))
+      await access(join(dirname(path), href))
     } catch {
       errors.push(`${rel}: missing packaged reference "${target}"`)
     }
