@@ -1,10 +1,10 @@
 ---
 name: build
-description: Implement an agreed task incrementally and verify the result. Use when the user types /build.
+description: Implement an agreed task incrementally and verify the result.
 disable-model-invocation: true
 ---
 
-## Purpose and inputs
+## Purpose
 
 Use an existing plan or a sufficiently clear implementation request. Read the repository instructions, affected README/scripts, matching rules and skills, and technical docs. Resolve missing consequential decisions from `PRODUCT.md` and matching technical docs; ask a human for product scope, secrets, or destructive operations.
 
@@ -25,6 +25,4 @@ Use an existing plan or a sufficiently clear implementation request. Read the re
 
 ## Handoff
 
-Return changed behavior, evidence, and remaining blockers. Commit, push, PR creation, and deployment require the user's request; build alone does not request them.
-
-Read [completion evidence](../references/completion.md) before reporting completion.
+Return changed behavior, evidence, and remaining blockers. Commit, push, PR creation, and deployment require the user's request; build alone does not request them. Read [completion evidence](../references/completion.md).

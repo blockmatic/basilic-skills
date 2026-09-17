@@ -1,17 +1,26 @@
 ---
 name: test
-description: Run the relevant tests and fix failures until they pass. Use when the user types /test.
+description: Run the repository test scripts and fix failures until they pass.
 disable-model-invocation: true
 ---
 
-## Purpose and inputs
+## Purpose
 
-Same as [run-all-tests-and-fix](../run-all-tests-and-fix/SKILL.md).
+Run the documented test scripts from package.json (filtered to the change when the repo supports it). Fix owning causes. Do not publish.
 
 ## Steps
 
-1. Read and follow [run-all-tests-and-fix](../run-all-tests-and-fix/SKILL.md). Preserve the remaining request as task context.
+1. Identify the test command for the affected packages (`pnpm test`, Turbo filters, or the app E2E script). Prefer the narrowest suite that covers the change; use the full suite when the failure is unknown or the user asked for it.
+2. Run the command. Capture failing tests, not a paraphrase.
+3. Fix one owning cause at a time. Re-run the failed command. Do not weaken assertions or skip tests to obtain a pass.
+4. Stop when the suite is green or remaining failures need a human (secrets, env, flaky infra).
+
+## Verification
+
+- [ ] The command that was run is named.
+- [ ] Failures caused here are fixed or listed with files.
+- [ ] No commit or push.
 
 ## Handoff
 
-Follow the child playbook's handoff.
+Report the command, result, and remaining failures. Read [completion evidence](../references/completion.md).

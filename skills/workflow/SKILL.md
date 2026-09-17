@@ -1,6 +1,6 @@
 ---
 name: workflow
-description: Catalog of Basilic slash playbooks. Use when the user types /workflow with no playbook name. List the shortcuts and stop; do not start work.
+description: Catalog of Basilic slash playbooks. List the shortcuts and stop; do not start work.
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 List the shortcuts below and stop. Do not start a lifecycle or execute all playbooks. Extra tokens (`/workflow plan`) do not dispatch — tell the user to invoke `/plan` (or the matching shortcut) directly.
 
-Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-hands for planning and implementation. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/use-tdd` is opt-in.
+Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-hands for planning and implementation. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/tdd` is opt-in.
 
 ## Shortcuts
 
@@ -16,78 +16,76 @@ Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-ha
 |---|---|
 | `/plan` | [plan](plan/SKILL.md) |
 | `/build` | [build](build/SKILL.md) |
-| `/review` | [code-review](code-review/SKILL.md) |
-| `/debug` | [debug-issue](debug-issue/SKILL.md) |
-| `/test` | [run-all-tests-and-fix](run-all-tests-and-fix/SKILL.md) |
-| `/commit` | [git-commit](git-commit/SKILL.md) |
-| `/push` | [git-push](git-push/SKILL.md) |
-| `/pr` | [git-create-pr](git-create-pr/SKILL.md) |
+| `/review` | [review](review/SKILL.md) |
+| `/debug` | [debug](debug/SKILL.md) |
+| `/test` | [test](test/SKILL.md) |
+| `/commit` | [commit](git/commit/SKILL.md) |
+| `/push` | [push](git/push/SKILL.md) |
+| `/pr` | [pr](git/pr/SKILL.md) |
 | `/retro` | [retro](retro/SKILL.md) |
-| `/ui` | [use-frontend](use-frontend/SKILL.md) |
+| `/ui` | [ui](ui/SKILL.md) |
 
-`build` ends at verified local changes. `commit`, `push`, `pr`, and `exec-push` request their named Git actions; none requests merging or deploying. Use `/git-push` to publish an already-committed branch; `/fix-push` after fixing a failed push; `/exec-push` only when the user asked for implement through a described PR.
+`/build` ends at verified local changes. `/commit`, `/push`, `/pr`, `/fix-push`, and `/ship` request their named Git actions; none requests merging or deploying. `/ship` is implement through a described PR. `/yolo` is the full local gate without publish.
 
-## Full index
+## Git
 
-- [/add-documentation](add-documentation/SKILL.md)
-- [/add-error-handling](add-error-handling/SKILL.md)
-- [/audit-accessibility](audit-accessibility/SKILL.md)
-- [/build](build/SKILL.md)
-- [/clarify-task](clarify-task/SKILL.md)
-- [/code-review](code-review/SKILL.md)
-- [/coderabbit](coderabbit/SKILL.md)
-- [/commit](commit/SKILL.md)
-- [/council](council/SKILL.md)
-- [/debug](debug/SKILL.md)
-- [/debug-browser](debug-browser/SKILL.md)
-- [/debug-issue](debug-issue/SKILL.md)
-- [/deslop](deslop/SKILL.md)
-- [/diagrams](diagrams/SKILL.md)
-- [/docker-logs](docker-logs/SKILL.md)
-- [/exec-push](exec-push/SKILL.md)
-- [/fix-compile-errors](fix-compile-errors/SKILL.md)
-- [/fix-git-issues](fix-git-issues/SKILL.md)
-- [/fix-github-actions](fix-github-actions/SKILL.md)
-- [/fix-push](fix-push/SKILL.md)
-- [/fix-vercel-build](fix-vercel-build/SKILL.md)
-- [/generate-api-docs](generate-api-docs/SKILL.md)
-- [/generate-pr-description](generate-pr-description/SKILL.md)
-- [/git-commit](git-commit/SKILL.md)
-- [/git-create-pr](git-create-pr/SKILL.md)
-- [/git-pr-comments](git-pr-comments/SKILL.md)
-- [/git-push](git-push/SKILL.md)
-- [/info-architecture](info-architecture/SKILL.md)
-- [/light-review-existing-diffs](light-review-existing-diffs/SKILL.md)
-- [/lint-fix](lint-fix/SKILL.md)
-- [/lint-suite](lint-suite/SKILL.md)
-- [/nextjs-form](nextjs-form/SKILL.md)
-- [/onboard-new-developer](onboard-new-developer/SKILL.md)
-- [/optimize-performance](optimize-performance/SKILL.md)
-- [/overview](overview/SKILL.md)
-- [/plan](plan/SKILL.md)
-- [/plan-architecture](plan-architecture/SKILL.md)
-- [/pr](pr/SKILL.md)
-- [/push](push/SKILL.md)
-- [/refactor-code](refactor-code/SKILL.md)
-- [/release-review](release-review/SKILL.md)
-- [/retro](retro/SKILL.md)
+- [/commit](git/commit/SKILL.md)
+- [/push](git/push/SKILL.md)
+- [/pr](git/pr/SKILL.md)
+- [/comments](git/comments/SKILL.md)
+- [/issues](git/issues/SKILL.md)
+- [/fix-push](git/fix-push/SKILL.md)
+- [/ship](git/ship/SKILL.md)
+
+## CI
+
+- [/gha](ci/gha/SKILL.md)
+- [/vercel](ci/vercel/SKILL.md)
+- [/docker](ci/docker/SKILL.md)
+
+## Quality
+
+- [/lint](qa/lint/SKILL.md)
+- [/yolo](qa/yolo/SKILL.md)
+- [/test](test/SKILL.md)
+- [/tdd](tdd/SKILL.md)
+- [/unit](unit/SKILL.md)
+- [/api-test](api-test/SKILL.md)
+
+## Review and security
+
 - [/review](review/SKILL.md)
 - [/review-plan](review-plan/SKILL.md)
-- [/roadmap](roadmap/SKILL.md)
-- [/run-all-tests-and-fix](run-all-tests-and-fix/SKILL.md)
-- [/security-audit](security-audit/SKILL.md)
-- [/security-review](security-review/SKILL.md)
-- [/test](test/SKILL.md)
+- [/security](security/SKILL.md)
+- [/release](release/SKILL.md)
+- [/rabbit](rabbit/SKILL.md)
+- [/deslop](deslop/SKILL.md)
+
+## Product and docs
+
+- [/clarify](clarify/SKILL.md)
+- [/council](council/SKILL.md)
+- [/roadmap](product/roadmap/SKILL.md)
+- [/overview](product/overview/SKILL.md)
+- [/architecture](product/architecture/SKILL.md)
+- [/info](product/info/SKILL.md)
+- [/docs](doc/docs/SKILL.md)
+- [/api-docs](doc/api-docs/SKILL.md)
+- [/onboard](doc/onboard/SKILL.md)
+- [/diagram](doc/diagram/SKILL.md)
+
+## UI and craft
+
 - [/ui](ui/SKILL.md)
-- [/use-frontend](use-frontend/SKILL.md)
-- [/use-shadcn](use-shadcn/SKILL.md)
-- [/use-tdd](use-tdd/SKILL.md)
-- [/use-v0](use-v0/SKILL.md)
-- [/visualize](visualize/SKILL.md)
-- [/write-api-test](write-api-test/SKILL.md)
-- [/write-unit-tests](write-unit-tests/SKILL.md)
-- [/yolo](yolo/SKILL.md)
+- [/shadcn](shadcn/SKILL.md)
+- [/v0](v0/SKILL.md)
+- [/form](form/SKILL.md)
+- [/a11y](a11y/SKILL.md)
+- [/perf](perf/SKILL.md)
+- [/refactor](refactor/SKILL.md)
+- [/errors](errors/SKILL.md)
+- [/debug-browser](debug-browser/SKILL.md)
 
 ## Authoring
 
-For skill changes, read [the authoring pattern](references/authoring.md). For delivery evidence, read [completion evidence](references/completion.md). Both ship inside this installable tree.
+For skill changes, read [the authoring pattern](references/authoring.md). For delivery evidence, read [completion evidence](references/completion.md). Git publish rules: [git publish](references/git-publish.md).
