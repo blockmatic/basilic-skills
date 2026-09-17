@@ -9,6 +9,8 @@ tags: mock, vi.mock, hoisting, module-mocking, imports
 
 `vi.mock()` calls are hoisted to the top of the file, executing before any imports. This means you can't use variables defined outside the mock factory, and the mock applies even to imports that appear earlier in the file.
 
+In Vitest 5, `vi.mock`, `vi.unmock`, and `vi.hoisted` must be top-level. Calling them inside a function, block, or `describe`/`test` callback throws (v4 only warned).
+
 **Incorrect (using external variable in mock):**
 
 ```typescript

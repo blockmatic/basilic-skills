@@ -2,19 +2,20 @@
 
 ## Core Principles
 
-shadcn/ui components are built on Radix UI primitives, which provide built-in accessibility features. However, proper implementation requires understanding and leveraging these features correctly.
+shadcn/ui components are built on Base UI primitives, which provide built-in accessibility features. However, proper implementation requires understanding and leveraging these features correctly.
 
 ---
 
-## Radix UI Primitives
+## Base UI primitives
 
 ### Built-in Accessibility
 
-Radix UI primitives include:
+Base UI primitives include:
 - **ARIA attributes**: Automatically added based on component state
 - **Keyboard navigation**: Arrow keys, Enter, Escape, Tab
 - **Focus management**: Focus trapping, focus restoration
 - **Screen reader support**: Proper roles and labels
+- **HTML data attributes**: `data-open` / `data-checked` for styling (not a substitute for ARIA)
 
 ### Example: Dialog Component
 
@@ -26,7 +27,7 @@ function MyDialog() {
     <Dialog>
       <DialogTrigger>Open Dialog</DialogTrigger>
       <DialogContent>
-        {/* Radix automatically handles:
+        {/* Base UI automatically handles:
            - Focus trapping
            - ESC to close
            - ARIA attributes
@@ -38,7 +39,7 @@ function MyDialog() {
 }
 ```
 
-**What Radix handles automatically:**
+**What Base UI handles automatically:**
 - `role="dialog"`
 - `aria-modal="true"`
 - `aria-labelledby` (from DialogTitle)
@@ -112,7 +113,7 @@ Use for additional context or descriptions:
 
 ### Standard Patterns
 
-Radix components follow standard keyboard patterns:
+shadcn Base UI wrappers follow standard keyboard patterns:
 
 | Component | Keys | Behavior |
 |-----------|------|----------|
@@ -151,21 +152,21 @@ function CustomButton({ onAction, ...props }) {
 
 ### Focus Trapping
 
-Radix components automatically trap focus (Dialog, Popover, etc.). Don't manually trap focus unless building custom components.
+Base UI components automatically trap focus (Dialog, Popover, etc.). Don't manually trap focus unless building custom components.
 
 ```tsx
-// ✅ Good - Radix handles focus trap
+// ✅ Good - Base UI handles focus trap
 <Dialog>
   <DialogContent>
     {/* Focus stays within dialog */}
   </DialogContent>
 </Dialog>
 
-// ❌ Bad - manual focus trap conflicts with Radix
+// ❌ Bad - manual focus trap conflicts with Base UI
 <Dialog>
   <DialogContent>
     <div onKeyDown={(e) => { /* manual trap */ }}>
-      {/* Conflicts with Radix's built-in trap */}
+      {/* Conflicts with the primitive's built-in trap */}
     </div>
   </DialogContent>
 </Dialog>
@@ -190,10 +191,10 @@ className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ri
 
 ### Focus Restoration
 
-Radix automatically restores focus to the trigger element when closing. Don't manually manage focus restoration.
+Base UI automatically restores focus to the trigger element when closing. Don't manually manage focus restoration.
 
 ```tsx
-// ✅ Good - Radix handles restoration
+// ✅ Good - Base UI handles restoration
 <Dialog>
   <DialogTrigger>Open</DialogTrigger>
   {/* Focus returns to trigger on close */}
@@ -434,9 +435,7 @@ Use accessibility testing tools:
 
 ```tsx
 <Dialog>
-  <DialogTrigger asChild>
-    <Button>Open Dialog</Button>
-  </DialogTrigger>
+  <DialogTrigger render={<Button />}>Open Dialog</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Delete Account</DialogTitle>
@@ -445,9 +444,7 @@ Use accessibility testing tools:
       </DialogDescription>
     </DialogHeader>
     <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="outline">Cancel</Button>
-      </DialogClose>
+      <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
       <Button variant="destructive">Delete</Button>
     </DialogFooter>
   </DialogContent>
@@ -465,9 +462,9 @@ Use accessibility testing tools:
 
 ## Best Practices
 
-### 1. Use Radix Primitives
+### 1. Use shadcn / Base UI wrappers
 
-Always use Radix UI primitives for complex interactions. Don't build custom dropdowns, dialogs, or modals from scratch.
+Always use shadcn wrappers (Base UI underneath) for complex interactions. Don't build custom dropdowns, dialogs, or modals from scratch.
 
 ### 2. Test with Screen Readers
 
@@ -489,7 +486,7 @@ Build accessible base, then enhance with animations and interactions.
 
 ## Related Documentation
 
-- [Radix UI Accessibility](https://www.radix-ui.com/primitives/docs/overview/accessibility)
+- [Base UI Accessibility](https://base-ui.com/react)
 - [WCAG Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [shadcn/ui Accessibility](https://ui.shadcn.com/docs)

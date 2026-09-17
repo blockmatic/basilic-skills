@@ -276,7 +276,7 @@ import { cn } from '@/lib/utils'
 
 ---
 
-### 12. Empty String in Radix Select
+### 12. Empty String in Select
 
 ❌ **WRONG:**
 ```tsx
@@ -288,7 +288,7 @@ import { cn } from '@/lib/utils'
 <SelectItem value="placeholder">Select an option</SelectItem>
 ```
 
-**Why:** Radix UI Select doesn't allow empty string values.
+**Why:** Select items cannot use an empty string value.
 
 ---
 

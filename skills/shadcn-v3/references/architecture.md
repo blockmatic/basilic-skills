@@ -1,5 +1,7 @@
 # Tailwind v4 + shadcn/ui Theming Architecture
 
+New shadcn installs use **Base UI** (style `base-vega`). Compose with `render`, not `asChild`. Style parts with `data-slot` and open/checked with `data-open` / `data-checked` (Tailwind `data-open:*`, not Radix `data-[state=open]:`).
+
 ## The Four-Step Pattern
 
 Tailwind v4 requires a specific architecture for CSS variable-based theming. This pattern is **mandatory** - skipping or modifying steps will break your theme.

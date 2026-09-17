@@ -156,7 +156,6 @@ Base styles → Variants → Sizes → States → Overrides
 
 ```typescript
 // components/ui/button.tsx
-import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
@@ -187,26 +186,13 @@ const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-}
+export type ButtonProps = React.ComponentProps<'button'> & VariantProps<typeof buttonVariants>
 
-// React 19: No forwardRef needed
-export function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ref,
-  ...props
-}: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
-  const Comp = asChild ? Slot : 'button'
+export function Button({ className, variant, size, ...props }: ButtonProps) {
   return (
-    <Comp
+    <button
+      data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
-      ref={ref}
       {...props}
     />
   )
@@ -215,7 +201,7 @@ export function Button({
 // Usage
 <Button variant="destructive" size="lg">Delete</Button>
 <Button variant="outline">Cancel</Button>
-<Button asChild><Link href="/home">Home</Link></Button>
+<a href="/home" className={buttonVariants()}>Home</a>
 ```
 
 ### Pattern 2: Compound Components (React 19)
@@ -553,25 +539,17 @@ export function Container({ className, size, ...props }: ContainerProps) {
 ```
 
 ```typescript
-// components/ui/dialog.tsx - Using native popover API
-import * as DialogPrimitive from '@radix-ui/react-dialog'
+// components/ui/dialog.tsx — Base UI presence attrs, not Radix data-state
+import { Dialog as DialogPrimitive } from '@base-ui/react/dialog'
 import { cn } from '@/lib/utils'
 
-const DialogPortal = DialogPrimitive.Portal
-
-export function DialogOverlay({
-  className,
-  ref,
-  ...props
-}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay> & {
-  ref?: React.Ref<HTMLDivElement>
-}) {
+export function DialogOverlay({ className, ...props }: DialogPrimitive.Backdrop.Props) {
   return (
-    <DialogPrimitive.Overlay
-      ref={ref}
+    <DialogPrimitive.Backdrop
+      data-slot="dialog-overlay"
       className={cn(
         'fixed inset-0 z-50 bg-black/80',
-        'data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out',
+        'data-open:animate-in data-closed:animate-out',
         className
       )}
       {...props}
@@ -582,26 +560,23 @@ export function DialogOverlay({
 export function DialogContent({
   className,
   children,
-  ref,
   ...props
-}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-  ref?: React.Ref<HTMLDivElement>
-}) {
+}: DialogPrimitive.Popup.Props) {
   return (
-    <DialogPortal>
+    <DialogPrimitive.Portal>
       <DialogOverlay />
-      <DialogPrimitive.Content
-        ref={ref}
+      <DialogPrimitive.Popup
+        data-slot="dialog-content"
         className={cn(
           'fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 border border-border bg-background p-6 shadow-lg sm:rounded-lg',
-          'data-[state=open]:animate-dialog-in data-[state=closed]:animate-dialog-out',
+          'data-open:animate-in data-closed:animate-out',
           className
         )}
         {...props}
       >
         {children}
-      </DialogPrimitive.Content>
-    </DialogPortal>
+      </DialogPrimitive.Popup>
+    </DialogPrimitive.Portal>
   )
 }
 ```
@@ -841,4 +816,4 @@ Define reusable custom utilities:
 - [Tailwind v4 Beta Announcement](https://tailwindcss.com/blog/tailwindcss-v4-beta)
 - [CVA Documentation](https://cva.style/docs)
 - [shadcn/ui](https://ui.shadcn.com/)
-- [Radix Primitives](https://www.radix-ui.com/primitives)
+- [Base UI](https://base-ui.com/react)

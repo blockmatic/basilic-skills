@@ -104,7 +104,7 @@ These trees are Basilic-maintained. Library/SDK folders use the stack major alre
 Vendored from upstream (renamed and overlaid in this repo):
 
 - `nuqs-v2` ← `nuqs` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
-- `vitest-v4` ← `vitest` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)
+- `vitest-v5` ← `vitest` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills) (folder major follows `vitest` ^5; was `vitest-v4`)
 - `viem-v2` ← `viem-integration` in [uniswap/uniswap-ai](https://github.com/uniswap/uniswap-ai)
 - `nodejs-keccak256-v1` ← `nodejs-keccak256` in [affaan-m/ecc](https://github.com/affaan-m/ecc)
 - `next-v16` ← `nextjs` in [pproenca/dot-skills](https://github.com/pproenca/dot-skills)

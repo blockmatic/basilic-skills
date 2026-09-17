@@ -4,7 +4,7 @@ description: Add unit tests for the current change using the repo test skill and
 disable-model-invocation: true
 ---
 
-Cover the requested behavior with unit tests. Follow `vitest-v4` (or the stack's test skill) and existing file conventions. Do not chase coverage percentage.
+Cover the requested behavior with unit tests. Follow `vitest-v5` (or the stack's test skill) and existing file conventions. Do not chase coverage percentage.
 
 1. Read neighboring tests and the test skill. Colocate `*.test.ts` beside the implementation.
 2. Test the behavior that can fail: public API, error paths, and the regression this change needs.

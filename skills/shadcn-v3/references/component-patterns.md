@@ -359,18 +359,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
 ## Data Attributes for State Styling
 
-Use data attributes (`data-[state=open]`) for styling based on component state. This keeps styling declarative and avoids JavaScript conditionals.
+Use data attributes for styling based on component state. This keeps styling declarative and avoids JavaScript conditionals.
 
-### Radix UI Pattern
+### Base UI / shadcn pattern
 
-Radix primitives automatically add data attributes:
+Wrappers set HTML `data-slot` on parts. Base UI sets presence attrs `data-open`, `data-closed`, `data-checked` (not ARIA, not Radix `data-state`):
 
 ```tsx
-// Radix Dialog automatically adds data-[state=open] when open
 <Dialog>
-  <DialogContent className="data-[state=open]:animate-in data-[state=closed]:animate-out" />
+  <DialogContent className="data-open:animate-in data-closed:animate-out" />
 </Dialog>
 ```
+
+Do not add `data-[state=open]:` on new wrappers. Custom app state still uses `data-[status=…]` as below.
 
 ### Custom Data Attributes
 
@@ -406,39 +407,27 @@ function StatusBadge({ status }: StatusBadgeProps) {
 
 ---
 
-## Slot Pattern (Radix UI)
+## Render composition (Base UI)
 
-Use Radix UI's `Slot` component for polymorphic components that can render as different elements.
+shadcn Base UI wrappers use `render` (and `nativeButton={false}` when the host is not a button). Do not use Radix `Slot` / `asChild`.
 
 ```tsx
-import { Slot } from '@radix-ui/react-slot'
-import { cn } from '@/lib/utils'
-import type * as React from 'react'
+import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
+import Link from 'next/link'
 
-interface ButtonProps extends React.ComponentProps<'button'> {
-  asChild?: boolean
-}
+<Button nativeButton={false} render={<a href="/" />}>
+  Link button
+</Button>
 
-function Button({ asChild = false, className, ...props }: ButtonProps) {
-  const Comp = asChild ? Slot : 'button'
-  
-  return (
-    <Comp
-      className={cn('inline-flex items-center justify-center rounded-md', className)}
-      {...props}
-    />
-  )
-}
-
-// Usage:
-// <Button>Normal button</Button>
-// <Button asChild><a href="/">Link button</a></Button>
+<Link href="/home" className={buttonVariants()}>
+  Real link
+</Link>
 ```
 
 **Use cases:**
-- Buttons that can be links
-- Cards that can be clickable
-- Components that need to render as different HTML elements
+- Triggers that must render as another element
+- Buttons that should be links (`Link` + `buttonVariants()` when you need `<a>` semantics)
 
 ---
 
@@ -564,5 +553,5 @@ function Component(props) { ... }
 ## Related Documentation
 
 - [shadcn/ui Components](https://ui.shadcn.com/docs/components)
-- [Radix UI Primitives](https://www.radix-ui.com/primitives)
+- [Base UI](https://base-ui.com/react)
 - [class-variance-authority](https://cva.style/docs)

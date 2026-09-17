@@ -28,4 +28,4 @@ Build production-ready design systems with Tailwind CSS v4, including CSS-first 
 | `theme.extend.colors`                 | `@theme { --color-*: value }`                                         |
 | `require("tailwindcss-animate")`      | CSS `@keyframes` in `@theme` + `@starting-style` for entry animations |
 
-CSS setup, component patterns, and migration: [PATTERNS.md](PATTERNS.md).
+CSS setup, component patterns, and migration: [PATTERNS.md](PATTERNS.md). Pair with `shadcn-v3` for Base UI wrappers (`render`, `data-slot`, `data-open`).
