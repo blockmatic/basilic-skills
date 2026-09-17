@@ -112,23 +112,6 @@ for (const file of skillFiles) {
   if ((kind === 'playbook' || name === 'workflow') && disableModelInvocation !== 'true')
     errors.push(`${rel}: playbooks must set disable-model-invocation: true`)
 
-  if (kind === 'playbook') {
-    const headings = [...content.matchAll(/^## (.+)$/gm)].map(match => match[1].trim())
-    const hasSteps = headings.some(heading => heading === 'Steps' || heading.startsWith('Steps '))
-    const hasPurpose = headings.some(
-      heading => heading === 'Purpose' || heading === 'Purpose and inputs',
-    )
-    const hasExit = headings.some(heading =>
-      /Verification|Handoff|Completion|Review checklist/.test(heading),
-    )
-    if (!hasPurpose) errors.push(`${rel}: playbook must have ## Purpose or ## Purpose and inputs`)
-    if (!hasSteps) errors.push(`${rel}: playbook must have ## Steps`)
-    if (!hasExit)
-      errors.push(
-        `${rel}: playbook must have ## Verification, ## Handoff, ## Completion, or ## Review checklist`,
-      )
-  }
-
   if (name === 'workflow' || kind === 'playbook')
     for (const [, target] of content.matchAll(/\]\(([^)]+)\)/g)) {
       if (/^(?:[a-z]+:|#|\/)/i.test(target)) continue
@@ -215,12 +198,11 @@ for (const file of refEntries) {
 
 try {
   await access(join(skillsRoot, 'workflow', 'references', 'authoring.md'))
-  await access(join(skillsRoot, 'workflow', 'references', 'completion.md'))
   await access(join(skillsRoot, 'workflow', 'references', 'git-publish.md'))
   await access(join(skillsRoot, 'workflow', 'references', 'review-dimensions.md'))
 } catch {
   errors.push(
-    'skills/workflow/references: packaged authoring.md, completion.md, git-publish.md, and review-dimensions.md are required',
+    'skills/workflow/references: packaged authoring.md, git-publish.md, and review-dimensions.md are required',
   )
 }
 

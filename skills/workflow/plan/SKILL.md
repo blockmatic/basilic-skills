@@ -1,28 +1,13 @@
 ---
 name: plan
-description: Plan a feature as ordered, verifiable slices without changing implementation.
+description: Write an ordered plan without changing implementation.
 disable-model-invocation: true
 ---
 
-## Purpose
+Planning does not implement, branch, or commit. A single already-clear change uses `/build`. A blocking product gap uses `/clarify`.
 
-Use the requested outcome, existing plan or issue, relevant implementation, rules, and technical docs. Skip `/plan` for a single already-clear slice; use `/build`. Planning alone does not authorize implementation or Git changes. If a consequential gap blocks slicing, stop at `/clarify`.
-
-## Steps
-
-1. State goals, non-goals, acceptance criteria, and 3–5 material assumptions. Resolve consequential ambiguity; continue with reversible details already covered by the request.
-2. Inspect the affected packages, their README and scripts, and existing behavior. For durable product or architecture decisions, read `PRODUCT.md` and the matching technical MDX or ADR.
-3. Divide work into the smallest complete user-visible slices. For each, name likely files, dependencies, an observable acceptance condition, and the existing command or manual check that proves it.
-4. Put uncertain dependencies early. Include error paths, compatibility, generated sources, and recovery where relevant. Use a diagram only when relationships need one.
-5. Save to the user's path, else the repo's existing plan file, else return in chat. Include Goals, Assumptions, ordered tasks, Risks/Open Questions, and References (rules, skills, docs). Do not create another backlog or overwrite another task's unfinished plan.
-
-## Verification
-
-- [ ] Each slice has a result a reviewer can observe and a concrete verification method.
-- [ ] Dependencies and consequential unresolved decisions are explicit.
-- [ ] Commands come from inspected scripts; generated outputs have an owning source.
-- [ ] The plan is reviewable without reconstructing this conversation.
-
-## Handoff
-
-Return the plan location, unresolved decisions, and first implementable slice. If the user also requested implementation, continue within that authorization; otherwise finish with the plan. Do not create a branch or scaffold code just to plan. Read [completion evidence](../references/completion.md).
+1. **Goals**: 3–7 bullets for scope, success, constraints, non-goals.
+2. **Context**: matching glob rule and skill, then topic MDX (or this repo’s docs path). Rules override skills. Inspect affected packages, README, scripts. Durable product/architecture: `PRODUCT.md` and matching MDX/ADR. Generated outputs name an owning source; commands come from inspected scripts.
+3. **Assumptions**: 3–5 bullets. Defer product scope, secrets, and destructive ops.
+4. **Tasks**: ordered work with likely files and dependencies. Uncertain work first. Diagram only if relationships need one.
+5. **Output**: user’s path, else the repo’s existing plan file, else chat. Sections: Goals, Assumptions, Tasks, Risks, **References** (plain paths to each rule, skill, and MDX used — no `@`). Do not create another backlog or overwrite another unfinished plan.
