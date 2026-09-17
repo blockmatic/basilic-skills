@@ -5,7 +5,7 @@
  * without modifying the originals, following best practices.
  */
 
-import { Button, type ButtonProps } from '@/components/ui/button'
+import { Button, buttonVariants, type ButtonProps } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -116,43 +116,23 @@ function ActionCard({
 }
 
 // ============================================================================
-// Example 3: Polymorphic Component with Slot
+// Example 3: Link styled as a button
 // ============================================================================
 
-interface LinkButtonProps extends ButtonProps {
-  href?: string
-  asChild?: boolean
-}
-
 /**
- * LinkButton - Button that can render as a link
+ * Prefer Link + buttonVariants when the host must be a real <a>.
+ * Use Button `render` + `nativeButton={false}` only when composing a primitive host.
  *
  * @example
- * <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
- * <LinkButton asChild>
- *   <a href="/external">External Link</a>
- * </LinkButton>
+ * <Link href="/dashboard" className={buttonVariants()}>Go to Dashboard</Link>
  */
-const LinkButton = forwardRef<HTMLButtonElement, LinkButtonProps>(
-  ({ href, asChild, children, ...props }, ref) => {
-    if (href && !asChild) {
-      return (
-        <Button asChild {...props}>
-          <a href={href} ref={ref as React.Ref<HTMLAnchorElement>}>
-            {children}
-          </a>
-        </Button>
-      )
-    }
-
-    return (
-      <Button ref={ref} asChild={asChild} {...props}>
-        {children}
-      </Button>
-    )
-  },
-)
-LinkButton.displayName = 'LinkButton'
+function LinkButton({
+  href,
+  className,
+  ...props
+}: React.ComponentProps<'a'> & { href: string }) {
+  return <a href={href} className={cn(buttonVariants(), className)} {...props} />
+}
 
 // ============================================================================
 // Example 4: Custom Variant Extension

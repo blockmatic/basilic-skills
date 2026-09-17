@@ -32,7 +32,9 @@ description: Set up Tailwind v4 with shadcn/ui using @theme inline pattern and C
 - Extend components via wrapper pattern (don't modify originals)
 - Use CVA (class-variance-authority) for variant systems
 - Use `forwardRef` only when a parent must attach a ref (React 19 does not require it by default)
-- Leverage Radix UI primitives for built-in accessibility
+- Leverage Base UI primitives for built-in accessibility (shadcn style `base-vega`)
+- Compose with `render` (and `nativeButton={false}` when the node is not a button), not Radix `asChild`
+- Target parts with `data-slot`; open/checked state is HTML `data-open` / `data-checked` (not ARIA, not Radix `data-state`)
 
 ## Constraints
 
@@ -41,6 +43,7 @@ description: Set up Tailwind v4 with shadcn/ui using @theme inline pattern and C
 - Wrap color values with `hsl()` in `:root` and `.dark`
 - Use `@theme inline` to map all CSS variables
 - Set `"tailwind.config": ""` in `components.json`
+- Use `"style": "base-vega"` for new shadcn installs (Base UI wrappers)
 - Delete `tailwind.config.ts` if it exists
 - Use CSS-first Tailwind v4 in Next apps (`@import "tailwindcss"` in CSS)
 
@@ -54,7 +57,8 @@ description: Set up Tailwind v4 with shadcn/ui using @theme inline pattern and C
 - Use CVA for variant systems in custom components
 - Use `forwardRef` when a parent must attach a ref
 - Test accessibility with keyboard navigation and screen readers
-- Use Radix UI primitives for complex interactions (dialogs, dropdowns, etc.)
+- Use Base UI / shadcn wrappers for complex interactions (dialogs, dropdowns, etc.)
+- Style with Tailwind `data-open:*`, `data-closed:*`, `data-checked:*`, `data-slot` selectors
 - Provide ARIA labels for icon-only buttons and interactive elements
 - Use `@tailwindcss/vite` only when the app is Vite-based (not Next.js)
 
@@ -68,7 +72,9 @@ description: Set up Tailwind v4 with shadcn/ui using @theme inline pattern and C
 - Using `dark:` variants for semantic colors
 - Using `@import` or `require()` for plugins (use `@plugin`)
 - Modifying base shadcn components directly (use wrapper pattern)
-- Building custom dropdowns/dialogs from scratch (use Radix primitives)
+- Building custom dropdowns/dialogs from scratch (use Base UI / shadcn wrappers)
+- Using Radix `asChild`, `@radix-ui/react-slot`, or `data-[state=open]` on new shadcn wrappers
+- Importing `@base-ui/react` or `@radix-ui/*` from apps when a shared UI barrel exists
 - Relying on color alone for state indication
 - Skipping accessibility testing
 
@@ -116,6 +122,7 @@ export default defineConfig({
 
 ```json
 {
+  "style": "base-vega",
   "tailwind": {
     "config": "",
     "css": "src/index.css",
@@ -140,4 +147,6 @@ See [Templates](templates/) (including [Component Extension](templates/component
 ## Resources
 
 - [shadcn/ui Tailwind v4 Guide](https://ui.shadcn.com/docs/tailwind-v4)
+- [shadcn Base UI](https://ui.shadcn.com/docs/components/base)
+- [Base UI](https://base-ui.com/react)
 - [Tailwind v4 Docs](https://tailwindcss.com/docs)
