@@ -4,24 +4,10 @@ description: Create or update a reviewable pull request for the intended branch.
 disable-model-invocation: true
 ---
 
-## Purpose
-
-Invocation requests publishing the intended branch and creating its PR. Inspect the base, branch diff, relevant issue, existing PR, and repository template first. Follow [git publish](../../references/git-publish.md). The description is part of this playbook; do not use a separate generate-description step.
-
-## Steps
+Invocation requests publishing the intended branch and creating its PR. Follow [git publish](../../references/git-publish.md). The description is part of this playbook; do not use a separate generate-description step.
 
 1. Ensure task-owned changes are committed and validated. Use [commit](../commit/SKILL.md) if needed. If this playbook must create a branch first, follow git-publish branch rules.
 2. Push the intended branch using [push](../push/SKILL.md).
 3. Write a standalone description: problem, resulting behavior, verification evidence, and material limitations. Follow the repository template; never create an empty description. Use a conventional PR title when the repository requires it.
 4. Reuse an existing PR for this branch rather than duplicating it. Use known applicable labels and requested reviewers; do not invent assignments.
-5. With a CLI, write multiline text to a temporary file and pass the body-file option. Verify the resulting title, base, and description.
-
-## Verification
-
-- [ ] Correct source and target branches and a nonempty, accurate description.
-- [ ] Validation claims match observed results; remaining blockers are explicit.
-- [ ] PR URL resolves to the intended change.
-
-## Handoff
-
-Return the PR link. PR creation does not authorize merge or deployment. Read [completion evidence](../../references/completion.md).
+5. With a CLI, write multiline text to a temporary file and pass the body-file option. Verify the resulting title, base, and description. Return the PR link. PR creation does not authorize merge or deployment.

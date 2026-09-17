@@ -10,7 +10,7 @@ List the shortcuts below and stop. Do not start a lifecycle or execute all playb
 
 Direct `/<name>` loads the child. Everyday: `/plan` `/build` `/review` `/debug` `/test` `/commit` `/push` `/pr` `/retro` `/ui`. Feature work uses `/plan`; a durable boundary uses `/architecture`; a missing product fact uses `/clarify`; a large plan uses `/review-plan` before `/build`. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/tdd` is opt-in.
 
-`/build` ends at verified local changes. `/commit`, `/push`, `/pr`, `/fix-push`, and `/ship` request their named Git actions; none requests merging or deploying. `/ship` is implement through a described PR. `/yolo` is the full local gate without publish.
+`/build` ends at verified local changes. `/commit`, `/push`, `/pr`, `/fix-push`, and `/ship` request their named Git actions; none requests merging or deploying. `/ship` is implement through a described PR and is the only playbook that requires `pnpm qa` (or the repo's full pre-push suite). `/yolo` fixes failing or requested local checks without publish.
 
 ## Debug
 
@@ -80,4 +80,4 @@ Direct `/<name>` loads the child. Everyday: `/plan` `/build` `/review` `/debug` 
 
 ## Authoring
 
-For skill changes, read [the authoring pattern](references/authoring.md). For delivery evidence, read [completion evidence](references/completion.md). Git publish rules: [git publish](references/git-publish.md). Review dimensions: [review dimensions](references/review-dimensions.md).
+For skill changes, read [the authoring pattern](references/authoring.md). Git publish rules: [git publish](references/git-publish.md). Review dimensions: [review dimensions](references/review-dimensions.md).

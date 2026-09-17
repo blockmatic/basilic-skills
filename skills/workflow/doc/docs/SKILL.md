@@ -4,11 +4,7 @@ description: Document the current code or feature in the owning docs layer.
 disable-model-invocation: true
 ---
 
-## Purpose
-
 Document the current code or feature. Follow the consuming repo's docs and README rules. Do not commit unless asked. Durable information architecture belongs in existing MDX; do not invent a second sitemap.
-
-## Steps
 
 Write to the layer that owns the change:
 
@@ -25,14 +21,3 @@ Inline comments only when the code is otherwise misleading. Do not copy MDX into
 3. Patch README only for run/setup/scripts; link the MDX.
 4. Patch the glob-matched rule only if a constraint changed.
 5. For mechanical file or doc moves: propose the smallest from/to list grouped by related files; drop folder-name prefixes inside groups. Save only if the user gave a path. Do not move files unless they also asked to implement.
-
-## Verification
-
-- [ ] The owning docs layer matches the kind of change.
-- [ ] READMEs link to MDX instead of duplicating it.
-- [ ] Move proposals cite existing conventions and create no parallel hierarchy.
-- [ ] No unsolicited commit.
-
-## Handoff
-
-Report which files changed and which layers were intentionally left alone. For a move list, say whether `/build` is authorized.
