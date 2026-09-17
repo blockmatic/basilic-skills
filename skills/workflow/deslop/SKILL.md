@@ -10,7 +10,7 @@ Diff this branch against main and remove comments, defensive noise, and `any` ca
 
 ## Steps
 
-1. Diff against main for files this branch introduced.
+1. Diff against main for every file this branch changed, including existing files it modified, not only files it added.
 2. Identify slop: extra comments a human would not add, abnormal try/catch on trusted paths, casts to `any`, style inconsistent with the file.
 3. Remove it. Do not rewrite unrelated structure.
 

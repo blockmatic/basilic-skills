@@ -45,7 +45,18 @@ pnpm dlx skills@latest add /path/to/basilic-skills --skill workflow -a cursor --
 
 After the catalog change is published, use the same command with `blockmatic/basilic-skills` as source. Basilic's `pnpm setup:skills` installs `--skill '*'` from this catalog only and restores `skills-lock.json`. Review the generated lockfile; do not fabricate a GitHub hash for an unpublished local preview.
 
-Slash names match leaf folders. Old aliases (`/git-commit`, `/exec-push`, `/use-frontend`, `/use-tdd`) map to `/commit`, `/ship`, `/ui`, `/tdd`. Do not invoke `/workflow plan`; type `/plan`. Reload skill discovery after installing.
+Slash names match leaf folders. Removed public names map as follows; there are no alias playbooks. Do not invoke `/workflow plan`; type `/plan`. Reload skill discovery after installing.
+
+| Removed | Current |
+|---|---|
+| `/git-commit` | `/commit` |
+| `/git-push` | `/push` |
+| `/git-create-pr` | `/pr` |
+| `/exec-push` | `/ship` |
+| `/use-frontend` | `/ui` |
+| `/use-tdd` | `/tdd` |
+| `/plan-architecture` | `/architecture` |
+| `/refactor-code` | `/refactor` |
 
 ## Validation and limits
 

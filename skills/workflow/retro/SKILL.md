@@ -17,7 +17,7 @@ Look back at the completed task, plan, and checks. Chat only. Do not implement, 
 ## Verification
 
 - [ ] Feedback cites this task, not generic advice.
-- [ ] No files were edited unless the user also asked for follow-up work.
+- [ ] No files were edited. Follow-up work is a later invocation, not this playbook.
 
 ## Handoff
 

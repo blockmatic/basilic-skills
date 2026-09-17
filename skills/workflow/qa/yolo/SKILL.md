@@ -10,7 +10,7 @@ Run the documented full gate (`pnpm qa` in Basilic, or the repo's equivalent) an
 
 ## Steps
 
-1. Run the documented lint, type, build, and test scripts from package.json. Fix owning causes. Re-run the failed command. Open [lint](../lint/SKILL.md) or [test](../../test/SKILL.md) only if that phase is blocked.
+1. Run the documented full gate: `pnpm qa` when the repo defines it, plus `pnpm validate` when that script exists (catalog). If neither exists, run the equivalent lint, type, build, and test scripts from package.json. Do not report completion until those commands have been run or marked not applicable with a reason. Fix owning causes. Re-run the failed command. Open [lint](../lint/SKILL.md) or [test](../../test/SKILL.md) only if that phase is blocked.
 2. Optionally review the task diff with `/review` (read-only). Apply fixes only for defects you can evidence.
 3. If CodeRabbit or CI comments exist and the user asked to consume them, follow `/rabbit` or `/comments` without committing.
 4. Stop when the gate is green or when remaining failures need a human (secrets, product scope, missing env).
