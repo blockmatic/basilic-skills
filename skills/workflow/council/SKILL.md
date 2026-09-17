@@ -1,10 +1,10 @@
 ---
 name: council
-description: Explore a codebase with parallel agents, then hand off findings. Use when the user types /council.
+description: Explore a codebase with parallel agents, then hand off findings.
 disable-model-invocation: true
 ---
 
-## Purpose and inputs
+## Purpose
 
 Gather architecture and keywords for the requested area, then spawn a small set of varied explorers. This playbook inspects. It does not commit, push, or open a PR. Implementation continues only when the user already asked for it.
 

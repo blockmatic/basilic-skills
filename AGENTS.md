@@ -12,17 +12,20 @@ skills/
     references/          # optional; load on demand
   workflow/
     SKILL.md             # required parent — CLI copies this tree as one skill
-    {playbook}/
+    {playbook}/          # everyday leaf; slash /<name>
       SKILL.md
+    {group}/             # grouping folder; no SKILL.md
+      {playbook}/        # slash is the leaf name
+        SKILL.md
 ```
 
-`skills/workflow/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/workflow/{playbook}/`. Nested playbooks are not independently installable (`--skill plan` will not match).
+`skills/workflow/SKILL.md` is required. The skills CLI does not preserve category parents; it copies the folder that contains `SKILL.md`. The parent makes dest `.agents/skills/workflow/`. Nested playbooks are not independently installable (`--skill plan` will not match). Cursor walks the tree recursively; `/<name>` is the leaf folder.
 
 ## Naming
 
 - Library/SDK skills: `<topic>-v<major>` (the package or framework major, e.g. `next-v16`, `motion-v13`, Expo `*-v55`)
 - Pattern, guideline, and craft skills: unversioned kebab-case (`composition-patterns`, `better-ui`, `emil-design-eng`)
-- Playbooks: unversioned folder names under `workflow/` (`plan`, `exec-push`)
+- Playbooks: unversioned leaf folders under `workflow/` (`plan`, `git/commit`)
 - Do not invent majors. Do not keep `foo/` next to `foo-vN/`
 - `name` is lowercase letters, digits, hyphens; max 64; equals the folder that contains `SKILL.md`
 
@@ -50,4 +53,4 @@ Install playbooks with `--skill workflow`. Nested children are not independent C
 
 Canonical copies land in `.agents/skills/`; agent flags (`-a cursor`, `-a claude-code`, …) write to each agent's skills directory. See README for full flag reference.
 
-For workflow changes, edit this catalog (`skills/workflow/`), then refresh consumers with the skills CLI. Installed copies under a product repo's `.agents/skills/workflow/` are not the source of truth. The parent catalog and references ship as one installable `workflow` skill. Nested playbooks are invoked as `/<name>` (`/plan`, `/review`). `/workflow` lists the catalog and stops. Do not retain a leftover `b` tree after migration.
+For workflow changes, edit this catalog (`skills/workflow/`), then refresh consumers with the skills CLI. Installed copies under a product repo's `.agents/skills/workflow/` are not the source of truth. The parent catalog and references ship as one installable `workflow` skill. Nested playbooks are invoked as `/<leaf>` (`/plan`, `/commit`). `/workflow` lists the catalog and stops. Do not retain a leftover `b` tree after migration.

@@ -1,20 +1,24 @@
 ---
 name: deslop
-description: Check diff against main and remove all AI generated code slop introduced in this branch. Use when the user types /deslop.
+description: Remove AI-generated slop introduced on this branch relative to main.
 disable-model-invocation: true
 ---
 
 ## Purpose
 
-Check diff against main and remove all AI generated code slop introduced in this branch.
+Diff this branch against main and remove comments, defensive noise, and `any` casts that do not match the surrounding file.
 
 ## Steps
 
-1. **Check diff**: Check diff against main to see what was introduced in this branch
-2. **Identify slop**: Identify AI-generated slop (extra comments that a human wouldn't add or is inconsistent with the rest of the file, extra defensive checks or try/catch blocks that are abnormal for that area of the codebase especially if called by trusted/validated codepaths, casts to any to get around type issues, any other style that is inconsistent with the file)
-3. **Remove slop**: Remove all identified AI-generated slop
-4. **Report**: First report completion evidence from [completion.md](../references/completion.md) (relevant rows and a status reason). Then a 1–3 sentence summary of changes
+1. Diff against main for every file this branch changed, including existing files it modified, not only files it added.
+2. Identify slop: extra comments a human would not add, abnormal try/catch on trusted paths, casts to `any`, style inconsistent with the file.
+3. Remove it. Do not rewrite unrelated structure.
 
-## Completion
+## Verification
 
-Lead with [completion evidence](../references/completion.md), then the short summary.
+- [ ] Removals are limited to slop on this branch.
+- [ ] Affected checks still pass or remaining failures are listed.
+
+## Handoff
+
+Short summary of what was removed. Read [completion evidence](../references/completion.md).

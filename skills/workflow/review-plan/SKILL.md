@@ -1,10 +1,10 @@
 ---
 name: review-plan
-description: Review the attached or in-context plan against the current plan contract. Use when the user types /review-plan.
+description: Review the attached or in-context plan against the current plan contract.
 disable-model-invocation: true
 ---
 
-## Purpose and inputs
+## Purpose
 
 Use the attached or in-context plan, the matching implementation, and [plan](../plan/SKILL.md). Stay read-only. Do not create files, branches, or scaffolds.
 
@@ -24,4 +24,4 @@ Use the attached or in-context plan, the matching implementation, and [plan](../
 
 ## Handoff
 
-Return whether the plan is implementable as written, the first blocked slice, and what must change before `/build`. An inspection is not approval to implement.
+Return whether the plan is implementable as written, the first blocked slice, and what must change before `/build`.

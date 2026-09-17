@@ -89,12 +89,13 @@ Other agents (`opencode`, `windsurf`, …): [supported agents](https://github.co
 ## Repository structure
 
 ```text
-skills/<name>/SKILL.md                       # library skills use -v<major>; craft/pattern skills do not
-skills/workflow/SKILL.md                     # required parent — installs as one skill named workflow
-skills/workflow/<playbook>/SKILL.md          # nested slash playbooks (not independently installable)
+skills/<name>/SKILL.md                            # library skills use -v<major>; craft/pattern skills do not
+skills/workflow/SKILL.md                          # required parent — installs as one skill named workflow
+skills/workflow/<playbook>/SKILL.md               # everyday slash playbooks
+skills/workflow/<group>/<playbook>/SKILL.md       # grouped specialists; slash is the leaf name
 ```
 
-The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/workflow/`. Cursor loads nested playbooks as `/<playbook>` (`/plan`, `/review`). `/workflow` lists the catalog and stops. Claude Code: read `.claude/skills/workflow/<playbook>/SKILL.md`.
+The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/workflow/`. Cursor walks that tree recursively; `/<name>` is the leaf folder (`/plan`, `/commit`). `/workflow` lists the catalog and stops. Claude Code: read `.agents/skills/workflow/` (or `.claude/skills/workflow/` if that agent flag is used).
 
 ## Canonical copies
 
@@ -119,7 +120,7 @@ Vendored from upstream (folder names unchanged):
 - `better-ui` ← [jakubkrehel/skills](https://github.com/jakubkrehel/skills) at [`267330e1adfc66a718fb65fa6918c1f06d0a689e`](https://github.com/jakubkrehel/skills/commit/267330e1adfc66a718fb65fa6918c1f06d0a689e) (MIT). Sibling `better-*` skills are not in this catalog.
 - `react-email` ← [resend/react-email](https://github.com/resend/react-email) `skills/react-email` (MIT)
 
-Not vendored: Vercel `writing-guidelines`, `react-view-transitions`, and `react-native-guidelines`. Craft ideas from [Impeccable](https://github.com/pbakaus/impeccable) (Apache 2.0) are adapted in original wording in `use-frontend` and `frontend-design/references/product-ui.md`; the Impeccable CLI, hooks, and PRODUCT/DESIGN generators are not in this catalog.
+Not vendored: Vercel `writing-guidelines`, `react-view-transitions`, and `react-native-guidelines`. Craft ideas from [Impeccable](https://github.com/pbakaus/impeccable) (Apache 2.0) are adapted in original wording in `/ui` and `frontend-design/references/product-ui.md`; the Impeccable CLI, hooks, and PRODUCT/DESIGN generators are not in this catalog.
 
 ## License
 
@@ -142,4 +143,4 @@ Do not rename a skill after install; lockfile keys follow skill names. A catalog
 
 This repository is the source of truth for `/plan`, `/build`, `/review`, `/test`, `/pr`, and the rest of the `workflow` tree. Consumers install with `--skill workflow`; do not treat a vendored `.agents/skills/workflow/` copy as canonical.
 
-Invoke playbooks with `/<name>`. `/workflow` lists the catalog and stops; it does not dispatch `/workflow plan`. `/use-tdd` is opt-in. See [adoption and migration](docs/workflow-adoption.md) for structure and checklists.
+Invoke playbooks with `/<name>`. `/workflow` lists the catalog and stops; it does not dispatch `/workflow plan`. `/tdd` is opt-in. See [adoption and migration](docs/workflow-adoption.md) for structure and checklists.

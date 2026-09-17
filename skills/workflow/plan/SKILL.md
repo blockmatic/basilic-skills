@@ -1,10 +1,10 @@
 ---
 name: plan
-description: Plan a feature as ordered, verifiable slices without changing implementation. Use when the user types /plan.
+description: Plan a feature as ordered, verifiable slices without changing implementation.
 disable-model-invocation: true
 ---
 
-## Purpose and inputs
+## Purpose
 
 Use the requested outcome, existing plan or issue, relevant implementation, rules, and technical docs. Planning alone does not authorize implementation or Git changes.
 

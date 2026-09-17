@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills')
 const expectedInstallableCount = 45
-const expectedPlaybookCount = 58
+const expectedPlaybookCount = 45
 
 const namePattern = /^[a-z0-9-]+$/
 const errors = []
@@ -48,7 +48,9 @@ const loadGroupedSkillNames = async () => {
 const classify = rel => {
   const posix = toPosix(rel)
   if (/^skills\/[^/]+\/SKILL\.md$/.test(posix)) return 'installable'
+  if (/^skills\/workflow\/references\//.test(posix)) return 'other'
   if (/^skills\/workflow\/[^/]+\/SKILL\.md$/.test(posix)) return 'playbook'
+  if (/^skills\/workflow\/[^/]+\/[^/]+\/SKILL\.md$/.test(posix)) return 'playbook'
   return 'other'
 }
 
@@ -66,7 +68,9 @@ for (const file of skillFiles) {
   const frontmatter = parseFrontmatter(content)
 
   if (kind === 'other') {
-    errors.push(`${rel}: SKILL.md must be skills/<name>/SKILL.md or skills/workflow/<name>/SKILL.md`)
+    errors.push(
+      `${rel}: SKILL.md must be skills/<name>/SKILL.md, skills/workflow/<name>/SKILL.md, or skills/workflow/<group>/<name>/SKILL.md`,
+    )
     continue
   }
 
@@ -180,7 +184,10 @@ if (!installableNames.has('workflow'))
 
 const dispatcherContent = await readFile(join(skillsRoot, 'workflow', 'SKILL.md'), 'utf8')
 const indexedPlaybooks = new Set(
-  [...dispatcherContent.matchAll(/\]\(([a-z0-9-]+)\/SKILL\.md\)/g)].map(match => match[1]),
+  [...dispatcherContent.matchAll(/\]\(([a-z0-9-]+(?:\/[a-z0-9-]+)?)\/SKILL\.md\)/g)].map(match => {
+    const rel = match[1]
+    return rel.includes('/') ? rel.slice(rel.lastIndexOf('/') + 1) : rel
+  }),
 )
 for (const name of playbookNames)
   if (!indexedPlaybooks.has(name))
@@ -209,8 +216,11 @@ for (const file of refEntries) {
 try {
   await access(join(skillsRoot, 'workflow', 'references', 'authoring.md'))
   await access(join(skillsRoot, 'workflow', 'references', 'completion.md'))
+  await access(join(skillsRoot, 'workflow', 'references', 'git-publish.md'))
 } catch {
-  errors.push('skills/workflow/references: packaged authoring.md and completion.md are required')
+  errors.push(
+    'skills/workflow/references: packaged authoring.md, completion.md, and git-publish.md are required',
+  )
 }
 
 if (errors.length) {
