@@ -3,83 +3,9 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Core",
-      "description": "TypeScript patterns for the stack.",
-      "skills": ["typescript-v6", "file-organization"]
-    },
-    {
       "title": "Workflow",
-      "description": "Slash playbooks for Basilic (installed as a nested tree; invoke /plan, /build, /review).",
+      "description": "Basilic slash playbooks (installed as a nested tree; invoke /w-plan, /w-build, /w-review).",
       "skills": ["workflow"]
-    },
-    {
-      "title": "Web",
-      "description": "Next.js, React, and client data patterns.",
-      "skills": [
-        "next-v16",
-        "vercel-react",
-        "tanstack-query-v5",
-        "ahooks-v3",
-        "nuqs-v2",
-        "react-email"
-      ]
-    },
-    {
-      "title": "UI",
-      "description": "Design, styling, and motion.",
-      "skills": [
-        "shadcn-v3",
-        "tailwind-design-system-v4",
-        "frontend-design",
-        "web-design-guidelines",
-        "composition-patterns",
-        "better-ui",
-        "motion-v13",
-        "emilkowal-animations",
-        "emil-design-eng",
-        "review-animations",
-        "animation-vocabulary",
-        "apple-design",
-        "improve-animations",
-        "find-animation-opportunities",
-        "pick-ui-library",
-        "prototype",
-        "animate",
-        "ask-sonner"
-      ]
-    },
-    {
-      "title": "API and Data",
-      "description": "Fastify, Drizzle, and OpenAPI clients.",
-      "skills": ["fastify-v5", "drizzle-orm-v0", "openapi-ts-v0"]
-    },
-    {
-      "title": "AI",
-      "description": "Vercel AI SDK core and UI.",
-      "skills": ["ai-sdk-core-v7", "ai-sdk-ui-v7"]
-    },
-    {
-      "title": "Expo",
-      "description": "Expo SDK and EAS skills (v55 upstream naming).",
-      "skills": [
-        "expo-dev-client-v55",
-        "expo-tailwind-setup-v55",
-        "expo-use-dom-v55",
-        "expo-upgrading-v55",
-        "expo-cicd-workflows-v55",
-        "expo-deployment-v55",
-        "animate-expo"
-      ]
-    },
-    {
-      "title": "Web3",
-      "description": "Wagmi and Solana UI patterns.",
-      "skills": ["wagmi-v3", "solana-v1", "viem-v2", "nodejs-keccak256-v1"]
-    },
-    {
-      "title": "Testing",
-      "description": "Vitest unit tests and ad-hoc Playwright browser automation.",
-      "skills": ["vitest-v5", "playwright-v1"]
     }
   ]
 }

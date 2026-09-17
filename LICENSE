@@ -20,6 +20,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Some skill trees retain their own licenses. See `skills/frontend-design/LICENSE.txt`
-(Apache License 2.0), `LICENSE.txt` in the Emil Kowalski and Jakub Krehel skill trees
-(MIT), and `license` frontmatter on individual `SKILL.md` files.
+This catalog is MIT. Playbook bodies in `skills/workflow/` are original Basilic wording.

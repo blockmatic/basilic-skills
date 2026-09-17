@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "type": "module",
-  "description": "Basilic-maintained Agent Skills catalog",
+  "description": "Basilic slash-playbook Agent Skills catalog",
   "scripts": {
     "lint": "pnpm lint:biome && pnpm lint:eslint",
     "lint:biome": "biome check .",

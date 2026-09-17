@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills')
-const expectedInstallableCount = 45
+const expectedInstallableCount = 1
 const expectedPlaybookCount = 42
 
 const namePattern = /^[a-z0-9-]+$/
@@ -94,8 +94,8 @@ for (const file of skillFiles) {
     errors.push(`${rel}: name "${name}" does not match folder "${folderName}"`)
   } else if (!namePattern.test(name)) {
     errors.push(`${rel}: name "${name}" has invalid characters`)
-  } else if (kind === 'playbook' && name.startsWith('b-')) {
-    errors.push(`${rel}: playbook name must not start with "b-"`)
+  } else if (kind === 'playbook' && !name.startsWith('w-')) {
+    errors.push(`${rel}: playbook name must start with "w-"`)
   } else if (seenNames.has(name)) {
     errors.push(`${rel}: duplicate skill name "${name}"`)
   } else {
