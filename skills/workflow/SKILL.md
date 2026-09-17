@@ -6,77 +6,77 @@ disable-model-invocation: true
 
 # Basilic playbooks
 
-List the shortcuts below and stop. Do not start a lifecycle or execute all playbooks. Extra tokens (`/workflow plan`) do not dispatch — tell the user to invoke `/plan` (or the matching shortcut) directly.
+List the shortcuts below and stop. Do not start a lifecycle or execute all playbooks. Extra tokens (`/workflow plan`) do not dispatch — tell the user to invoke `/w-plan` (or the matching shortcut) directly.
 
-Direct `/<name>` loads the child. Everyday: `/plan` `/build` `/review` `/debug` `/test` `/commit` `/push` `/pr` `/retro` `/ui`. Feature work uses `/plan`; a durable boundary uses `/architecture`; a missing product fact uses `/clarify`; a large plan uses `/review-plan` before `/build`. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/tdd` is opt-in.
+Direct `/<name>` loads the child. Everyday: `/w-plan` `/w-build` `/w-review` `/w-debug` `/w-test` `/w-commit` `/w-push` `/w-pr` `/w-retro` `/w-ui`. Feature work uses `/w-plan`; a durable boundary uses `/w-architecture`; a missing product fact uses `/w-clarify`; a large plan uses `/w-review-plan` before `/w-build`. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/w-tdd` is opt-in.
 
-`/build` ends at verified local changes. `/commit`, `/push`, `/pr`, `/fix-push`, and `/ship` request their named Git actions; none requests merging or deploying. `/ship` is implement through a described PR and is the only playbook that requires `pnpm qa` (or the repo's full pre-push suite). `/yolo` fixes failing or requested local checks without publish.
+`/w-build` ends at verified local changes. `/w-commit`, `/w-push`, `/w-pr`, `/w-fix-push`, and `/w-ship` request their named Git actions; none requests merging or deploying. `/w-ship` is implement through a described PR and is the only playbook that requires `pnpm qa` (or the repo's full pre-push suite). `/w-yolo` fixes failing or requested local checks without publish.
 
 ## Debug
 
-- [/debug](debug/SKILL.md)
-- [/debug-browser](debug-browser/SKILL.md)
+- [/w-debug](w-debug/SKILL.md)
+- [/w-debug-browser](w-debug-browser/SKILL.md)
 
 ## Lifecycle
 
-- [/plan](plan/SKILL.md)
-- [/build](build/SKILL.md)
-- [/retro](retro/SKILL.md)
+- [/w-plan](w-plan/SKILL.md)
+- [/w-build](w-build/SKILL.md)
+- [/w-retro](w-retro/SKILL.md)
 
 ## Git
 
-- [/commit](git/commit/SKILL.md)
-- [/push](git/push/SKILL.md)
-- [/pr](git/pr/SKILL.md)
-- [/comments](git/comments/SKILL.md)
-- [/git-repair](git/git-repair/SKILL.md)
-- [/fix-push](git/fix-push/SKILL.md)
-- [/ship](git/ship/SKILL.md)
+- [/w-commit](git/w-commit/SKILL.md)
+- [/w-push](git/w-push/SKILL.md)
+- [/w-pr](git/w-pr/SKILL.md)
+- [/w-comments](git/w-comments/SKILL.md)
+- [/w-git-repair](git/w-git-repair/SKILL.md)
+- [/w-fix-push](git/w-fix-push/SKILL.md)
+- [/w-ship](git/w-ship/SKILL.md)
 
 ## CI
 
-- [/gha](ci/gha/SKILL.md)
-- [/vercel](ci/vercel/SKILL.md)
+- [/w-gha](ci/w-gha/SKILL.md)
+- [/w-vercel](ci/w-vercel/SKILL.md)
 
 ## Quality
 
-- [/lint](qa/lint/SKILL.md)
-- [/yolo](qa/yolo/SKILL.md)
-- [/test](test/SKILL.md)
-- [/tdd](tdd/SKILL.md)
-- [/unit](unit/SKILL.md)
-- [/api-test](api-test/SKILL.md)
+- [/w-lint](qa/w-lint/SKILL.md)
+- [/w-yolo](qa/w-yolo/SKILL.md)
+- [/w-test](w-test/SKILL.md)
+- [/w-tdd](w-tdd/SKILL.md)
+- [/w-unit](w-unit/SKILL.md)
+- [/w-api-test](w-api-test/SKILL.md)
 
 ## Review and security
 
-- [/review](review/SKILL.md)
-- [/review-plan](review-plan/SKILL.md)
-- [/security](security/SKILL.md)
-- [/release](release/SKILL.md)
-- [/coderabbit](coderabbit/SKILL.md)
-- [/deslop](deslop/SKILL.md)
+- [/w-review](w-review/SKILL.md)
+- [/w-review-plan](w-review-plan/SKILL.md)
+- [/w-security](w-security/SKILL.md)
+- [/w-release](w-release/SKILL.md)
+- [/w-coderabbit](w-coderabbit/SKILL.md)
+- [/w-deslop](w-deslop/SKILL.md)
 
 ## Product and docs
 
-- [/clarify](clarify/SKILL.md)
-- [/council](council/SKILL.md)
-- [/roadmap](product/roadmap/SKILL.md)
-- [/architecture](product/architecture/SKILL.md)
-- [/docs](doc/docs/SKILL.md)
-- [/api-docs](doc/api-docs/SKILL.md)
-- [/onboard](doc/onboard/SKILL.md)
-- [/diagram](doc/diagram/SKILL.md)
+- [/w-clarify](w-clarify/SKILL.md)
+- [/w-council](w-council/SKILL.md)
+- [/w-roadmap](product/w-roadmap/SKILL.md)
+- [/w-architecture](product/w-architecture/SKILL.md)
+- [/w-docs](doc/w-docs/SKILL.md)
+- [/w-api-docs](doc/w-api-docs/SKILL.md)
+- [/w-onboard](doc/w-onboard/SKILL.md)
+- [/w-diagram](doc/w-diagram/SKILL.md)
 
 ## UI and craft
 
-- [/ui](ui/SKILL.md)
-- [/shadcn](shadcn/SKILL.md)
-- [/v0](v0/SKILL.md)
-- [/form](form/SKILL.md)
-- [/a11y](a11y/SKILL.md)
-- [/perf](perf/SKILL.md)
-- [/refactor](refactor/SKILL.md)
-- [/errors](errors/SKILL.md)
+- [/w-ui](w-ui/SKILL.md)
+- [/w-shadcn](w-shadcn/SKILL.md)
+- [/w-v0](w-v0/SKILL.md)
+- [/w-form](w-form/SKILL.md)
+- [/w-a11y](w-a11y/SKILL.md)
+- [/w-perf](w-perf/SKILL.md)
+- [/w-refactor](w-refactor/SKILL.md)
+- [/w-errors](w-errors/SKILL.md)
 
 ## Authoring
 

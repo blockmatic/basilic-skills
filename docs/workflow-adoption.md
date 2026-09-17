@@ -2,9 +2,11 @@
 
 ## Decision
 
-Keep the Basilic catalog. Everyday short-hands are `/plan`, `/build`, `/review`, `/test`, `/commit`, `/push`, `/pr`, and the other unprefixed shortcuts. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/tdd` is opt-in.
+This catalog is **only** the `workflow` tree. Everyday short-hands are `/w-plan`, `/w-build`, `/w-review`, `/w-test`, `/w-commit`, `/w-push`, `/w-pr`. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/w-tdd` is opt-in.
 
-Playbook bodies follow the Agent Skills / Cursor spec (`name`, `description`, `disable-model-invocation`) plus numbered instructions. Do not install or mimic Addy Osmani's Purpose / Steps / Verification / Handoff anatomy. Do not auto-commit in `/build`, write `tasks/plan.md`, or make TDD the default. Playbooks are a list of skills invoked directly, not a `/workflow <token>` router. Full `pnpm qa` is `/ship` only.
+Basilic also installs [mattpocock/skills](https://github.com/mattpocock/skills) (`/grill-me`, `/tdd`, `/implement`). The `w-` prefix keeps Basilic playbooks from colliding with that pack.
+
+Playbook bodies follow the Agent Skills / Cursor spec (`name`, `description`, `disable-model-invocation`) plus numbered instructions. Do not install or mimic Addy Osmani's Purpose / Steps / Verification / Handoff anatomy. Do not auto-commit in `/w-build`, write `tasks/plan.md`, or make TDD the default. Playbooks are a list of skills invoked directly, not a `/workflow <token>` router. Full `pnpm qa` is `/w-ship` only.
 
 ## Evidence and comparison
 
@@ -12,10 +14,10 @@ Research inspected [the site](https://skills.addy.ie/) and [source revision 84ee
 
 | Concern | Addy's approach | Basilic decision |
 |---|---|---|
-| Discovery | Lifecycle commands and a meta-skill route work | Direct `/<name>`; `/workflow` lists and stops |
+| Discovery | Lifecycle commands and a meta-skill route work | Direct `/w-<name>`; `/workflow` lists and stops |
 | Authoring | Purpose, use conditions, procedure, warning signs, and verification | Spec frontmatter; numbered steps; no Purpose/Handoff headings |
 | Planning | Dependencies, acceptance conditions, and verification per task | Goals, Assumptions (3–5), Tasks, Risks, References; no automatic branch creation |
-| Implementation | Small increments with tests and commits | `/build` verifies locally; publishing remains separately requested |
+| Implementation | Small increments with tests and commits | `/w-build` verifies locally; publishing remains separately requested |
 | Review | Multiple dimensions, severity, and verification scrutiny | Review with concrete findings; read-only unless fixes are requested |
 | Debugging | Reproduction and progressively narrowed diagnosis | Evidence before fixes; original-scenario verification |
 | Shared policy | Shared completion and domain references | `git-publish.md` and `review-dimensions.md` inside the installed `workflow` package |
@@ -25,15 +27,15 @@ The relevant source discussions are [skill anatomy](https://github.com/addyosman
 
 ## Why not replace the catalog
 
-Basilic already carries stack-specific patterns, generated-client ownership, repository validation scripts, and docs destinations. Wholesale replacement would overlap existing planning, review, debugging, API, UI, and security skills.
+Basilic already carries stack-specific patterns (in the product repo), generated-client ownership, repository validation scripts, and docs destinations. Wholesale replacement would overlap existing planning, review, debugging, API, UI, and security skills.
 
-Addy's [incremental implementation](https://github.com/addyosmani/agent-skills/blob/84ee50673804b95c287d1e4eb4f1c1dad7c5188a/skills/incremental-implementation/SKILL.md) treats commits as part of each increment. Basilic distinguishes implementation from a user-requested commit/push. `/tdd` stays explicit.
+Addy's [incremental implementation](https://github.com/addyosmani/agent-skills/blob/84ee50673804b95c287d1e4eb4f1c1dad7c5188a/skills/incremental-implementation/SKILL.md) treats commits as part of each increment. Basilic distinguishes implementation from a user-requested commit/push. `/w-tdd` stays explicit.
 
 The planning source defaults to `tasks/plan.md` and a task list. Basilic uses one plan location (or the user's chosen file) and GitHub Issues/PRs for work state.
 
 ## Packaging and migration
 
-The skills CLI installs the parent containing `SKILL.md`; the entire `workflow` directory carries its children and references. Nested children are not independent CLI install targets. Specialists may live at `workflow/<group>/<name>/`; the slash command is the leaf name.
+The skills CLI installs the parent containing `SKILL.md`; the entire `workflow` directory carries its children and references. Nested children are not independent CLI install targets. Specialists may live at `workflow/<group>/w-<name>/`; the slash command is the leaf name.
 
 For local preview, from the consuming repository:
 
@@ -41,25 +43,33 @@ For local preview, from the consuming repository:
 pnpm dlx skills@latest add /path/to/basilic-skills --skill workflow -a cursor --copy -y
 ```
 
-After the catalog change is published, use the same command with `blockmatic/basilic-skills` as source. Basilic's `pnpm setup:skills` installs `--skill '*'` from this catalog only and restores `skills-lock.json`. Review the generated lockfile; do not fabricate a GitHub hash for an unpublished local preview.
+After the catalog change is published, use the same command with `blockmatic/basilic-skills` as source. Basilic's `pnpm setup:skills` installs `--skill workflow` from this catalog and [mattpocock/skills](https://github.com/mattpocock/skills), then restores `skills-lock.json`. Review the generated lockfile; do not fabricate a GitHub hash for an unpublished local preview.
 
-Slash names match leaf folders. Removed public names map as follows; there are no alias playbooks. Do not invoke `/workflow plan`; type `/plan`. Reload skill discovery after installing.
+Slash names match leaf folders (`/w-plan`). Removed public names map as follows; there are no alias playbooks. Do not invoke `/workflow plan`; type `/w-plan`. Reload skill discovery after installing.
 
 | Removed | Current |
 |---|---|
-| `/git-commit` | `/commit` |
-| `/git-push` | `/push` |
-| `/git-create-pr` | `/pr` |
-| `/exec-push` | `/ship` |
-| `/use-frontend` | `/ui` |
-| `/use-tdd` | `/tdd` |
-| `/plan-architecture` | `/architecture` |
-| `/refactor-code` | `/refactor` |
-| `/overview` | `/diagram` |
-| `/docker` | `/debug` |
-| `/info` | `/docs` |
-| `/issues` | `/git-repair` |
-| `/rabbit` | `/coderabbit` |
+| `/plan` | `/w-plan` |
+| `/build` | `/w-build` |
+| `/review` | `/w-review` |
+| `/commit` | `/w-commit` |
+| `/push` | `/w-push` |
+| `/pr` | `/w-pr` |
+| `/ship` | `/w-ship` |
+| `/tdd` | `/w-tdd` |
+| `/git-commit` | `/w-commit` |
+| `/git-push` | `/w-push` |
+| `/git-create-pr` | `/w-pr` |
+| `/exec-push` | `/w-ship` |
+| `/use-frontend` | `/w-ui` |
+| `/use-tdd` | `/w-tdd` |
+| `/plan-architecture` | `/w-architecture` |
+| `/refactor-code` | `/w-refactor` |
+| `/overview` | `/w-diagram` |
+| `/docker` | `/w-debug` |
+| `/info` | `/w-docs` |
+| `/issues` | `/w-git-repair` |
+| `/rabbit` | `/w-coderabbit` |
 
 ## Validation and limits
 
