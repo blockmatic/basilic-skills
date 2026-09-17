@@ -23,4 +23,4 @@ Use the selected files or a named concern. Capture current behavior with tests, 
 
 ## Handoff
 
-Explain what changed and why, with the verification evidence. Stop at local edits unless the user asked `/commit`.
+Explain what changed and why, with the verification evidence. Stop at local edits unless the user asked `/commit`. Read [completion evidence](../references/completion.md).

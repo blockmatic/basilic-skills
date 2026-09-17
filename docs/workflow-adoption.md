@@ -57,17 +57,22 @@ Slash names match leaf folders. Removed public names map as follows; there are n
 | `/use-tdd` | `/tdd` |
 | `/plan-architecture` | `/architecture` |
 | `/refactor-code` | `/refactor` |
+| `/overview` | `/diagram` |
+| `/docker` | `/debug` |
+| `/info` | `/docs` |
+| `/issues` | `/git-repair` |
+| `/rabbit` | `/coderabbit` |
 
 ## Validation and limits
 
-`pnpm validate` checks names, invocation metadata, catalog grouping, expected counts, parent index coverage of every playbook folder, and relative references from playbook SKILL.md files and `skills/workflow/references/*.md`. A packaged install should contain 45 child playbooks plus the parent catalog and references, with no leftover `b` tree.
+`pnpm validate` checks names, invocation metadata, catalog grouping, expected counts, parent index coverage of every playbook folder, and relative references from playbook SKILL.md files and `skills/workflow/references/*.md`. A packaged install should contain 42 child playbooks plus the parent catalog and references, with no leftover `b` tree.
 
 Evaluate these scenarios in an isolated workspace: `/workflow` lists without executing; extra tokens do not dispatch or publish; review-only leaves files unchanged; build-only does not commit; a commit with unrelated staged files preserves them; failed verification does not become a success claim.
 
 ## References
 
 - Catalog `AGENTS.md`, `README.md`, and `scripts/validate-catalog.mjs`
-- `skills/workflow/references/authoring.md`, `completion.md`, and `git-publish.md`
+- `skills/workflow/references/authoring.md`, `completion.md`, `git-publish.md`, and `review-dimensions.md`
 - Basilic repository rules: `base/general`, `base/git`, `cursor/skills`, `base/docs`, `base/readme`
 - Basilic technical docs: `development/ai-workflow.mdx`, `development/cursor-skills.mdx`
 - Addy source links above; its MIT license permits reuse with required notices for copied material. This adaptation uses original Basilic wording and credits the source of the structural ideas.

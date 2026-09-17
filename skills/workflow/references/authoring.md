@@ -9,9 +9,9 @@ Use these sections:
 3. **Verification**: short, observable exit conditions. Link shared completion or git-publish evidence instead of copying policy.
 4. **Handoff**: the artifact returned, uncertainty, and next action. Include a stopping condition for investigative loops.
 
-Compose playbooks (`/ship`, `/yolo`) inline their phase list. Link a child playbook only when that phase needs the full contract.
+Compose playbooks (`/ship`, `/yolo`) inline their phase list. Do not paraphrase [git publish](git-publish.md) or Conventional Commit format. Open a child playbook only when that phase is blocked.
 
-Supporting files belong inside `workflow/references/` so installing `workflow` carries them. Other catalogs are optional context, never install-time dependencies.
+Supporting files belong inside `workflow/references/` so installing `workflow` carries them: [authoring](authoring.md), [completion](completion.md), [git publish](git-publish.md), and [review dimensions](review-dimensions.md). Other catalogs are optional context, never install-time dependencies.
 
 Avoid fixed interview quotas, mandatory plans for trivial edits, fabricated performance estimates, auto-commits from implementation, and silent expansion from review into fixes. Do not encode arbitrary line-count, timing, coverage, or security thresholds as repository policy.
 

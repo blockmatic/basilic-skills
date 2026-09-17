@@ -1,6 +1,6 @@
 ---
 name: v0
-description: Draft a v0.dev prompt from the current file and wait for OPEN, EDIT, or CANCEL.
+description: Draft a Next.js and shadcn v0.dev prompt from the current file and wait for OPEN, EDIT, or CANCEL.
 disable-model-invocation: true
 ---
 

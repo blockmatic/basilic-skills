@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills')
 const expectedInstallableCount = 45
-const expectedPlaybookCount = 45
+const expectedPlaybookCount = 42
 
 const namePattern = /^[a-z0-9-]+$/
 const errors = []
@@ -217,9 +217,10 @@ try {
   await access(join(skillsRoot, 'workflow', 'references', 'authoring.md'))
   await access(join(skillsRoot, 'workflow', 'references', 'completion.md'))
   await access(join(skillsRoot, 'workflow', 'references', 'git-publish.md'))
+  await access(join(skillsRoot, 'workflow', 'references', 'review-dimensions.md'))
 } catch {
   errors.push(
-    'skills/workflow/references: packaged authoring.md, completion.md, and git-publish.md are required',
+    'skills/workflow/references: packaged authoring.md, completion.md, git-publish.md, and review-dimensions.md are required',
   )
 }
 

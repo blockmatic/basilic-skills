@@ -23,4 +23,4 @@ Find performance issues with a measured baseline. Do not invent SLOs or impact p
 
 ## Handoff
 
-Report baseline, suspected cause, and proposed change. Say when measurement is still missing.
+Report baseline, suspected cause, and proposed change. Say when measurement is still missing. Read [completion evidence](../references/completion.md).

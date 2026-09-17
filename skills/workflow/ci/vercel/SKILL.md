@@ -23,4 +23,4 @@ Triage a Vercel build failure for the current branch. Use Vercel MCP when availa
 
 ## Handoff
 
-Report the build error, the fix, and the local build result.
+Report the build error, the fix, and the local build result. Read [completion evidence](../../references/completion.md).

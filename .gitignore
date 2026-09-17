@@ -10,3 +10,4 @@ dist
 *.pem
 .pnp.js
 *.log
+__dev

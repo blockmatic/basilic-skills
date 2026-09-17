@@ -11,8 +11,8 @@ Install or extend a shadcn primitive. Reshaping a screen stays on `/ui`. Follow 
 ## Steps
 
 1. Use shadcn MCP only when unsure about variants or when hitting an install error.
-2. Install in the repo's shared UI package (Basilic: `packages/ui/src/components/`) per `components.json`.
-3. Import from the package subpath (`@repo/ui/components/*`), not a deep source path. Use that package's `cn` and Radix re-exports.
+2. Install in the shared UI package from `components.json` (Basilic example: `packages/ui/src/components/`).
+3. Import from that package's public subpath (Basilic example: `@repo/ui/components/*`), not a deep source path. Use that package's `cn` and Radix re-exports.
 4. After the primitive exists, reshape screens with `/ui` if the job is a surface, not only a component.
 
 ## Verification
