@@ -9,13 +9,13 @@
     },
     {
       "title": "Workflow",
-      "description": "Slash playbooks for Basilic development workflows (installed as a nested tree).",
+      "description": "Slash playbooks for Basilic (installed as a nested tree; invoke /plan, /build, /review).",
       "skills": ["workflow"]
     },
     {
       "title": "Web",
       "description": "Next.js, React, and client data patterns.",
-      "skills": ["next-v16", "vercel-react", "tanstack-query-v5", "ahooks-v3", "nuqs-v2"]
+      "skills": ["next-v16", "vercel-react", "tanstack-query-v5", "ahooks-v3", "nuqs-v2", "react-email"]
     },
     {
       "title": "UI",

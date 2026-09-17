@@ -1,31 +1,29 @@
 ---
 name: workflow
-description: Basilic workflow dispatcher and catalog. Use when the user types /workflow or /<playbook>.
+description: Catalog of Basilic slash playbooks. Use when the user types /workflow with no playbook name. List the shortcuts and stop; do not start work.
 disable-model-invocation: true
 ---
 
-# Basilic workflows
+# Basilic playbooks
 
-With no argument, list the shortcuts below and stop. Do not start a lifecycle or execute all playbooks.
+List the shortcuts below and stop. Do not start a lifecycle or execute all playbooks. Extra tokens (`/workflow plan`) do not dispatch — tell the user to invoke `/plan` (or the matching shortcut) directly.
 
-For `/workflow <token>`, resolve a shortcut below or a full name from the index, read that child SKILL.md, and follow it. Preserve the remaining request as its task context. Unknown token: show the index and stop; never guess a publishing command.
-
-Direct `/<name>` loads the same child. `/plan` and `/build` are the everyday short-hands for planning and implementation. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/use-tdd` is opt-in.
+Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-hands for planning and implementation. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/use-tdd` is opt-in.
 
 ## Shortcuts
 
 | Invocation | Playbook |
 |---|---|
-| `/workflow plan` | [plan](plan/SKILL.md) |
-| `/workflow build` | [build](build/SKILL.md) |
-| `/workflow review` | [code-review](code-review/SKILL.md) |
-| `/workflow debug` | [debug-issue](debug-issue/SKILL.md) |
-| `/workflow test` | [run-all-tests-and-fix](run-all-tests-and-fix/SKILL.md) |
-| `/workflow commit` | [git-commit](git-commit/SKILL.md) |
-| `/workflow push` | [git-push](git-push/SKILL.md) |
-| `/workflow pr` | [git-create-pr](git-create-pr/SKILL.md) |
-| `/workflow retro` | [retro](retro/SKILL.md) |
-| `/workflow ui` | [use-frontend](use-frontend/SKILL.md) |
+| `/plan` | [plan](plan/SKILL.md) |
+| `/build` | [build](build/SKILL.md) |
+| `/review` | [code-review](code-review/SKILL.md) |
+| `/debug` | [debug-issue](debug-issue/SKILL.md) |
+| `/test` | [run-all-tests-and-fix](run-all-tests-and-fix/SKILL.md) |
+| `/commit` | [git-commit](git-commit/SKILL.md) |
+| `/push` | [git-push](git-push/SKILL.md) |
+| `/pr` | [git-create-pr](git-create-pr/SKILL.md) |
+| `/retro` | [retro](retro/SKILL.md) |
+| `/ui` | [use-frontend](use-frontend/SKILL.md) |
 
 `build` ends at verified local changes. `commit`, `push`, `pr`, and `exec-push` request their named Git actions; none requests merging or deploying. Use `/git-push` to publish an already-committed branch; `/fix-push` after fixing a failed push; `/exec-push` only when the user asked for implement through a described PR.
 
@@ -38,7 +36,9 @@ Direct `/<name>` loads the same child. `/plan` and `/build` are the everyday sho
 - [/clarify-task](clarify-task/SKILL.md)
 - [/code-review](code-review/SKILL.md)
 - [/coderabbit](coderabbit/SKILL.md)
+- [/commit](commit/SKILL.md)
 - [/council](council/SKILL.md)
+- [/debug](debug/SKILL.md)
 - [/debug-browser](debug-browser/SKILL.md)
 - [/debug-issue](debug-issue/SKILL.md)
 - [/deslop](deslop/SKILL.md)
@@ -66,14 +66,19 @@ Direct `/<name>` loads the same child. `/plan` and `/build` are the everyday sho
 - [/overview](overview/SKILL.md)
 - [/plan](plan/SKILL.md)
 - [/plan-architecture](plan-architecture/SKILL.md)
+- [/pr](pr/SKILL.md)
+- [/push](push/SKILL.md)
 - [/refactor-code](refactor-code/SKILL.md)
 - [/release-review](release-review/SKILL.md)
 - [/retro](retro/SKILL.md)
+- [/review](review/SKILL.md)
 - [/review-plan](review-plan/SKILL.md)
 - [/roadmap](roadmap/SKILL.md)
 - [/run-all-tests-and-fix](run-all-tests-and-fix/SKILL.md)
 - [/security-audit](security-audit/SKILL.md)
 - [/security-review](security-review/SKILL.md)
+- [/test](test/SKILL.md)
+- [/ui](ui/SKILL.md)
 - [/use-frontend](use-frontend/SKILL.md)
 - [/use-shadcn](use-shadcn/SKILL.md)
 - [/use-tdd](use-tdd/SKILL.md)

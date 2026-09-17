@@ -4,8 +4,8 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills')
-const expectedInstallableCount = 46
-const expectedPlaybookCount = 51
+const expectedInstallableCount = 47
+const expectedPlaybookCount = 58
 
 const namePattern = /^[a-z0-9-]+$/
 const errors = []
@@ -176,7 +176,7 @@ try {
 }
 
 if (!installableNames.has('workflow'))
-  errors.push('skills/workflow/SKILL.md: dispatcher is required')
+  errors.push('skills/workflow/SKILL.md: parent catalog is required')
 
 const dispatcherContent = await readFile(join(skillsRoot, 'workflow', 'SKILL.md'), 'utf8')
 const indexedPlaybooks = new Set(

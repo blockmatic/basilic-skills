@@ -2,9 +2,9 @@
 
 ## Decision
 
-Keep the Basilic catalog. Everyday short-hands are `/plan` and `/build` (also `/workflow plan` and `/workflow build`). Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/use-tdd` is opt-in.
+Keep the Basilic catalog. Everyday short-hands are `/plan`, `/build`, `/review`, `/test`, `/pr`, and the other unprefixed shortcuts. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/use-tdd` is opt-in.
 
-Addy Osmani's agent-skills remain a **later** editorial reference for progressive polish, not a rewrite list for this pass. Do not install his pack, auto-commit in `/build`, write `tasks/plan.md`, or make TDD the default.
+Addy Osmani's agent-skills remain a **later** editorial reference for progressive polish, not a rewrite list for this pass. Do not install his pack, auto-commit in `/build`, write `tasks/plan.md`, or make TDD the default. Playbooks are a list of skills invoked directly, not a `/workflow <token>` router.
 
 ## Evidence and comparison
 
@@ -12,7 +12,7 @@ Research inspected [the site](https://skills.addy.ie/) and [source revision 84ee
 
 | Concern | Addy's approach | Basilic decision |
 |---|---|---|
-| Discovery | Lifecycle commands and a meta-skill route work | `/workflow` routes explicit requests; `/plan` and `/build` are short-hands |
+| Discovery | Lifecycle commands and a meta-skill route work | Direct `/<name>`; `/workflow` lists and stops |
 | Authoring | Purpose, use conditions, procedure, warning signs, and verification | Concise inputs, steps, observable checklist, and handoff |
 | Planning | Dependencies, acceptance conditions, and verification per task | One feature-specific plan; no automatic branch creation |
 | Implementation | Small increments with tests and commits | `/build` verifies locally; publishing remains separately requested |
@@ -43,15 +43,15 @@ For local preview, from the consuming repository:
 pnpm dlx skills@latest add /path/to/basilic-skills --skill workflow -a cursor --copy -y
 ```
 
-After the catalog change is published, use the same command with `blockmatic/basilic-skills` as source. Review the generated lockfile; do not fabricate a GitHub hash for an unpublished local preview.
+After the catalog change is published, use the same command with `blockmatic/basilic-skills` as source. Basilic's `pnpm setup:skills` installs `--skill '*'` from this catalog only and restores `skills-lock.json`. Review the generated lockfile; do not fabricate a GitHub hash for an unpublished local preview.
 
-`/plan-feature` is now `/plan`. `/workflow plan` is a dispatcher shortcut to `/plan`. Update pinned prompts and reload skill discovery after installing.
+`/plan-feature` is now `/plan`. Do not invoke `/workflow plan`; type `/plan`. Shortcuts that differ from folder names (`/review` → `code-review`) are thin alias playbooks. Update pinned prompts and reload skill discovery after installing.
 
 ## Validation and limits
 
-`pnpm validate` checks names, invocation metadata, catalog grouping, expected counts, dispatcher index coverage of every playbook folder, and relative references from playbook SKILL.md files and `skills/workflow/references/*.md`. A packaged install should contain 51 child playbooks plus the dispatcher and references, with no leftover `b` tree.
+`pnpm validate` checks names, invocation metadata, catalog grouping, expected counts, parent index coverage of every playbook folder, and relative references from playbook SKILL.md files and `skills/workflow/references/*.md`. A packaged install should contain 58 child playbooks plus the parent catalog and references, with no leftover `b` tree.
 
-Evaluate these scenarios in an isolated workspace: `/workflow` lists without executing; an unknown token does not publish; review-only leaves files unchanged; build-only does not commit; a commit with unrelated staged files preserves them; failed verification does not become a success claim.
+Evaluate these scenarios in an isolated workspace: `/workflow` lists without executing; extra tokens do not dispatch or publish; review-only leaves files unchanged; build-only does not commit; a commit with unrelated staged files preserves them; failed verification does not become a success claim.
 
 ## References
 

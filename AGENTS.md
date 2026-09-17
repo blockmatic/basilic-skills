@@ -50,4 +50,4 @@ Install playbooks with `--skill workflow`. Nested children are not independent C
 
 Canonical copies land in `.agents/skills/`; agent flags (`-a cursor`, `-a claude-code`, …) write to each agent's skills directory. See README for full flag reference.
 
-For workflow changes, edit this catalog (`skills/workflow/`), then refresh consumers with the skills CLI. Installed copies under a product repo's `.agents/skills/workflow/` are not the source of truth. The dispatcher and references ship as one installable `workflow` skill. Do not retain a leftover `b` tree after migration.
+For workflow changes, edit this catalog (`skills/workflow/`), then refresh consumers with the skills CLI. Installed copies under a product repo's `.agents/skills/workflow/` are not the source of truth. The parent catalog and references ship as one installable `workflow` skill. Nested playbooks are invoked as `/<name>` (`/plan`, `/review`). `/workflow` lists the catalog and stops. Do not retain a leftover `b` tree after migration.

@@ -82,6 +82,8 @@ npx skills@latest add /path/to/basilic-skills --skill workflow -a cursor -y
 npx skills@latest add blockmatic/basilic-skills --skill '*' -a cursor --copy -y
 ```
 
+Basilic consumers pin **only** this catalog in `skills-lock.json`. Extra upstream skills (for example `react-email`) belong in this repo, not as a second lock source. `pnpm setup:skills` in Basilic runs that `add --skill '*'` once and restores the lockfile so hashes stay pinned.
+
 Other agents (`opencode`, `windsurf`, …): [supported agents](https://github.com/vercel-labs/skills#supported-agents). Env overrides: `CLAUDE_CONFIG_DIR`, `CODEX_HOME`.
 
 ## Repository structure
@@ -92,7 +94,7 @@ skills/workflow/SKILL.md                     # required parent — installs as o
 skills/workflow/<playbook>/SKILL.md          # nested slash playbooks (not independently installable)
 ```
 
-The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/workflow/`. Cursor still loads nested playbooks as `/<playbook>`. Claude Code: read `.claude/skills/workflow/<playbook>/SKILL.md`.
+The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/workflow/`. Cursor loads nested playbooks as `/<playbook>` (`/plan`, `/review`). `/workflow` lists the catalog and stops. Claude Code: read `.claude/skills/workflow/<playbook>/SKILL.md`.
 
 ## Canonical copies
 
@@ -115,6 +117,7 @@ Vendored from upstream (folder names unchanged):
 
 - [emilkowalski/skills](https://github.com/emilkowalski/skills) at [`85e8e2363b713506e1d5b6e07a0eb2da66be1bc3`](https://github.com/emilkowalski/skills/commit/85e8e2363b713506e1d5b6e07a0eb2da66be1bc3) (MIT): `emil-design-eng`, `review-animations`, `animation-vocabulary`, `apple-design`, `improve-animations`, `find-animation-opportunities`, `pick-ui-library`, `prototype`, `animate`, `ask-sonner`, `animate-expo`, `write-swift`, `mobile-native`
 - `better-ui` ← [jakubkrehel/skills](https://github.com/jakubkrehel/skills) at [`267330e1adfc66a718fb65fa6918c1f06d0a689e`](https://github.com/jakubkrehel/skills/commit/267330e1adfc66a718fb65fa6918c1f06d0a689e) (MIT). Sibling `better-*` skills are not in this catalog.
+- `react-email` ← [resend/react-email](https://github.com/resend/react-email) `skills/react-email` (MIT)
 
 Not vendored: Vercel `writing-guidelines`, `react-view-transitions`, and `react-native-guidelines`. Craft ideas from [Impeccable](https://github.com/pbakaus/impeccable) (Apache 2.0) are adapted in original wording in `use-frontend` and `frontend-design/references/product-ui.md`; the Impeccable CLI, hooks, and PRODUCT/DESIGN generators are not in this catalog.
 
@@ -135,8 +138,8 @@ pnpm dlx skills@latest update
 
 Do not rename a skill after install; lockfile keys follow skill names. A catalog rename is a breaking consumer key change — re-add the skill under the new name and commit `skills-lock.json`. Commit `skills-lock.json` in consuming projects when you vendor skills.
 
-## Basilic workflows
+## Basilic playbooks
 
-This repository is the source of truth for `/plan`, `/build`, and the rest of the `workflow` tree. Consumers install with `--skill workflow`; do not treat a vendored `.agents/skills/workflow/` copy as canonical.
+This repository is the source of truth for `/plan`, `/build`, `/review`, `/test`, `/pr`, and the rest of the `workflow` tree. Consumers install with `--skill workflow`; do not treat a vendored `.agents/skills/workflow/` copy as canonical.
 
-Use `/workflow` for the catalog, `/plan`, `/build`, `/workflow review`, `/workflow ui`, or a full `/<playbook>` name. `/use-tdd` is opt-in. See [adoption and migration](docs/workflow-adoption.md) for structure and checklists.
+Invoke playbooks with `/<name>`. `/workflow` lists the catalog and stops; it does not dispatch `/workflow plan`. `/use-tdd` is opt-in. See [adoption and migration](docs/workflow-adoption.md) for structure and checklists.
