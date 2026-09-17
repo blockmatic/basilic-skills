@@ -23,4 +23,4 @@ Invocation requests pushing the current task. Inspect branch, upstream, staged/u
 
 ## Handoff
 
-Report branch and push result. Do not create a PR, deploy, or start watching CI unless requested.
+Report branch and push result. Do not create a PR, deploy, or start watching CI unless requested. Read [completion evidence](../../references/completion.md).

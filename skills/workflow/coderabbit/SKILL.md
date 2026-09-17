@@ -1,5 +1,5 @@
 ---
-name: rabbit
+name: coderabbit
 description: Fetch CodeRabbit review comments, apply authorized fixes, and stop at local verification.
 disable-model-invocation: true
 ---

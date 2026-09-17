@@ -23,4 +23,4 @@ Use TDD only when the user asked for it or the repository requires it. Follow th
 
 ## Handoff
 
-Report the test files, the increment, and remaining uncovered behavior.
+Report the test files, the increment, and remaining uncovered behavior. Read [completion evidence](../references/completion.md).

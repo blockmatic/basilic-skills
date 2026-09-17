@@ -24,4 +24,4 @@ Find security defects relative to repository security docs and existing scanners
 
 ## Handoff
 
-Report defects, residual risk, suggested remedies, and whether a security-doc follow-up is required.
+Report defects, residual risk, suggested remedies, and whether a security-doc follow-up is required. Read [completion evidence](../references/completion.md).

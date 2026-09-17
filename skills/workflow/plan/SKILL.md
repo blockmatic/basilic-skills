@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 ## Purpose
 
-Use the requested outcome, existing plan or issue, relevant implementation, rules, and technical docs. Planning alone does not authorize implementation or Git changes.
+Use the requested outcome, existing plan or issue, relevant implementation, rules, and technical docs. Skip `/plan` for a single already-clear slice; use `/build`. Planning alone does not authorize implementation or Git changes. If a consequential gap blocks slicing, stop at `/clarify`.
 
 ## Steps
 
@@ -14,7 +14,7 @@ Use the requested outcome, existing plan or issue, relevant implementation, rule
 2. Inspect the affected packages, their README and scripts, and existing behavior. For durable product or architecture decisions, read `PRODUCT.md` and the matching technical MDX or ADR.
 3. Divide work into the smallest complete user-visible slices. For each, name likely files, dependencies, an observable acceptance condition, and the existing command or manual check that proves it.
 4. Put uncertain dependencies early. Include error paths, compatibility, generated sources, and recovery where relevant. Use a diagram only when relationships need one.
-5. Save to the existing plan location or the user's chosen destination. Include Goals, Assumptions, ordered tasks, Risks/Open Questions, and References (rules, skills, docs). Do not create another backlog or overwrite another task's unfinished plan.
+5. Save to the user's path, else the repo's existing plan file, else return in chat. Include Goals, Assumptions, ordered tasks, Risks/Open Questions, and References (rules, skills, docs). Do not create another backlog or overwrite another task's unfinished plan.
 
 ## Verification
 
@@ -25,4 +25,4 @@ Use the requested outcome, existing plan or issue, relevant implementation, rule
 
 ## Handoff
 
-Return the plan location, unresolved decisions, and first implementable slice. If the user also requested implementation, continue within that authorization; otherwise finish with the plan. Do not create a branch or scaffold code just to plan.
+Return the plan location, unresolved decisions, and first implementable slice. If the user also requested implementation, continue within that authorization; otherwise finish with the plan. Do not create a branch or scaffold code just to plan. Read [completion evidence](../references/completion.md).

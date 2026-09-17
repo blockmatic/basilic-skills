@@ -11,9 +11,9 @@ Invocation requests fix → validate → commit → push for the named issues. T
 ## Steps
 
 1. Address the reported errors, warnings, or feedback (lint, types, tests, reviews).
-2. Run `pnpm qa` in Basilic (or the consuming repo's documented full gate). Fix failures before publishing.
-3. Commit intended paths only using the `/commit` rules: task-owned hunks, Conventional Commit, hooks enabled.
-4. Push using the `/push` rules: inspected upstream, no force-push, no hook bypass. Open [commit](../commit/SKILL.md) or [push](../push/SKILL.md) only if a step is blocked.
+2. Run the documented full gate (`pnpm qa` in Basilic, or the consuming repo's equivalent). Fix failures before publishing.
+3. Commit intended paths only. Open [commit](../commit/SKILL.md) only if the commit step is blocked.
+4. Push the inspected upstream. Open [push](../push/SKILL.md) only if the push step is blocked.
 
 ## Verification
 
@@ -23,4 +23,4 @@ Invocation requests fix → validate → commit → push for the named issues. T
 
 ## Handoff
 
-Report commit, branch, and push result. Do not open a PR unless the user asked `/pr` or `/ship`.
+Report commit, branch, and push result. Do not open a PR unless the user asked `/pr` or `/ship`. Read [completion evidence](../../references/completion.md).

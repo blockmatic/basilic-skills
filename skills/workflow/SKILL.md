@@ -8,24 +8,20 @@ disable-model-invocation: true
 
 List the shortcuts below and stop. Do not start a lifecycle or execute all playbooks. Extra tokens (`/workflow plan`) do not dispatch — tell the user to invoke `/plan` (or the matching shortcut) directly.
 
-Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-hands for planning and implementation. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/tdd` is opt-in.
-
-## Shortcuts
-
-| Invocation | Playbook |
-|---|---|
-| `/plan` | [plan](plan/SKILL.md) |
-| `/build` | [build](build/SKILL.md) |
-| `/review` | [review](review/SKILL.md) |
-| `/debug` | [debug](debug/SKILL.md) |
-| `/test` | [test](test/SKILL.md) |
-| `/commit` | [commit](git/commit/SKILL.md) |
-| `/push` | [push](git/push/SKILL.md) |
-| `/pr` | [pr](git/pr/SKILL.md) |
-| `/retro` | [retro](retro/SKILL.md) |
-| `/ui` | [ui](ui/SKILL.md) |
+Direct `/<name>` loads the child. Everyday: `/plan` `/build` `/review` `/debug` `/test` `/commit` `/push` `/pr` `/retro` `/ui`. Feature work uses `/plan`; a durable boundary uses `/architecture`; a missing product fact uses `/clarify`; a large plan uses `/review-plan` before `/build`. Durable product facts live in the consuming repo's `PRODUCT.md`; technical facts live in that repo's docs. `/tdd` is opt-in.
 
 `/build` ends at verified local changes. `/commit`, `/push`, `/pr`, `/fix-push`, and `/ship` request their named Git actions; none requests merging or deploying. `/ship` is implement through a described PR. `/yolo` is the full local gate without publish.
+
+## Debug
+
+- [/debug](debug/SKILL.md)
+- [/debug-browser](debug-browser/SKILL.md)
+
+## Lifecycle
+
+- [/plan](plan/SKILL.md)
+- [/build](build/SKILL.md)
+- [/retro](retro/SKILL.md)
 
 ## Git
 
@@ -33,7 +29,7 @@ Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-ha
 - [/push](git/push/SKILL.md)
 - [/pr](git/pr/SKILL.md)
 - [/comments](git/comments/SKILL.md)
-- [/issues](git/issues/SKILL.md)
+- [/git-repair](git/git-repair/SKILL.md)
 - [/fix-push](git/fix-push/SKILL.md)
 - [/ship](git/ship/SKILL.md)
 
@@ -41,7 +37,6 @@ Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-ha
 
 - [/gha](ci/gha/SKILL.md)
 - [/vercel](ci/vercel/SKILL.md)
-- [/docker](ci/docker/SKILL.md)
 
 ## Quality
 
@@ -58,7 +53,7 @@ Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-ha
 - [/review-plan](review-plan/SKILL.md)
 - [/security](security/SKILL.md)
 - [/release](release/SKILL.md)
-- [/rabbit](rabbit/SKILL.md)
+- [/coderabbit](coderabbit/SKILL.md)
 - [/deslop](deslop/SKILL.md)
 
 ## Product and docs
@@ -66,9 +61,7 @@ Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-ha
 - [/clarify](clarify/SKILL.md)
 - [/council](council/SKILL.md)
 - [/roadmap](product/roadmap/SKILL.md)
-- [/overview](product/overview/SKILL.md)
 - [/architecture](product/architecture/SKILL.md)
-- [/info](product/info/SKILL.md)
 - [/docs](doc/docs/SKILL.md)
 - [/api-docs](doc/api-docs/SKILL.md)
 - [/onboard](doc/onboard/SKILL.md)
@@ -84,8 +77,7 @@ Direct `/<name>` loads the child. `/plan` and `/build` are the everyday short-ha
 - [/perf](perf/SKILL.md)
 - [/refactor](refactor/SKILL.md)
 - [/errors](errors/SKILL.md)
-- [/debug-browser](debug-browser/SKILL.md)
 
 ## Authoring
 
-For skill changes, read [the authoring pattern](references/authoring.md). For delivery evidence, read [completion evidence](references/completion.md). Git publish rules: [git publish](references/git-publish.md).
+For skill changes, read [the authoring pattern](references/authoring.md). For delivery evidence, read [completion evidence](references/completion.md). Git publish rules: [git publish](references/git-publish.md). Review dimensions: [review dimensions](references/review-dimensions.md).

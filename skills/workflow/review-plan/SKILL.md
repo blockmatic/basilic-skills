@@ -24,4 +24,4 @@ Use the attached or in-context plan, the matching implementation, and [plan](../
 
 ## Handoff
 
-Return whether the plan is implementable as written, the first blocked slice, and what must change before `/build`.
+Return whether the plan is implementable as written, the first blocked slice, and what must change before `/build`. Read [completion evidence](../references/completion.md).

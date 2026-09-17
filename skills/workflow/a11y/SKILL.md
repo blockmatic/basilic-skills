@@ -23,4 +23,4 @@ Audit the specified UI against accessibility docs and existing a11y tests. Stay 
 
 ## Handoff
 
-List issues, the gate used, and remaining manual checks.
+List issues, the gate used, and remaining manual checks. Read [completion evidence](../references/completion.md).

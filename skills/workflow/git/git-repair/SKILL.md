@@ -1,5 +1,5 @@
 ---
-name: issues
+name: git-repair
 description: Resolve common Git problems and conflicts with inspected commands.
 disable-model-invocation: true
 ---

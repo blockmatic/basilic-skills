@@ -23,4 +23,4 @@ Use the affected URL, expected interaction, and available browser tools. Inspect
 
 ## Handoff
 
-Return the cause, changed behavior, and evidence. Do not ask the user to test something the available tools can verify.
+Return the cause, changed behavior, and evidence. Do not ask the user to test something the available tools can verify. Read [completion evidence](../references/completion.md).

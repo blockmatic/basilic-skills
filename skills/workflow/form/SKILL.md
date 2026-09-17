@@ -1,6 +1,6 @@
 ---
 name: form
-description: Build a Next.js form using the app’s existing mutation path, not a second stack.
+description: Build a Next.js form using the app's existing mutation path, not a second stack.
 disable-model-invocation: true
 ---
 

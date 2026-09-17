@@ -10,6 +10,7 @@ Use the rows relevant to the requested deliverable. Mark passed, failed, not run
 | Commit or push | Intended diff, required checks/hooks, commit or remote result, and preserved unrelated work |
 | Pull request | Correct branch/base, standalone description, observed verification, and PR link |
 | UI surface | Desktop and mobile viewport evidence, keyboard path, named loading/empty/error/success states as applicable, and a separate line for visual inspection vs automated checks (Playwright or typecheck is not visual QA) |
+| Full local gate | Each gate command recorded as passed, failed, or not applicable; secrets and unrelated dotfiles untouched; no publish |
 
 ## Common failure checks
 

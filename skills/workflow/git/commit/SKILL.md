@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Review and commit the task’s intended changes using repository conventions.
+description: Review and commit the task's intended changes using repository conventions.
 disable-model-invocation: true
 ---
 
@@ -12,9 +12,9 @@ Invocation requests a commit. Inspect staged and unstaged changes and the author
 
 1. Inspect the diff and distinguish task-owned changes from unrelated work, including pre-staged files. If the intended commit cannot be separated safely, clarify the file scope.
 2. Check required validation evidence and documentation updates. Resolve failures caused by this task; report unrelated blockers honestly.
-3. Stage explicit task-owned paths or hunks. Do not sweep unrelated or untracked work into the commit with a blanket add.
-4. Write a Conventional Commit: lowercase type/scope, imperative summary of at most 60 characters, no period. Follow repository-specific scope conventions.
-5. Commit with hooks enabled; inspect the result and remaining working tree.
+3. Stage explicit task-owned paths or hunks. Do not sweep unrelated or untracked work into the commit with a blanket add. Never stage `.env`, credentials, or secrets.
+4. Write a Conventional Commit: lowercase type/scope, imperative summary of at most 60 characters, no period. Follow repository-specific scope conventions. Pass the message via a heredoc; commit with hooks enabled.
+5. Inspect the result and remaining working tree.
 
 ## Verification
 
