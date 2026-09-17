@@ -1,6 +1,6 @@
 ---
 name: build
-description: Implement an agreed task incrementally and verify the result. Use when the user types /build or /workflow build.
+description: Implement an agreed task incrementally and verify the result. Use when the user types /build.
 disable-model-invocation: true
 ---
 

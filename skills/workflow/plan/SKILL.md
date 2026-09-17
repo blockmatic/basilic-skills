@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Plan a feature as ordered, verifiable slices without changing implementation. Use when the user types /plan or /workflow plan.
+description: Plan a feature as ordered, verifiable slices without changing implementation. Use when the user types /plan.
 disable-model-invocation: true
 ---
 
