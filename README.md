@@ -115,7 +115,7 @@ Vendored from upstream (renamed and overlaid in this repo):
 
 Vendored from upstream (folder names unchanged):
 
-- [emilkowalski/skills](https://github.com/emilkowalski/skills) at [`85e8e2363b713506e1d5b6e07a0eb2da66be1bc3`](https://github.com/emilkowalski/skills/commit/85e8e2363b713506e1d5b6e07a0eb2da66be1bc3) (MIT): `emil-design-eng`, `review-animations`, `animation-vocabulary`, `apple-design`, `improve-animations`, `find-animation-opportunities`, `pick-ui-library`, `prototype`, `animate`, `ask-sonner`, `animate-expo`, `write-swift`, `mobile-native`
+- [emilkowalski/skills](https://github.com/emilkowalski/skills) at [`85e8e2363b713506e1d5b6e07a0eb2da66be1bc3`](https://github.com/emilkowalski/skills/commit/85e8e2363b713506e1d5b6e07a0eb2da66be1bc3) (MIT): `emil-design-eng`, `review-animations`, `animation-vocabulary`, `apple-design`, `improve-animations`, `find-animation-opportunities`, `pick-ui-library`, `prototype`, `animate`, `ask-sonner`, `animate-expo`
 - `better-ui` ← [jakubkrehel/skills](https://github.com/jakubkrehel/skills) at [`267330e1adfc66a718fb65fa6918c1f06d0a689e`](https://github.com/jakubkrehel/skills/commit/267330e1adfc66a718fb65fa6918c1f06d0a689e) (MIT). Sibling `better-*` skills are not in this catalog.
 - `react-email` ← [resend/react-email](https://github.com/resend/react-email) `skills/react-email` (MIT)
 
