@@ -1,7 +1,5 @@
 # AGENTS.md
 
-This repository is a **workflow playbook** catalog for coding agents. Each leaf under `skills/workflow/` is a slash skill (`/w-plan`, `/w-build`, …). Tech and pattern skills are not here.
+This repository is an [Agent Skills](https://agentskills.io) catalog. Each skill is `skills/w-<name>/SKILL.md`. Frontmatter `name` equals the folder. Playbooks set `disable-model-invocation: true`. One outcome per skill. Numbered steps.
 
-Layout: `skills/workflow/SKILL.md` is the parent (install name `workflow`). Everyday leaves are `w-<name>/`; grouped leaves are `<group>/w-<name>/`. Frontmatter `name` equals the leaf folder. Playbooks set `disable-model-invocation: true`. Run `pnpm validate` before push.
-
-Humans: playbook index and install are in [README.md](README.md). Authoring: [skills/workflow/references/authoring.md](skills/workflow/references/authoring.md).
+Install: `npx skills@latest add blockmatic/basilic-skills --all` or `--skill w-plan`. Validate: `node scripts/validate-catalog.mjs`. Index: [README.md](README.md).

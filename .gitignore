@@ -1,14 +1,5 @@
-node_modules
-.cache
 .DS_Store
-.env
-.env*.local
 .agents
 .cursor
-dist
-.turbo
-*.pem
-.pnp.js
-*.log
-__dev
-*.tsbuildinfo
+.claude
+node_modules
