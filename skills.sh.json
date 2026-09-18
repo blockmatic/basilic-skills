@@ -3,9 +3,77 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Workflow",
-      "description": "Basilic slash playbooks (installed as a nested tree; invoke /w-plan, /w-build, /w-review).",
-      "skills": ["workflow"]
+      "title": "Lifecycle",
+      "description": "Plan, implement, and reflect.",
+      "skills": ["w-plan", "w-build", "w-retro"]
+    },
+    {
+      "title": "Git",
+      "description": "Commit, push, PR, and ship.",
+      "skills": [
+        "w-commit",
+        "w-push",
+        "w-pr",
+        "w-comments",
+        "w-git-repair",
+        "w-fix-push",
+        "w-ship"
+      ]
+    },
+    {
+      "title": "Debug",
+      "description": "Diagnose runtime and browser failures.",
+      "skills": ["w-debug", "w-debug-browser"]
+    },
+    {
+      "title": "CI",
+      "description": "GitHub Actions and Vercel build failures.",
+      "skills": ["w-gha", "w-vercel"]
+    },
+    {
+      "title": "Quality",
+      "description": "Lint, tests, and local check repair.",
+      "skills": ["w-lint", "w-yolo", "w-test", "w-tdd", "w-unit", "w-api-test"]
+    },
+    {
+      "title": "Review and security",
+      "description": "Review, release, and hardening playbooks.",
+      "skills": [
+        "w-review",
+        "w-review-plan",
+        "w-security",
+        "w-release",
+        "w-coderabbit",
+        "w-deslop"
+      ]
+    },
+    {
+      "title": "Product and docs",
+      "description": "Clarify, architecture, and documentation.",
+      "skills": [
+        "w-clarify",
+        "w-council",
+        "w-roadmap",
+        "w-architecture",
+        "w-docs",
+        "w-api-docs",
+        "w-onboard",
+        "w-diagram"
+      ]
+    },
+    {
+      "title": "UI and craft",
+      "description": "Interface, a11y, and refactor playbooks.",
+      "skills": [
+        "w-ui",
+        "w-shadcn",
+        "w-v0",
+        "w-form",
+        "w-a11y",
+        "w-perf",
+        "w-refactor",
+        "w-errors"
+      ]
     }
   ]
 }
