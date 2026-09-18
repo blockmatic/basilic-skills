@@ -1,109 +1,95 @@
-# Basilic Skills
+# Basilic workflow skills
 
 [![skills.sh](https://skills.sh/b/blockmatic/basilic-skills)](https://skills.sh/blockmatic/basilic-skills)
 
-Basilic slash playbooks as [Agent Skills](https://agentskills.io). Stack (tech/pattern) skills live in the Basilic repo, not this catalog. Pair this pack with [mattpocock/skills](https://github.com/mattpocock/skills) in Basilic: this catalog is `/w-*`; Matt’s pack is unprefixed (`/grill-me`, `/tdd`, `/implement`).
+Slash **playbooks** for coding agents ([Agent Skills](https://agentskills.io)). They are workflows: plan, implement, review, git, CI, docs, UI. Invoke them as `/w-plan`, `/w-build`, `/w-ship`, and the rest. `/workflow` lists this catalog and stops.
 
-Install with the [skills CLI](https://github.com/vercel-labs/skills).
+Stack (tech/pattern) skills are **not** in this repo. Basilic commits those in the product tree and can also install [mattpocock/skills](https://github.com/mattpocock/skills) (unprefixed names such as `/grill-me` and `/tdd`). This catalog stays `/w-*` so the two packs do not collide.
+
+Bodies live in each `SKILL.md`. Read those files; this page is only an index.
 
 ## Install
 
-Use your package manager (flags are identical):
-
-| npm | pnpm | bun |
-| --- | --- | --- |
-| `npx skills@latest` | `pnpm dlx skills@latest` | `bunx skills@latest` |
-
-**Interactive** — pick skills, then pick agents (Cursor, Claude Code, Codex, and others the CLI detects). Run in a normal terminal; inside Cursor the CLI may auto-target Cursor only.
-
-```bash
-npx skills@latest add blockmatic/basilic-skills
-```
-
-**List without installing:**
-
-```bash
-npx skills@latest add blockmatic/basilic-skills --list
-```
-
-From a local clone: `npx skills@latest add . --list`
-
-Validate the catalog before pushing (frontmatter, cross-links, `skills.sh.json` sync):
-
-```bash
-pnpm validate
-```
-
-## Flags
-
-| Intent | Example |
-| --- | --- |
-| Playbooks | `--skill workflow` |
-| All skills (this catalog is only `workflow`) | `--skill '*'` |
-| Cursor only | `-a cursor` |
-| Cursor + Claude Code | `-a cursor -a claude-code` |
-| All detected agents | `--agent '*'` |
-| User-wide (not project) | `-g` |
-| Copy files (no symlinks) | `--copy` |
-| Skip prompts | `-y` |
-
-Examples:
-
-```bash
-npx skills@latest add blockmatic/basilic-skills --skill workflow -a cursor --copy -y
-npx skills@latest add /path/to/basilic-skills --skill workflow -a cursor -y
-```
-
-Do not use `--all` unless you want every skill on every agent.
-
-## Agents and paths
-
-The CLI has no free-form `--dir`. Scope and agent flags choose the destination. With `-a cursor`, the **project** install path is `.agents/skills/<name>/` (not `.cursor/skills/`). Cursor also reads `.cursor/skills/` if you place files there manually; this catalog relies on the CLI layout.
-
-| Agent | Project path (`-a <agent>`) | Global (`-g`) |
-| --- | --- | --- |
-| Cursor | `.agents/skills/<name>/` | `~/.cursor/skills/<name>/` |
-| Claude Code | `.claude/skills/<name>/` | `~/.claude/skills/<name>/` |
-| Codex | `.agents/skills/<name>/` | `~/.codex/skills/<name>/` |
-| Canonical hub (symlink default) | `.agents/skills/<name>/` | `~/.agents/skills/<name>/` |
-
-With **symlink** (default), the CLI stores files under `.agents/skills/` and links agent-specific dirs when applicable. With **`--copy`**, it writes independent copies into `.agents/skills/` (and into each `-a` agent dir when that agent uses a separate path).
-
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill workflow -a cursor --copy -y
 ```
 
-Other agents (`opencode`, `windsurf`, …): [supported agents](https://github.com/vercel-labs/skills#supported-agents). Env overrides: `CLAUDE_CONFIG_DIR`, `CODEX_HOME`.
+Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `--list`. The CLI copies the parent `workflow` skill to `.agents/skills/workflow/`. Nested playbooks are not separate `--skill` targets.
 
-## Repository structure
+[skills CLI flags](https://github.com/vercel-labs/skills). Cursor project path: `.agents/skills/workflow/`.
 
-```text
-skills/workflow/SKILL.md                          # required parent — installs as one skill named workflow
-skills/workflow/w-<playbook>/SKILL.md             # everyday slash playbooks (`/w-plan`)
-skills/workflow/<group>/w-<playbook>/SKILL.md     # grouped specialists; slash is the leaf name
-```
+## Playbooks
 
-The parent `SKILL.md` is required so the CLI copies the whole tree to `.agents/skills/workflow/`. Cursor walks that tree recursively; `/w-<name>` is the leaf folder (`/w-plan`, `/w-commit`). `/workflow` lists the catalog and stops. Claude Code: read `.agents/skills/workflow/` (or `.claude/skills/workflow/` if that agent flag is used).
+Parent: [`/workflow`](skills/workflow/SKILL.md)
 
-## License
+### Lifecycle
 
-This repository is MIT.
+- [`/w-plan`](skills/workflow/w-plan/SKILL.md)
+- [`/w-build`](skills/workflow/w-build/SKILL.md)
+- [`/w-retro`](skills/workflow/w-retro/SKILL.md)
 
-Distribution is GitHub only. Do not publish this catalog to npm — `package.json` is intentionally `private`.
+### Git
+
+- [`/w-commit`](skills/workflow/git/w-commit/SKILL.md)
+- [`/w-push`](skills/workflow/git/w-push/SKILL.md)
+- [`/w-pr`](skills/workflow/git/w-pr/SKILL.md)
+- [`/w-comments`](skills/workflow/git/w-comments/SKILL.md)
+- [`/w-git-repair`](skills/workflow/git/w-git-repair/SKILL.md)
+- [`/w-fix-push`](skills/workflow/git/w-fix-push/SKILL.md)
+- [`/w-ship`](skills/workflow/git/w-ship/SKILL.md)
+
+### Debug
+
+- [`/w-debug`](skills/workflow/w-debug/SKILL.md)
+- [`/w-debug-browser`](skills/workflow/w-debug-browser/SKILL.md)
+
+### CI
+
+- [`/w-gha`](skills/workflow/ci/w-gha/SKILL.md)
+- [`/w-vercel`](skills/workflow/ci/w-vercel/SKILL.md)
+
+### Quality
+
+- [`/w-lint`](skills/workflow/qa/w-lint/SKILL.md)
+- [`/w-yolo`](skills/workflow/qa/w-yolo/SKILL.md)
+- [`/w-test`](skills/workflow/w-test/SKILL.md)
+- [`/w-tdd`](skills/workflow/w-tdd/SKILL.md)
+- [`/w-unit`](skills/workflow/w-unit/SKILL.md)
+- [`/w-api-test`](skills/workflow/w-api-test/SKILL.md)
+
+### Review and security
+
+- [`/w-review`](skills/workflow/w-review/SKILL.md)
+- [`/w-review-plan`](skills/workflow/w-review-plan/SKILL.md)
+- [`/w-security`](skills/workflow/w-security/SKILL.md)
+- [`/w-release`](skills/workflow/w-release/SKILL.md)
+- [`/w-coderabbit`](skills/workflow/w-coderabbit/SKILL.md)
+- [`/w-deslop`](skills/workflow/w-deslop/SKILL.md)
+
+### Product and docs
+
+- [`/w-clarify`](skills/workflow/w-clarify/SKILL.md)
+- [`/w-council`](skills/workflow/w-council/SKILL.md)
+- [`/w-roadmap`](skills/workflow/product/w-roadmap/SKILL.md)
+- [`/w-architecture`](skills/workflow/product/w-architecture/SKILL.md)
+- [`/w-docs`](skills/workflow/doc/w-docs/SKILL.md)
+- [`/w-api-docs`](skills/workflow/doc/w-api-docs/SKILL.md)
+- [`/w-onboard`](skills/workflow/doc/w-onboard/SKILL.md)
+- [`/w-diagram`](skills/workflow/doc/w-diagram/SKILL.md)
+
+### UI and craft
+
+- [`/w-ui`](skills/workflow/w-ui/SKILL.md)
+- [`/w-shadcn`](skills/workflow/w-shadcn/SKILL.md)
+- [`/w-v0`](skills/workflow/w-v0/SKILL.md)
+- [`/w-form`](skills/workflow/w-form/SKILL.md)
+- [`/w-a11y`](skills/workflow/w-a11y/SKILL.md)
+- [`/w-perf`](skills/workflow/w-perf/SKILL.md)
+- [`/w-refactor`](skills/workflow/w-refactor/SKILL.md)
+- [`/w-errors`](skills/workflow/w-errors/SKILL.md)
+
+Authoring for this catalog: [`references/authoring.md`](skills/workflow/references/authoring.md).
 
 ## Contribute
 
-Edit this repository. Consumers update with:
-
-```bash
-npx skills@latest update
-pnpm dlx skills@latest update
-```
-
-Do not rename a skill after install; lockfile keys follow skill names. A catalog rename is a breaking consumer key change — re-add the skill under the new name and commit `skills-lock.json`.
-
-## Basilic playbooks
-
-This repository is the source of truth for `/w-plan`, `/w-build`, `/w-review`, `/w-test`, `/w-pr`, and the rest of the `workflow` tree. Consumers install with `--skill workflow`; do not treat a vendored `.agents/skills/workflow/` copy as canonical.
-
-Invoke playbooks with `/w-<leaf>`. `/workflow` lists the catalog and stops; it does not dispatch `/workflow plan`. `/w-tdd` is opt-in. See [adoption and migration](docs/workflow-adoption.md) for structure and checklists.
+Edit `skills/workflow/`. Run `pnpm validate` before pushing. Consumers refresh with `npx skills@latest update`. MIT. Private `package.json` — GitHub only, not npm.
