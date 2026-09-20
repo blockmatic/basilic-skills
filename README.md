@@ -4,6 +4,8 @@
 
 Slash playbooks for coding agents ([Agent Skills](https://agentskills.io)). They work in any IDE or agent that can read a `SKILL.md`. Invoke them as `/w-plan`, `/w-build`, `/w-ship`, and the rest.
 
+`/w-plan` explores via `/w-council` first. Git, TDD, lint, generate, and publish stay single-writer.
+
 This page is an index. Read each `SKILL.md` for the body.
 
 ## Install
@@ -22,6 +24,7 @@ Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `
 ### Lifecycle
 
 - [`/w-plan`](skills/w-plan/SKILL.md)
+- [`/w-council`](skills/w-council/SKILL.md)
 - [`/w-build`](skills/w-build/SKILL.md)
 - [`/w-retro`](skills/w-retro/SKILL.md)
 
@@ -66,7 +69,6 @@ Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `
 ### Product and docs
 
 - [`/w-clarify`](skills/w-clarify/SKILL.md)
-- [`/w-council`](skills/w-council/SKILL.md)
 - [`/w-roadmap`](skills/w-roadmap/SKILL.md)
 - [`/w-architecture`](skills/w-architecture/SKILL.md)
 - [`/w-docs`](skills/w-docs/SKILL.md)
@@ -87,4 +89,4 @@ Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `
 
 ## Contribute
 
-Add `skills/w-<name>/SKILL.md`. Frontmatter `name` matches the folder, starts with `w-`, and sets `disable-model-invocation: true`. One-line `description`. Numbered steps. Git playbooks carry their own `references/git-publish.md` copy. Run `node scripts/validate-catalog.mjs` before pushing. Consumers refresh with `npx skills@latest update`. MIT.
+Add `skills/w-<name>/SKILL.md`. Frontmatter `name` matches the folder, starts with `w-`, and sets `disable-model-invocation: true`. One-line `description`. Numbered steps. Git playbooks carry their own `references/git-publish.md` copy. `/w-plan` ships `references/plan-output.md`. Run `node scripts/validate-catalog.mjs` before pushing. Consumers refresh with `npx skills@latest update`. MIT.

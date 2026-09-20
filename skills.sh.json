@@ -5,7 +5,7 @@
     {
       "title": "Lifecycle",
       "description": "Plan, implement, and reflect.",
-      "skills": ["w-plan", "w-build", "w-retro"]
+      "skills": ["w-plan", "w-council", "w-build", "w-retro"]
     },
     {
       "title": "Git",
@@ -52,7 +52,6 @@
       "description": "Clarify, architecture, and documentation.",
       "skills": [
         "w-clarify",
-        "w-council",
         "w-roadmap",
         "w-architecture",
         "w-docs",
