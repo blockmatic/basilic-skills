@@ -4,7 +4,7 @@
 
 Slash playbooks for coding agents ([Agent Skills](https://agentskills.io)). They work in any IDE or agent that can read a `SKILL.md`. Invoke them as `/w-plan`, `/w-build`, `/w-ship`, and the rest.
 
-`/w-plan` explores via `/w-council` first. Git, TDD, lint, generate, and publish stay single-writer.
+`/w-plan` explores via `/w-council` first. Git, TDD, lint, generate, and publish stay single-writer. `/w-clarify` is blocking gaps; `/w-grill` is a design-tree interview; `/w-wayfinder` is fog bigger than one session.
 
 This page is an index. Read each `SKILL.md` for the body.
 
@@ -25,6 +25,8 @@ Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `
 
 - [`/w-plan`](skills/w-plan/SKILL.md)
 - [`/w-council`](skills/w-council/SKILL.md)
+- [`/w-grill`](skills/w-grill/SKILL.md)
+- [`/w-wayfinder`](skills/w-wayfinder/SKILL.md)
 - [`/w-build`](skills/w-build/SKILL.md)
 - [`/w-retro`](skills/w-retro/SKILL.md)
 

@@ -4,7 +4,7 @@ description: Write an ordered plan without changing implementation.
 disable-model-invocation: true
 ---
 
-Planning does not implement, branch, or commit. A single already-clear change uses `/w-build`. A blocking product gap uses `/w-clarify`.
+Planning does not implement, branch, or commit. A single already-clear change uses `/w-build`. A blocking product gap uses `/w-clarify`. Stress-test a plan with `/w-grill`. Fog bigger than one session uses `/w-wayfinder`.
 
 1. **Explore**: if this turn has no reconciled exploration for the area, follow [council](../w-council/SKILL.md) steps 1–3, then continue.
 2. **Goals**: 3–7 bullets for scope, success, constraints, non-goals.
