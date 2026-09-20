@@ -4,11 +4,11 @@ description: Build or reshape UI with purpose, existing tokens, accessible inter
 disable-model-invocation: true
 ---
 
-Build or reshape a user-facing surface. Planning a feature without UI work stays on `/w-plan`. Installing a primitive stays on `/w-shadcn`. Do not invent PRODUCT.md or DESIGN.md. Follow existing tokens and root `DESIGN.md` when present. Do not install animation libraries or design-detector hooks.
+Build or reshape a user-facing surface. Planning a feature without UI work stays on `/w-plan`. Installing a primitive stays on `/w-shadcn`. Do not invent `PRODUCT.md` or `DESIGN.md`. Follow existing tokens and root `DESIGN.md` when present. Do not install animation libraries or design-detector hooks.
 
-Load `frontend-design` for visual direction, `composition-patterns` for reusable APIs, and `web-design-guidelines` for the UI code checklist. Durable product jobs belong in `PRODUCT.md`.
+Load `frontend-design` for visual direction, `composition-patterns` for reusable APIs, and `web-design-guidelines` for the UI code checklist. Durable jobs live in matching MDX/README/`DESIGN.md`.
 
-1. Name the job, the person, and the surface mode: Operate (app/task), Persuade (marketing), or Read (docs). Durable jobs stay in `PRODUCT.md`.
+1. Name the job, the person, and the surface mode: Operate (app/task), Persuade (marketing), or Read (docs).
 2. Use the brief, existing screens, or a stated aesthetic. If the repo has tokens and shared components, inspect those first.
 3. Prefer shared primitives. Compose at the second call site. Do not extract a compound API for a one-off route. Do not lift server data into a client provider.
 4. Mobile-first layout, visible focus, keyboard path, `prefers-reduced-motion`. Do not add a new motion library.

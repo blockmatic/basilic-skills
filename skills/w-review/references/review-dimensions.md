@@ -10,4 +10,4 @@ Check the dimensions in scope for this change. Skip those that are clearly out o
 - [ ] **Security**: changed input and authorization boundaries, secret exposure, and denied access paths are checked.
 - [ ] **Performance**: changed queries, list bounds, repeated work, and client rendering have evidence appropriate to their risk.
 - [ ] **Verification**: tests exercise behavior; claimed checks were actually run and cover the change. If a finding implies a new quality or security bar, point at existing testing or security docs instead of inventing policy.
-- [ ] **Docs**: matching MDX and nearest README were updated when behavior, commands, or conventions changed (`PRODUCT.md` only if product facts changed).
+- [ ] **Docs**: matching MDX and nearest README were updated when behavior, commands, or conventions changed.
