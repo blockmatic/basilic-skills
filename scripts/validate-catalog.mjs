@@ -112,6 +112,31 @@ for (const file of skillFiles) {
     errors.push(`${rel}: contains @cursor/skills reference — use catalog-relative paths`)
 }
 
+const skillDirs = await readdir(skillsRoot, { withFileTypes: true })
+const gitPublishPaths = []
+for (const entry of skillDirs) {
+  if (!entry.isDirectory()) continue
+  const gitPublishPath = join(skillsRoot, entry.name, 'references', 'git-publish.md')
+  try {
+    await access(gitPublishPath)
+    gitPublishPaths.push(gitPublishPath)
+  } catch {
+    // not every playbook ships git-publish.md
+  }
+}
+
+if (gitPublishPaths.length) {
+  const gitPublishContents = await Promise.all(gitPublishPaths.map(path => readFile(path, 'utf8')))
+  const canonical = gitPublishContents[0]
+  if (!canonical.includes('git fetch origin') || !canonical.includes('--no-track origin/main'))
+    errors.push('git-publish.md must require `git fetch origin` then branch from `origin/main`')
+  for (const [index, content] of gitPublishContents.entries())
+    if (content !== canonical)
+      errors.push(
+        `${toPosix(relative(root, gitPublishPaths[index]))}: git-publish.md must match ${toPosix(relative(root, gitPublishPaths[0]))}`,
+      )
+}
+
 if (installableNames.size !== expectedInstallableCount)
   errors.push(`expected ${expectedInstallableCount} installable skills, found ${installableNames.size}`)
 
