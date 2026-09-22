@@ -3,6 +3,11 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Pack",
+      "description": "Installs nested /w-* playbooks under .agents/skills/workflow/.",
+      "skills": ["workflow"]
+    },
+    {
       "title": "Lifecycle",
       "description": "Plan, implement, and reflect.",
       "skills": ["w-plan", "w-council", "w-grill", "w-wayfinder", "w-build", "w-retro"]

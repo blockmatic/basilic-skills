@@ -11,9 +11,11 @@ This page is an index. Read each `SKILL.md` for the body.
 ## Install
 
 ```bash
-npx skills@latest add blockmatic/basilic-skills --skill w-plan
+npx skills@latest add blockmatic/basilic-skills --skill workflow
 npx skills@latest add blockmatic/basilic-skills --all
 ```
+
+Installs one pack at `.agents/skills/workflow/` with nested `/w-*` playbooks (`.agents/skills/workflow/w-plan`, …). Invoke `/w-plan` as before.
 
 Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `--list`.
 
@@ -91,4 +93,4 @@ Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `
 
 ## Contribute
 
-Add `skills/workflow/w-<name>/SKILL.md` under the workflow group. Frontmatter `name` matches the folder, starts with `w-`, and sets `disable-model-invocation: true`. One-line `description`. Numbered steps. Git playbooks carry their own `references/git-publish.md` copy. `/w-plan` ships `references/plan-output.md`. Run `node scripts/validate-catalog.mjs` before pushing. Consumers refresh with `npx skills@latest update`. MIT.
+Keep the pack at `skills/workflow/SKILL.md`. Add `skills/workflow/w-<name>/SKILL.md` under it. Frontmatter `name` matches the folder, starts with `w-`, and sets `disable-model-invocation: true`. One-line `description`. Numbered steps. Git playbooks carry their own `references/git-publish.md` copy. `/w-plan` ships `references/plan-output.md`. Run `node scripts/validate-catalog.mjs` before pushing. Consumers refresh with `npx skills@latest update`. MIT.

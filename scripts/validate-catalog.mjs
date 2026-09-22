@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills', 'workflow')
-const expectedInstallableCount = 44
+const expectedPlaybookCount = 44
 const namePattern = /^w-[a-z0-9-]+$/
 const errors = []
 
@@ -57,13 +57,14 @@ const installableNames = new Set()
 for (const file of skillFiles) {
   const rel = relative(root, file)
   const posix = toPosix(rel)
-  const installable = /^skills\/workflow\/[^/]+\/SKILL\.md$/.test(posix)
-  const folderName = basename(dirname(file))
+  const isPack = posix === 'skills/workflow/SKILL.md'
+  const installable = isPack || /^skills\/workflow\/[^/]+\/SKILL\.md$/.test(posix)
+  const folderName = isPack ? 'workflow' : basename(dirname(file))
   const content = await readFile(file, 'utf8')
   const frontmatter = parseFrontmatter(content)
 
   if (!installable) {
-    errors.push(`${rel}: SKILL.md must be skills/workflow/<name>/SKILL.md`)
+    errors.push(`${rel}: SKILL.md must be skills/workflow/SKILL.md or skills/workflow/<name>/SKILL.md`)
     continue
   }
 
@@ -76,7 +77,8 @@ for (const file of skillFiles) {
 
   if (!name) errors.push(`${rel}: missing name in frontmatter`)
   else if (name !== folderName) errors.push(`${rel}: name "${name}" does not match folder "${folderName}"`)
-  else if (!namePattern.test(name)) errors.push(`${rel}: name "${name}" must match ${namePattern}`)
+  else if (isPack && name !== 'workflow') errors.push(`${rel}: pack name must be workflow`)
+  else if (!isPack && !namePattern.test(name)) errors.push(`${rel}: name "${name}" must match ${namePattern}`)
   else if (seenNames.has(name)) errors.push(`${rel}: duplicate skill name "${name}"`)
   else {
     seenNames.add(name)
@@ -137,8 +139,10 @@ if (gitPublishPaths.length) {
       )
 }
 
-if (installableNames.size !== expectedInstallableCount)
-  errors.push(`expected ${expectedInstallableCount} installable skills, found ${installableNames.size}`)
+const playbookNames = [...installableNames].filter(name => name !== 'workflow')
+if (!installableNames.has('workflow')) errors.push('skills/workflow/SKILL.md pack is missing')
+if (playbookNames.length !== expectedPlaybookCount)
+  errors.push(`expected ${expectedPlaybookCount} playbooks, found ${playbookNames.length}`)
 
 const groupedSet = new Set(groupedNames)
 for (const name of installableNames)
@@ -159,4 +163,6 @@ if (errors.length) {
   process.exit(1)
 }
 
-console.log(`Catalog OK: ${installableNames.size} installable skills, skills.sh.json in sync`)
+console.log(
+  `Catalog OK: workflow pack + ${playbookNames.length} playbooks, skills.sh.json in sync`,
+)
