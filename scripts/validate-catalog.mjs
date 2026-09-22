@@ -3,7 +3,7 @@ import { basename, dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
-const skillsRoot = join(root, 'skills')
+const skillsRoot = join(root, 'skills', 'workflow')
 const expectedInstallableCount = 44
 const namePattern = /^w-[a-z0-9-]+$/
 const errors = []
@@ -57,13 +57,13 @@ const installableNames = new Set()
 for (const file of skillFiles) {
   const rel = relative(root, file)
   const posix = toPosix(rel)
-  const installable = /^skills\/[^/]+\/SKILL\.md$/.test(posix)
+  const installable = /^skills\/workflow\/[^/]+\/SKILL\.md$/.test(posix)
   const folderName = basename(dirname(file))
   const content = await readFile(file, 'utf8')
   const frontmatter = parseFrontmatter(content)
 
   if (!installable) {
-    errors.push(`${rel}: SKILL.md must be skills/<name>/SKILL.md`)
+    errors.push(`${rel}: SKILL.md must be skills/workflow/<name>/SKILL.md`)
     continue
   }
 
