@@ -12,10 +12,9 @@ This page is an index. Read each `SKILL.md` for the body.
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill workflow
-npx skills@latest add blockmatic/basilic-skills --all
 ```
 
-Installs one pack at `.agents/skills/workflow/` with nested `/w-*` playbooks (`.agents/skills/workflow/w-plan`, …). Invoke `/w-plan` as before.
+Installs one pack at `.agents/skills/workflow/` with nested `/w-*` playbooks (`.agents/skills/workflow/w-plan`, …). Invoke `/w-plan` as before. Do not pass `--all`: it also targets every harness (`-a '*'`), which writes extra trees such as eve's `agent/skills/` at the repo root.
 
 Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `--list`.
 
