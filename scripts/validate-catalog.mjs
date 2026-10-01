@@ -4,8 +4,10 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills', 'workflow')
+const skillsTop = join(root, 'skills')
 const expectedPlaybookCount = 44
-const namePattern = /^w-[a-z0-9-]+$/
+const playbookNamePattern = /^w-[a-z0-9-]+$/
+const standaloneNamePattern = /^[a-z0-9-]+$/
 const errors = []
 
 /** @param {string} path */
@@ -49,10 +51,44 @@ const loadGroupedSkillNames = async () => {
   return config.groupings.flatMap(group => group.skills)
 }
 
-const skillFiles = await walkSkillFiles(skillsRoot)
+/** @param {string} file @param {object} frontmatter */
+const validateDescription = (file, _content, frontmatter) => {
+  const { descriptionLine, descriptionBlock } = frontmatter
+  const rel = relative(root, file)
+  if (!descriptionLine && !descriptionBlock.trim()) errors.push(`${rel}: missing description in frontmatter`)
+  else if (descriptionLine === '|' || descriptionLine === '>')
+    errors.push(`${rel}: description must be a single line, not a YAML block`)
+  else if (descriptionBlock.includes('\n')) errors.push(`${rel}: description must be a single line`)
+  else {
+    const description = (descriptionLine || descriptionBlock).trim()
+    if (description.length > 1024)
+      errors.push(`${rel}: description exceeds 1024 characters (${description.length})`)
+  }
+}
+
+/** @param {string} file @param {string} content */
+const validatePackagedReferences = async (file, content) => {
+  const rel = relative(root, file)
+  for (const match of content.matchAll(/\]\(([^)]+)\)/g)) {
+    const target = match[1]
+    if (!target || /^(?:[a-z]+:|#|\/)/i.test(target)) continue
+    const href = target.split('#')[0]
+    if (!href) continue
+    try {
+      await access(join(dirname(file), href))
+    } catch {
+      errors.push(`${rel}: missing packaged reference "${target}"`)
+    }
+  }
+  if (content.includes('@cursor/skills'))
+    errors.push(`${rel}: contains @cursor/skills reference — use catalog-relative paths`)
+}
+
 const groupedNames = await loadGroupedSkillNames()
 const seenNames = new Set()
 const installableNames = new Set()
+
+const skillFiles = await walkSkillFiles(skillsRoot)
 
 for (const file of skillFiles) {
   const rel = relative(root, file)
@@ -73,45 +109,65 @@ for (const file of skillFiles) {
     continue
   }
 
-  const { name, descriptionLine, descriptionBlock, disableModelInvocation } = frontmatter
+  const { name, disableModelInvocation } = frontmatter
 
   if (!name) errors.push(`${rel}: missing name in frontmatter`)
   else if (name !== folderName) errors.push(`${rel}: name "${name}" does not match folder "${folderName}"`)
   else if (isPack && name !== 'workflow') errors.push(`${rel}: pack name must be workflow`)
-  else if (!isPack && !namePattern.test(name)) errors.push(`${rel}: name "${name}" must match ${namePattern}`)
+  else if (!isPack && !playbookNamePattern.test(name))
+    errors.push(`${rel}: name "${name}" must match ${playbookNamePattern}`)
   else if (seenNames.has(name)) errors.push(`${rel}: duplicate skill name "${name}"`)
   else {
     seenNames.add(name)
     installableNames.add(name)
   }
 
-  if (!descriptionLine && !descriptionBlock.trim()) errors.push(`${rel}: missing description in frontmatter`)
-  else if (descriptionLine === '|' || descriptionLine === '>')
-    errors.push(`${rel}: description must be a single line, not a YAML block`)
-  else if (descriptionBlock.includes('\n')) errors.push(`${rel}: description must be a single line`)
-  else {
-    const description = (descriptionLine || descriptionBlock).trim()
-    if (description.length > 1024)
-      errors.push(`${rel}: description exceeds 1024 characters (${description.length})`)
-  }
+  validateDescription(file, content, frontmatter)
 
   if (disableModelInvocation !== 'true')
     errors.push(`${rel}: playbooks must set disable-model-invocation: true`)
 
-  for (const match of content.matchAll(/\]\(([^)]+)\)/g)) {
-    const target = match[1]
-    if (!target || /^(?:[a-z]+:|#|\/)/i.test(target)) continue
-    const href = target.split('#')[0]
-    if (!href) continue
-    try {
-      await access(join(dirname(file), href))
-    } catch {
-      errors.push(`${rel}: missing packaged reference "${target}"`)
-    }
+  await validatePackagedReferences(file, content)
+}
+
+const topEntries = await readdir(skillsTop, { withFileTypes: true })
+for (const entry of topEntries) {
+  if (!entry.isDirectory() || entry.name === 'workflow') continue
+  const file = join(skillsTop, entry.name, 'SKILL.md')
+  const folderName = entry.name
+  let content
+  try {
+    content = await readFile(file, 'utf8')
+  } catch {
+    errors.push(`skills/${folderName}/SKILL.md: missing standalone skill file`)
+    continue
+  }
+  const rel = relative(root, file)
+  const frontmatter = parseFrontmatter(content)
+
+  if (!frontmatter) {
+    errors.push(`${rel}: missing YAML frontmatter`)
+    continue
   }
 
-  if (content.includes('@cursor/skills'))
-    errors.push(`${rel}: contains @cursor/skills reference — use catalog-relative paths`)
+  const { name, disableModelInvocation } = frontmatter
+
+  if (!name) errors.push(`${rel}: missing name in frontmatter`)
+  else if (name !== folderName) errors.push(`${rel}: name "${name}" does not match folder "${folderName}"`)
+  else if (!standaloneNamePattern.test(name))
+    errors.push(`${rel}: name "${name}" must match ${standaloneNamePattern}`)
+  else if (seenNames.has(name)) errors.push(`${rel}: duplicate skill name "${name}"`)
+  else {
+    seenNames.add(name)
+    installableNames.add(name)
+  }
+
+  validateDescription(file, content, frontmatter)
+
+  if (disableModelInvocation === 'true')
+    errors.push(`${rel}: standalone skills must not set disable-model-invocation: true`)
+
+  await validatePackagedReferences(file, content)
 }
 
 const skillDirs = await readdir(skillsRoot, { withFileTypes: true })
@@ -139,7 +195,8 @@ if (gitPublishPaths.length) {
       )
 }
 
-const playbookNames = [...installableNames].filter(name => name !== 'workflow')
+const playbookNames = [...installableNames].filter(name => name.startsWith('w-'))
+
 if (!installableNames.has('workflow')) errors.push('skills/workflow/SKILL.md pack is missing')
 if (playbookNames.length !== expectedPlaybookCount)
   errors.push(`expected ${expectedPlaybookCount} playbooks, found ${playbookNames.length}`)
@@ -163,6 +220,7 @@ if (errors.length) {
   process.exit(1)
 }
 
+const standaloneCount = installableNames.size - 1 - playbookNames.length
 console.log(
-  `Catalog OK: workflow pack + ${playbookNames.length} playbooks, skills.sh.json in sync`,
+  `Catalog OK: workflow pack + ${playbookNames.length} playbooks + ${standaloneCount} standalone skill(s), skills.sh.json in sync`,
 )

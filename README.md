@@ -12,9 +12,10 @@ This page is an index. Read each `SKILL.md` for the body.
 
 ```bash
 npx skills@latest add blockmatic/basilic-skills --skill workflow
+npx skills@latest add blockmatic/basilic-skills --skill technical-writing
 ```
 
-Installs one pack at `.agents/skills/workflow/` with nested `/w-*` playbooks (`.agents/skills/workflow/w-plan`, …). Invoke `/w-plan` as before. Do not pass `--all`: it also targets every harness (`-a '*'`), which writes extra trees such as eve's `agent/skills/` at the repo root.
+Installs one pack at `.agents/skills/workflow/` with nested `/w-*` playbooks (`.agents/skills/workflow/w-plan`, …). Invoke `/w-plan` as before. The `technical-writing` skill installs at `.agents/skills/technical-writing/` and is model-invocable for MDX, README, and product markdown work. Do not pass `--all`: it also targets every harness (`-a '*'`), which writes extra trees such as eve's `agent/skills/` at the repo root.
 
 Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `--list`.
 
@@ -90,6 +91,10 @@ Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `
 - [`/w-refactor`](skills/workflow/w-refactor/SKILL.md)
 - [`/w-errors`](skills/workflow/w-errors/SKILL.md)
 
+## Writing
+
+- [`technical-writing`](skills/technical-writing/SKILL.md) — voice, verification, and review for Docu MDX, READMEs, and root product markdown in Basilic-based repos.
+
 ## Contribute
 
-Keep the pack at `skills/workflow/SKILL.md`. Add `skills/workflow/w-<name>/SKILL.md` under it. Frontmatter `name` matches the folder, starts with `w-`, and sets `disable-model-invocation: true`. One-line `description`. Numbered steps. Git playbooks carry their own `references/git-publish.md` copy. `/w-plan` ships `references/plan-output.md`. Run `node scripts/validate-catalog.mjs` before pushing. Consumers refresh with `npx skills@latest update`. MIT.
+Keep the pack at `skills/workflow/SKILL.md`. Add `skills/workflow/w-<name>/SKILL.md` under it. Frontmatter `name` matches the folder, starts with `w-`, and sets `disable-model-invocation: true`. One-line `description`. Numbered steps. Standalone skills live at `skills/<name>/SKILL.md` (no `disable-model-invocation`). Git playbooks carry their own `references/git-publish.md` copy. `/w-plan` ships `references/plan-output.md`. Run `node scripts/validate-catalog.mjs` before pushing. Consumers refresh with `npx skills@latest update`. MIT.

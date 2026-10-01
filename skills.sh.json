@@ -8,6 +8,11 @@
       "skills": ["workflow"]
     },
     {
+      "title": "Writing",
+      "description": "Technical documentation voice, verification, and review for Basilic-based repos.",
+      "skills": ["technical-writing"]
+    },
+    {
       "title": "Lifecycle",
       "description": "Plan, implement, and reflect.",
       "skills": ["w-plan", "w-council", "w-grill", "w-wayfinder", "w-build", "w-retro"]
