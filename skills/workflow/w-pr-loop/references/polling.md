@@ -37,17 +37,18 @@ Corroborate with the latest `coderabbitai[bot]` review whose `commit_id` equals 
 
 ```sh
 gh api "repos/$owner/$repo/pulls/<pr>/reviews" \
-  --jq '[.[] | select(.user.login=="coderabbitai[bot]") | {commit_id, submitted_at}] | last'
+  --paginate --slurp \
+  --jq '[.[][] | select(.user.login=="coderabbitai[bot]") | {commit_id, submitted_at}] | last'
 ```
 
 ## Unresolved CodeRabbit threads
 
-GraphQL (filter in `--jq` for `isResolved==false`, `isOutdated==false`, author `coderabbitai`):
+GraphQL. Paginate with `gh api graphql --paginate` so threads beyond the first page are not missed (`pageInfo { hasNextPage endCursor }` on `reviewThreads`). Filter each page in `--jq` for `isResolved==false`, `isOutdated==false`, author `coderabbitai`:
 
 ```sh
-gh api graphql -f query='query($o:String!,$r:String!,$n:Int!){
+gh api graphql --paginate -f query='query($o:String!,$r:String!,$n:Int!,$after:String){
   repository(owner:$o,name:$r){pullRequest(number:$n){
-    reviewThreads(first:100){nodes{
+    reviewThreads(first:100, after:$after){pageInfo{hasNextPage endCursor} nodes{
       id isResolved isOutdated path line
       comments(first:1){nodes{author{login} body url}}
     }}
@@ -61,6 +62,7 @@ REST author login is `coderabbitai[bot]`; GraphQL author is often `coderabbitai`
 
 ```sh
 gh api "repos/$owner/$repo/pulls/<pr>/reviews" \
+  --paginate \
   --jq '.[] | select(.user.login=="coderabbitai[bot]") | select(.commit_id=="<sha>") | .body' \
   | rg -n 'Nitpick comments|Outside diff range|Actionable comments posted'
 ```
