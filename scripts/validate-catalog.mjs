@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const skillsRoot = join(root, 'skills', 'workflow')
 const skillsTop = join(root, 'skills')
-const expectedPlaybookCount = 44
+const expectedPlaybookCount = 45
 const playbookNamePattern = /^w-[a-z0-9-]+$/
 const standaloneNamePattern = /^[a-z0-9-]+$/
 const errors = []

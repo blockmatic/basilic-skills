@@ -19,7 +19,7 @@
     },
     {
       "title": "Git",
-      "description": "Commit, push, PR, and ship.",
+      "description": "Commit, push, PR, ship, and the post-PR loop.",
       "skills": [
         "w-commit",
         "w-push",
@@ -27,7 +27,8 @@
         "w-comments",
         "w-git-repair",
         "w-fix-push",
-        "w-ship"
+        "w-ship",
+        "w-pr-loop"
       ]
     },
     {

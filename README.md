@@ -41,6 +41,7 @@ Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `
 - [`/w-git-repair`](skills/workflow/w-git-repair/SKILL.md)
 - [`/w-fix-push`](skills/workflow/w-fix-push/SKILL.md)
 - [`/w-ship`](skills/workflow/w-ship/SKILL.md)
+- [`/w-pr-loop`](skills/workflow/w-pr-loop/SKILL.md)
 
 ### Debug
 
@@ -97,4 +98,4 @@ Interactive pick: `npx skills@latest add blockmatic/basilic-skills`. List: add `
 
 ## Contribute
 
-Keep the pack at `skills/workflow/SKILL.md`. Add `skills/workflow/w-<name>/SKILL.md` under it. Frontmatter `name` matches the folder, starts with `w-`, and sets `disable-model-invocation: true`. One-line `description`. Numbered steps. Standalone skills live at `skills/<name>/SKILL.md` (no `disable-model-invocation`). Git playbooks carry their own `references/git-publish.md` copy. `/w-plan` ships `references/plan-output.md`. Run `node scripts/validate-catalog.mjs` before pushing. Consumers refresh with `npx skills@latest update`. MIT.
+Keep the pack at `skills/workflow/SKILL.md`. Add `skills/workflow/w-<name>/SKILL.md` under it. Frontmatter `name` matches the folder, starts with `w-`, and sets `disable-model-invocation: true`. One-line `description`. Numbered steps. Standalone skills live at `skills/<name>/SKILL.md` (no `disable-model-invocation`). Git playbooks carry their own `references/git-publish.md` copy. `/w-plan` ships `references/plan-output.md`. `/w-pr-loop` ships `references/polling.md`. Run `node scripts/validate-catalog.mjs` before pushing. Consumers refresh with `npx skills@latest update`. MIT.
